@@ -1,0 +1,55 @@
+{
+  "duracion": 56.0,
+  "pantalla": "assets/screen.mp4",
+  "camara": "assets/face.mp4",
+  "audio": "assets/mix.wav",
+  "words": "words.json",
+  "camara_alto": 640,
+  "camara_zooms": [3.1, 6.9, 13.7, 18.5, 27.0, 36.6, 41.7, 47.9],
+  "camara_zoom_escala": 1.1,
+  "claves": ["seguidores", "alarma", "tiktok", "recomendando", "audiencias", "retención", "interacción", "studio", "espectadores", "83%", "83", "17", "%", "17%", "visualizaciones", "algoritmo", "preocuparía", "estrategia", "salud", "marca"],
+  "correcciones": [
+    {"t": 19.24, "de": "evalues", "a": "evalúes"},
+    {"t": 24.88, "de": "evalua", "a": "evalúa"},
+    {"t": 23.98, "de": "de", "a": null},
+    {"t": 24.14, "de": "estudio,", "a": "Studio,"},
+    {"t": 15.72, "de": "está", "a": "no está", "tol": 0.2},
+    {"t": 46.10, "de": "los", "a": "no"},
+    {"t": 48.70, "de": "rebrantiar", "a": "replantear"},
+    {"t": 51.68, "de": "esa", "a": "esta"}
+  ],
+  "gancho": {"desde": 0.1, "fin": 6.5, "tag": "ASÍ SABES SI TIKTOK TE RECOMIENDA", "icono": "warning", "lineas": ["¿TU CONTENIDO SOLO", "LLEGA A SEGUIDORES?"], "pildora": "ES UNA ALARMA PARA TU CUENTA"},
+  "empuje": {"t0": 6.7, "t1": 13.4, "escala": 1.18, "cx": 400, "cy": 330},
+  "pantalla_zooms": [
+    {"t": 18.6, "hasta": 21.7, "escala": 1.6, "cx": 163, "cy": 283},
+    {"t": 28.0, "hasta": 35.4, "escala": 1.35, "cx": 430, "cy": 239},
+    {"t": 38.3, "hasta": 40.1, "escala": 1.8, "cx": 201, "cy": 352},
+    {"t": 42.5, "hasta": 47.8, "escala": 1.3, "cx": 432, "cy": 320}
+  ],
+  "anillos": [
+    {"t": 18.7, "hasta": 21.5, "x": 56, "y": 220, "w": 238, "h": 44, "color": "acento"},
+    {"t": 28.7, "hasta": 30.6, "x": 60, "y": 244, "w": 268, "h": 40, "color": "acento"},
+    {"t": 30.6, "hasta": 33.3, "x": 58, "y": 192, "w": 62, "h": 32, "color": "positivo"},
+    {"t": 33.4, "hasta": 35.3, "x": 748, "y": 192, "w": 54, "h": 32, "color": "secundario"},
+    {"t": 33.4, "hasta": 35.3, "x": 680, "y": 247, "w": 124, "h": 34, "color": "secundario"},
+    {"t": 38.3, "hasta": 40.0, "x": 164, "y": 330, "w": 76, "h": 44, "color": "acento"},
+    {"t": 43.7, "hasta": 45.5, "x": 58, "y": 274, "w": 62, "h": 34, "color": "alerta"},
+    {"t": 45.6, "hasta": 47.6, "x": 748, "y": 274, "w": 54, "h": 34, "color": "alerta"}
+  ],
+  "eventos": [
+    {"tipo": "texto", "t": 6.8, "fin": 9.1, "icono": "user", "color": "alerta", "l1": "SOLO LLEGA A SEGUIDORES", "l2": "ES UNA ALARMA"},
+    {"tipo": "texto", "t": 9.2, "fin": 13.5, "icono": "megaphone", "color": "alerta", "l1": "TIKTOK NO TE RECOMIENDA", "l2": "A NUEVAS AUDIENCIAS"},
+    {"tipo": "texto", "t": 13.7, "fin": 16.9, "icono": "clock", "color": "alerta", "l1": "NO GENERA RETENCIÓN"},
+    {"tipo": "texto", "t": 16.9, "fin": 18.5, "icono": "thumb", "color": "alerta", "l1": "NO GENERA INTERACCIÓN"},
+    {"tipo": "texto", "t": 18.6, "fin": 21.1, "icono": "chart", "color": "acento", "l1": "EVALÚA LA SALUD", "l2": "DE TU CONTENIDO"},
+    {"tipo": "pasos", "t": 21.1, "fin": 26.8, "cada": 1.9, "items": ["TIKTOK STUDIO", "ESPECTADORES", "TIPO DE ESPECTADOR"]},
+    {"tipo": "texto", "t": 27.0, "fin": 29.9, "icono": "target", "color": "acento", "l1": "¿A QUÉ PERSONAS", "l2": "ESTOY LLEGANDO?"},
+    {"tipo": "stats", "t": 30.0, "fin": 34.3, "cada": 3.2, "items": [{"valor": "83%", "etiqueta": "NO TE SIGUEN", "color": "positivo", "pct": 83}, {"valor": "17%", "etiqueta": "SEGUIDORES", "color": "secundario", "pct": 17}]},
+    {"tipo": "sello", "t": 34.4, "fin": 36.7, "color": "positivo", "icono": "check", "texto": "CAMINO CORRECTO"},
+    {"tipo": "dato", "t": 36.8, "fin": 41.3, "color": "acento", "valor": "11K", "etiqueta": "VISUALIZACIONES", "chip": "EL ALGORITMO LO RECOMENDÓ"},
+    {"tipo": "texto", "t": 41.7, "fin": 43.4, "icono": "warning", "color": "alerta", "l1": "SI ESTO FUERA AL REVÉS"},
+    {"tipo": "comparar", "t": 43.3, "fin": 47.9, "cada": 1.9, "titulo": "AHÍ SÍ ME PREOCUPARÍA", "a": {"etiqueta": "SEGUIDORES", "pct": 83, "color": "alerta"}, "b": {"etiqueta": "NO SEGUIDORES", "pct": 17, "color": "alerta"}},
+    {"tipo": "texto", "t": 47.9, "fin": 52.3, "icono": "target", "color": "acento", "l1": "REPLANTEA TU ESTRATEGIA", "l2": "MEJORA LA SALUD DE TU MARCA"}
+  ],
+  "cierre": {"t": 52.2, "tag": "¡EMPRENDEDOR, NECESITAS SABER ESTO!", "lineas": ["ÚNETE EN EL ENLACE", "DE MI PERFIL"], "pildora": "@hugolopez.pe"}
+}

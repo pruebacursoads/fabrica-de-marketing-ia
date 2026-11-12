@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "preset": "calido",
+  "nombre": "Café Aroma",
+  "handle": "@cafearoma",
+  "eslogan": "",
+  "logo": null,
+  "colores": {
+    "fondo": "#1a120d",
+    "panel": "#2a1c14",
+    "texto": "#FFF8F0",
+    "acento": "#E8590C",
+    "secundario": "#FB7185",
+    "positivo": "#34D399",
+    "alerta": "#EF4444"
+  },
+  "tipografia": {
+    "familia": "Poppins",
+    "peso_titulo": 800,
+    "peso_extra": 900,
+    "mayusculas": false
+  },
+  "subtitulos": {
+    "y": 1180,
+    "tam": 62,
+    "tam_clave": 88,
+    "palabras_por_grupo": 3,
+    "color_clave": "acento"
+  },
+  "estilo_grafico": {
+    "radio": 36,
+    "vidrio": true
+  },
+  "cta": {
+    "texto": "ESCRÍBEME",
+    "sub": ""
+  },
+  "musica": {
+    "mood": "calma"
+  },
+  "tono": "cálido, cercano, de confianza"
+}

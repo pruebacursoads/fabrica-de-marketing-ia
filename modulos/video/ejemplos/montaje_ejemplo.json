@@ -1,0 +1,12 @@
+{
+  "salida": "assets/base.mp4",
+  "encuadre": "cubrir",
+  "audio": {"fuente": "Tomas/voz.wav"},
+  "xfade": 0,
+  "cola": 1.3,
+  "segmentos": [
+    {"archivo": "Tomas/clip1.mp4", "ini": 0, "fin": 5.2},
+    {"archivo": "Tomas/clip2.mp4", "ini": 1.0, "fin": 4.0},
+    {"archivo": "Tomas/clip3_horizontal.mp4", "ini": 0, "fin": 6.0}
+  ]
+}

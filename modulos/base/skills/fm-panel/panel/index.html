@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mi equipo de marketing con IA · Panel en vivo</title>
+<style>
+:root{
+  --bg:#0d0a1a; --bg2:#15112a; --card:#1a1535; --card2:#211b44; --line:#2e2760;
+  --tx:#f3f1ff; --mut:#a9a3d6; --vio:#8b5cf6; --vio2:#6d28d9; --am:#facc15; --ok:#22c55e; --warn:#f59e0b; --bad:#ef4444;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(1200px 600px at 80% -10%,#2a1a6b55,transparent),var(--bg);color:var(--tx);
+  font-family:Montserrat,"Segoe UI",system-ui,-apple-system,Roboto,sans-serif;min-height:100vh;padding:20px 24px 60px}
+header{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-bottom:18px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--vio),var(--am));display:grid;place-items:center;font-size:22px}
+h1{font-size:clamp(18px,2.4vw,26px);font-weight:800;letter-spacing:-.01em}
+.sub{color:var(--mut);font-size:13px;margin-top:2px}
+.tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.live{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);padding:7px 12px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.06em}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 #22c55e88;animation:pulse 1.6s infinite}
+.live.demo .dot{background:var(--am);box-shadow:0 0 0 0 #facc1588}
+.live.off .dot{background:#64608f;animation:none}
+@keyframes pulse{70%{box-shadow:0 0 0 9px #0000}100%{box-shadow:0 0 0 0 #0000}}
+button{background:var(--vio2);color:#fff;border:0;border-radius:10px;padding:9px 14px;font:700 13px inherit;cursor:pointer}
+button:hover{background:var(--vio)}
+button.ghost{background:transparent;border:1px solid var(--line);color:var(--mut)}
+.dir{background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:18px;padding:18px 20px;margin-bottom:18px}
+.dir-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+.dir-name{font-weight:800;font-size:15px}
+.dir-name small{color:var(--mut);font-weight:600;margin-left:8px}
+.msg{color:var(--mut);font-size:14px;margin-top:6px;min-height:20px}
+.steps{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:16px}
+.step{position:relative;text-align:center;font-size:11.5px;color:var(--mut);font-weight:600;padding-top:30px}
+.step::before{content:attr(data-n);position:absolute;top:0;left:50%;transform:translateX(-50%);width:24px;height:24px;border-radius:50%;
+  background:var(--bg2);border:2px solid var(--line);display:grid;place-items:center;font-size:12px;font-weight:800;color:var(--mut);z-index:1}
+.step::after{content:"";position:absolute;top:11px;left:calc(50% + 14px);right:calc(-50% + 14px);height:2px;background:var(--line)}
+.step:last-child::after{display:none}
+.step.listo{color:var(--tx)}.step.listo::before{background:var(--ok);border-color:var(--ok);color:#06220f;content:"✓"}
+.step.listo::after{background:var(--ok)}
+.step.en-curso{color:var(--am)}.step.en-curso::before{border-color:var(--am);color:var(--am);box-shadow:0 0 0 4px #facc1533}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px;align-items:start}
+@media(max-width:980px){.layout{grid-template-columns:1fr}}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.ag{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;transition:.25s;position:relative;overflow:hidden}
+.ag.trabajando{border-color:var(--vio);box-shadow:0 0 0 1px var(--vio),0 8px 30px #6d28d944}
+.ag.trabajando::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,#8b5cf61f 50%,transparent 65%);transform:translateX(-100%);animation:sweep 2.2s infinite}
+@keyframes sweep{to{transform:translateX(100%)}}
+.ag.listo{border-color:#22c55e66}
+.ag.necesita-ayuda{border-color:var(--warn)}
+.ag-h{display:flex;align-items:center;gap:12px}
+.av{width:44px;height:44px;border-radius:13px;background:var(--bg2);display:grid;place-items:center;font-size:22px;flex:none}
+.ag.trabajando .av{background:linear-gradient(135deg,var(--vio2),var(--vio))}
+.nm{font-weight:800;font-size:15px}
+.rl{color:var(--mut);font-size:12px;margin-top:1px}
+.chip{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.05em;padding:3px 9px;border-radius:999px;margin-top:12px;text-transform:uppercase}
+.chip.espera{background:#2e2760;color:var(--mut)}
+.chip.trabajando{background:#8b5cf633;color:#c4b5fd}
+.chip.listo{background:#22c55e26;color:#4ade80}
+.chip.ajustando{background:#f59e0b26;color:#fbbf24}
+.chip.necesita-ayuda{background:#f59e0b26;color:#fbbf24}
+.task{font-size:13px;margin-top:10px;min-height:36px;color:var(--tx)}
+.bar{height:6px;background:var(--bg2);border-radius:999px;margin-top:10px;overflow:hidden}
+.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--vio),var(--am));border-radius:999px;transition:width .6s}
+.ag.listo .bar>i{background:var(--ok)}
+.files{font-size:12px;color:var(--mut);margin-top:8px}
+.side{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;position:sticky;top:16px;max-height:calc(100vh - 40px);overflow:auto}
+.side h2,.sec h2{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin-bottom:12px}
+.ev{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid #2e276055;font-size:12.5px}
+.ev:last-child{border:0}
+.ev time{color:var(--mut);font-variant-numeric:tabular-nums;flex:none;width:46px}
+.ev b{color:#c4b5fd}
+.sec{margin-top:22px}
+.docs{display:flex;flex-wrap:wrap;gap:10px}
+.doc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-size:13px;color:var(--tx);text-decoration:none;display:flex;gap:8px;align-items:center}
+.doc:hover{border-color:var(--am)}
+.doc small{color:var(--mut)}
+.empty{padding:34px;text-align:center;color:var(--mut);border:1px dashed var(--line);border-radius:16px;margin-bottom:14px;font-size:14px;line-height:1.6}
+footer{margin-top:34px;text-align:center;color:#6f69a8;font-size:12px}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <div class="logo">⚡</div>
+    <div>
+      <h1>Mi equipo de marketing con IA</h1>
+      <div class="sub">Mira en vivo cómo trabaja cada agente. Esta página se actualiza sola.</div>
+    </div>
+  </div>
+  <div class="tools">
+    <div class="live off" id="live"><span class="dot"></span><span id="liveTxt">ESPERANDO</span></div>
+    <button id="btnDemo" class="ghost">▶ Ver demo</button>
+    <button id="btnFull" class="ghost">Pantalla completa</button>
+  </div>
+</header>
+
+<section class="dir">
+  <div class="dir-top">
+    <div class="dir-name">🎯 Director <small id="neg"></small></div>
+  </div>
+  <div class="msg" id="msg">Esperando al director…</div>
+  <div class="steps" id="steps"></div>
+</section>
+
+<div id="vacio" class="empty" style="display:none">
+  Todavía no hay actividad.<br>
+  Abre Claude en esta carpeta y escribe: <b>Quiero empezar</b>.<br>
+  O pulsa <b>▶ Ver demo</b> para ver cómo se ve con el equipo trabajando.
+</div>
+
+<div class="layout">
+  <div>
+    <div class="grid" id="grid"></div>
+    <div class="sec">
+      <h2>Entregables listos</h2>
+      <div class="docs" id="docs"><span style="color:var(--mut);font-size:13px">Aún no hay archivos.</span></div>
+    </div>
+  </div>
+  <aside class="side">
+    <h2>Actividad en vivo</h2>
+    <div id="feed"></div>
+  </aside>
+</div>
+<footer>Fábrica de Marketing con IA · por Hugo López, El Marketero del Pueblo</footer>
+
+<script>
+const AGENTES=[
+ {id:'estratega',n:'Estratega',i:'🧭',d:'Plan de 90 días y calendario'},
+ {id:'oferta',n:'Oferta y copy',i:'✍️',d:'Oferta, textos y WhatsApp'},
+ {id:'imagenes',n:'Imágenes y flyers',i:'🖼️',d:'Prompts de imagen y flyers'},
+ {id:'carruseles',n:'Carruseles',i:'🎠',d:'Slides para Instagram y TikTok'},
+ {id:'video',n:'Video',i:'🎬',d:'Guiones y prompts de Omni Flash'},
+ {id:'anuncios',n:'Anuncios Meta',i:'📣',d:'Estructura, copy y WhatsApp'},
+ {id:'revisor',n:'Revisor',i:'🛡️',d:'Marca, claims y políticas de Meta'}
+];
+const ETAPAS=['Diagnóstico','ADN de marca','Plan','Producción en paralelo','Revisión','Entrega'];
+const ESTADOS={espera:'En espera',trabajando:'Trabajando',listo:'Listo',ajustando:'Ajustando','necesita-ayuda':'Necesita tu ayuda'};
+window.FM={director:null,agentes:{}};
+let demo=false,demoT0=0,lastSig='';
+
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---------- modo demo ---------- */
+const DEMO_TOTAL=78;
+const DEMO_AG={
+ estratega:{s:19,d:14,t:['Leyendo el ADN de marca','Definiendo 3 pilares de contenido','Armando el calendario de 4 semanas','Marcando qué piezas se vuelven anuncios'],f:['Estrategia/plan-90-dias.md','Estrategia/calendario.md']},
+ oferta:{s:19,d:12,t:['Afinando la promesa de la oferta','Escribiendo 3 propuestas de valor','Preparando el flujo de WhatsApp','Respuestas a las 5 objeciones'],f:['Entregables/oferta-y-copy.md','Entregables/flujo-whatsapp.md']},
+ imagenes:{s:20,d:22,t:['Revisando tu paleta y tipografía','Prompt flyer 1: oferta principal','Prompt flyer 2: antes y después','Prompt imagen de producto 4:5','Anotando qué referencias cargar'],f:['Entregables/imagenes/prompts-flyers.md']},
+ carruseles:{s:20,d:18,t:['Eligiendo el tema del carrusel','Diseñando el ADN visual de las slides','Escribiendo el prompt de cada slide','Copy de publicación'],f:['Entregables/carruseles/carrusel-1.md']},
+ video:{s:22,d:26,t:['Proponiendo ángulos de video','Guion 1: gancho de 2 s en pregunta','Prompts de Omni Flash con @me','Lista de referencias por clip','Guion 2 y 3'],f:['Entregables/video/guiones.md','Entregables/video/prompts-omni-flash.md']},
+ anuncios:{s:23,d:25,t:['Construyendo la matriz de 3 ángulos','Copy: texto principal, títulos y descripciones','Estructura de campaña a WhatsApp','Checklist de medición de compras','Nombres de campañas y anuncios'],f:['Entregables/anuncios/campana-whatsapp.md']},
+ revisor:{s:50,d:9,t:['Revisando claims y promesas','Comprobando políticas de Meta','Verificando que nada esté inventado','Coherencia con tu ADN de marca'],f:['Entregables/revision-final.md']}
+};
+const DEMO_STAGES=[0,7,14,18,49,60,DEMO_TOTAL-6];
+function demoState(t){
+  const D={negocio:'Postres saludables (ejemplo)',etapas:[],mensaje:'',log:[]};
+  const bounds=[0,7,14,19,50,59];
+  for(let i=0;i<6;i++){
+    const ini=bounds[i],fin=i<5?bounds[i+1]:DEMO_TOTAL-8;
+    D.etapas.push(t>=fin?'listo':t>=ini?'en-curso':'pendiente');
+  }
+  if(t>=DEMO_TOTAL-8) D.etapas=D.etapas.map(()=> 'listo');
+  const msgs=[[0,'Hola 👋 Primero entiendo tu negocio y tus objetivos de venta.'],[7,'Ahora capto tu marca: colores, tono y referencias.'],[14,'Te muestro el plan. Cuando lo apruebes, el equipo arranca.'],[19,'Producción en paralelo: seis agentes trabajando a la vez.'],[50,'El revisor controla claims, políticas de Meta y coherencia.'],[59,'Armando tu Campaña lista con los pasos y enlaces.'],[DEMO_TOTAL-8,'¡Campaña lista! Abre la carpeta Entregables.']];
+  msgs.forEach(m=>{if(t>=m[0])D.mensaje=m[1]});
+  const ag={},ev=[];
+  const fmt=x=>String(Math.floor(x/60)).padStart(2,'0')+':'+String(Math.floor(x%60)).padStart(2,'0');
+  msgs.forEach(m=>{if(t>=m[0])ev.push({t:m[0],ag:'Director',m:m[1]})});
+  AGENTES.forEach(a=>{
+    const c=DEMO_AG[a.id];const log=[];
+    let estado='espera',prog=0,tarea='Esperando turno',archivos=[];
+    if(t>=c.s){
+      const p=Math.min(1,(t-c.s)/c.d);prog=Math.round(p*100);
+      c.t.forEach((x,i)=>{const at=c.s+c.d*(i/c.t.length);if(t>=at){tarea=x;ev.push({t:at,ag:a.n,m:x});}});
+      if(p>=1){estado='listo';tarea='Entrega terminada';archivos=c.f.map(f=>({ruta:f,nombre:f.split('/').pop()}));ev.push({t:c.s+c.d,ag:a.n,m:'✓ Listo: '+c.f.length+' archivo(s)'});}
+      else estado='trabajando';
+    }
+    ag[a.id]={estado,tarea,progreso:prog,archivos,log:[]};
+  });
+  ev.sort((a,b)=>a.t-b.t);
+  D.log=ev.map(e=>({t:fmt(e.t),ag:e.ag,m:e.m}));
+  return {director:D,agentes:ag};
+}
+
+/* ---------- carga de estado real ---------- */
+function cargar(){
+  if(demo)return;
+  const ids=['director',...AGENTES.map(a=>a.id)];
+  let pend=ids.length;
+  document.querySelectorAll('script[data-fm]').forEach(s=>s.remove());
+  ids.forEach(id=>{
+    const s=document.createElement('script');s.dataset.fm='1';
+    s.src='estado/'+id+'.js?t='+Date.now();
+    s.onload=s.onerror=()=>{if(--pend===0)pintar()};
+    document.head.appendChild(s);
+  });
+}
+
+/* ---------- pintar ---------- */
+function pintar(){
+  let S;
+  if(demo){S=demoState((Date.now()-demoT0)/1000%DEMO_TOTAL);}
+  else S=window.FM;
+  const hay=S.director||Object.keys(S.agentes||{}).length;
+  const sig=JSON.stringify(S);
+  const live=$('live'),lt=$('liveTxt');
+  live.className='live'+(demo?' demo':hay?'':' off');
+  lt.textContent=demo?'DEMO':hay?'EN VIVO':'ESPERANDO';
+  $('vacio').style.display=hay||demo?'none':'block';
+  if(sig===lastSig)return;lastSig=sig;
+  const D=S.director||{};
+  $('neg').textContent=D.negocio?('· '+D.negocio):'';
+  $('msg').textContent=D.mensaje||'Esperando al director…';
+  const et=D.etapas||[];
+  const stSig=et.join(',');
+  if(stSig!==window.__stSig){window.__stSig=stSig;
+    $('steps').innerHTML=ETAPAS.map((n,i)=>`<div class="step ${esc(et[i]||'pendiente')}" data-n="${i+1}">${esc(n)}</div>`).join('');}
+  /* tarjetas: se crean una vez y se actualizan en sitio (así las animaciones no se reinician) */
+  if(!$('grid').children.length){
+    $('grid').innerHTML=AGENTES.map(a=>`<div class="ag espera" id="ag-${a.id}"><div class="ag-h"><div class="av">${a.i}</div><div><div class="nm">${esc(a.n)}</div><div class="rl">${esc(a.d)}</div></div></div>
+      <span class="chip espera"></span><div class="task"></div><div class="bar"><i></i></div><div class="files"></div></div>`).join('');
+  }
+  AGENTES.forEach(a=>{
+    const g=(S.agentes||{})[a.id]||{};
+    const est=g.estado||'espera';
+    const nf=(g.archivos||[]).length;
+    const el=$('ag-'+a.id);
+    el.className='ag '+est;
+    const chip=el.querySelector('.chip');chip.className='chip '+est;chip.textContent=ESTADOS[est]||est;
+    el.querySelector('.task').textContent=g.tarea||'Esperando turno';
+    el.querySelector('.bar i').style.width=Math.max(0,Math.min(100,g.progreso||0))+'%';
+    el.querySelector('.files').textContent=nf?('📄 '+nf+' archivo'+(nf>1?'s':'')+' entregado'+(nf>1?'s':'')):' ';
+  });
+  /* feed */
+  let ev=[];
+  (D.log||[]).forEach(e=>ev.push({t:e.t,ag:e.ag||'Director',m:e.m}));
+  AGENTES.forEach(a=>{((S.agentes||{})[a.id]||{}).log&&S.agentes[a.id].log.forEach(e=>ev.push({t:e.t,ag:a.n,m:e.m}))});
+  ev.sort((x,y)=>String(x.t).localeCompare(String(y.t)));
+  const evSig=ev.length+'|'+(ev.length?ev[ev.length-1].t+ev[ev.length-1].m:'');
+  if(evSig!==window.__evSig){
+    window.__evSig=evSig;
+    $('feed').innerHTML=ev.slice(-40).reverse().map(e=>`<div class="ev"><time>${esc(e.t)}</time><div><b>${esc(e.ag)}</b> · ${esc(e.m)}</div></div>`).join('')||'<span style="color:var(--mut);font-size:13px">Sin actividad todavía.</span>';
+  }
+  /* entregables */
+  const docs=[];
+  AGENTES.forEach(a=>{((S.agentes||{})[a.id]||{}).archivos&&S.agentes[a.id].archivos.forEach(f=>docs.push({a:a.n,...f}))});
+  $('docs').innerHTML=docs.length?docs.map(f=>`<a class="doc" href="../${encodeURI(f.ruta)}" target="_blank">📄 <span>${esc(f.nombre||f.ruta)}<br><small>${esc(f.a)}</small></span></a>`).join(''):'<span style="color:var(--mut);font-size:13px">Aún no hay archivos.</span>';
+}
+
+$('btnDemo').onclick=()=>{
+  demo=!demo;lastSig='';
+  $('btnDemo').textContent=demo?'■ Salir de la demo':'▶ Ver demo';
+  if(demo)demoT0=Date.now();else cargar();
+  pintar();
+};
+$('btnFull').onclick=()=>{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()};
+if(/[?&]demo/.test(location.search)){demo=true;demoT0=Date.now();$('btnDemo').textContent='■ Salir de la demo';}
+cargar();pintar();
+setInterval(()=>{demo?pintar():cargar()},demo?500:2000);
+setInterval(()=>{if(demo)pintar()},500);
+</script>
+</body>
+</html>

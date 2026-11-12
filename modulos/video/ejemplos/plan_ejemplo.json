@@ -1,0 +1,24 @@
+{
+  "duracion": 31.2,
+  "video": "assets/base.mp4",
+  "audio": "assets/mix.wav",
+  "words": "words.json",
+  "rostro_y": 1000,
+  "zoom_max": 1.15,
+  "rostro": {"y1": 1000, "y2": 1350},
+  "zonas": {"arriba": {"y": 170, "h": 440}, "medio": {"y": 560, "h": 420}, "abajo": {"y": 1420, "h": 110}},
+  "claves": ["empresa", "obligatorio", "ruc", "herramientas", "analítica", "marketing", "negocio"],
+  "gancho": {"tag": "TUTORIAL", "fin": 4.6, "lineas": [{"t": "VERIFICA TU CUENTA", "tam": 84}, {"t": "DE *EMPRESA*", "tam": 96}]},
+  "eventos": [
+    {"tipo": "nombre", "t": 0.6, "dur": 2.8, "pos": "abajo"},
+    {"tipo": "sello", "t": 5.7, "dur": 0.9, "texto": "OBLIGATORIO", "color": "alerta", "pos": "arriba"},
+    {"tipo": "tarjeta", "t": 6.6, "dur": 2.5, "icono": "user", "titulo": "RUC 10", "sub": "PERSONA NATURAL", "pos": "arriba"},
+    {"tipo": "tarjeta", "t": 7.0, "dur": 2.1, "icono": "building", "titulo": "RUC 20", "sub": "EMPRESA", "pos": "medio", "entrada": "derecha"},
+    {"tipo": "lista", "t": 10.0, "dur": 3.4, "titulo": "AL VERIFICAR", "items": ["MÁS HERRAMIENTAS", "ANALÍTICA", "PUBLICIDAD"], "cada": 0.7, "pos": "arriba"},
+    {"tipo": "dato", "t": 16.4, "dur": 2.2, "valor": "+ FUNCIONES", "etiqueta": "TE *POTENCIA*", "pos": "arriba", "color": "positivo"},
+    {"tipo": "etiqueta", "t": 18.3, "dur": 2.4, "icono": "warning", "texto": "LA MÚSICA PUEDE LIMITARSE", "color": "alerta", "pos": "abajo"},
+    {"tipo": "titular", "t": 22.0, "dur": 4.2, "texto": "ANALÍTICA\n*MARKETING*\nINTELIGENCIA ARTIFICIAL", "pos": "arriba"},
+    {"tipo": "tarjeta", "t": 26.4, "dur": 3.0, "icono": "store", "titulo": "TU NEGOCIO", "sub": "IMPLEMENTA TODO ESTO", "pos": "arriba"}
+  ],
+  "cierre": {"t": 29.8, "y": 1390}
+}

@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "preset": "minimal-claro",
+  "nombre": "Mi marca",
+  "handle": "@mimarca",
+  "eslogan": "",
+  "logo": null,
+  "colores": {"fondo": "#F8FAFC", "panel": "#FFFFFF", "texto": "#0F172A", "acento": "#2563EB", "secundario": "#7C3AED", "positivo": "#059669", "alerta": "#DC2626"},
+  "tipografia": {"familia": "Inter", "peso_titulo": 800, "peso_extra": 900, "mayusculas": false},
+  "subtitulos": {"y": 1180, "tam": 60, "tam_clave": 84, "palabras_por_grupo": 3, "color_clave": "acento"},
+  "estilo_grafico": {"radio": 24, "vidrio": false},
+  "cta": {"texto": "SÍGUEME", "sub": ""},
+  "musica": {"mood": "calma"},
+  "tono": "limpio, profesional, claro"
+}

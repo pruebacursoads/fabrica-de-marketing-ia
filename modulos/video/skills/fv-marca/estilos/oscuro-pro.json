@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "preset": "oscuro-pro",
+  "nombre": "Mi marca",
+  "handle": "@mimarca",
+  "eslogan": "",
+  "logo": null,
+  "colores": {"fondo": "#07080f", "panel": "#12142c", "texto": "#FFFFFF", "acento": "#38BDF8", "secundario": "#A78BFA", "positivo": "#2FE3AE", "alerta": "#FF5A5F"},
+  "tipografia": {"familia": "Poppins", "peso_titulo": 800, "peso_extra": 800, "mayusculas": true},
+  "subtitulos": {"y": 1180, "tam": 64, "tam_clave": 92, "palabras_por_grupo": 3, "color_clave": "acento"},
+  "estilo_grafico": {"radio": 30, "vidrio": true},
+  "cta": {"texto": "SÍGUEME", "sub": ""},
+  "musica": {"mood": "calma"},
+  "tono": "cercano y directo"
+}

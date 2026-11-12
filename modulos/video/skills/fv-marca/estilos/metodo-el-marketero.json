@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "preset": "metodo-el-marketero",
+  "nombre": "El Marketero del Pueblo",
+  "handle": "@hugolopez.pe",
+  "eslogan": "Marketing digital para emprendedores",
+  "logo": null,
+  "colores": {"fondo": "#05060d", "panel": "#12142c", "texto": "#FFFFFF", "acento": "#FFD23F", "secundario": "#8B5CFF", "positivo": "#2FE3AE", "alerta": "#FF5A5F"},
+  "tipografia": {"familia": "Montserrat", "peso_titulo": 800, "peso_extra": 900, "mayusculas": true},
+  "subtitulos": {"y": 1180, "tam": 64, "tam_clave": 92, "palabras_por_grupo": 3, "color_clave": "acento"},
+  "estilo_grafico": {"radio": 30, "vidrio": true},
+  "cta": {"texto": "ÚNETE EN MI PERFIL", "sub": "CLASE DE VIDEOS CON IA DESDE 0"},
+  "musica": {"mood": "calma"},
+  "tono": "directo, cercano, para emprendedores"
+}

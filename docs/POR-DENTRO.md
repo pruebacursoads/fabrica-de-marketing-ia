@@ -1,0 +1,43 @@
+# Por dentro (para mantener y ampliar el paquete)
+
+## Mapa
+```
+fm-director ──► fm-diagnostico ─► Mi negocio/diagnostico-situacional.md
+            ├─► fm-adn         ─► Mi negocio/adn-de-marca.md
+            ├─► plan en tabla  (aprobación del alumno)
+            ├─► agentes en paralelo (fm-agente-*)  ──► Entregables/<tema>/<área>/
+            │        estratega · oferta · imagenes · carruseles · video · anuncios
+            ├─► fm-agente-revisor ─► revision-final.md
+            └─► 00-LEEME-PRIMERO.md + aprendizajes.md
+                         ▲
+                fm-panel (Panel/index.html + estado/*.js) ◄── todos reportan
+```
+
+## Panel en vivo
+- `Panel/index.html` es estático. Cada 2 s inyecta `<script src="estado/<id>.js">` para `director` y los 7 agentes; cada archivo asigna `window.FM...`. Así funciona abierto con doble clic (`file://`) y sin servidor.
+- **Un archivo por agente** → cero conflictos en paralelo. `scripts/reportar.py` escribe de forma atómica (`.tmp` + `os.replace`) y conserva el historial (30 eventos).
+- Sin Python, el agente reescribe su archivo con el formato documentado en `fm-panel/SKILL.md`.
+- Modo demo: `?demo=1` o botón; la línea de tiempo está en `DEMO_AG` dentro del HTML.
+- Para cambiar el roster, edita `AGENTES` en `index.html` y `IDS` en `reportar.py`.
+
+## Agentes
+- Viven en `agentes/*.md` y se instalan en `~/.claude/agents/`. El director los lanza con varias llamadas a `Agent` en **un solo mensaje** (paralelo real). Si la herramienta no permite subagentes, el director ejecuta las instrucciones una tras otra.
+- Los agentes **no preguntan al alumno**: leen el ADN, el diagnóstico y `aprendizajes.md`, y devuelven Supuestos y Faltantes.
+- Generados con un script desde una plantilla común; el protocolo común (leer ADN, reportar al panel, claims, devolver resumen) está al final de cada archivo.
+
+## Mantener Meta Ads al día
+1. Edita `modulos/anuncios/skills/meta-ads-andromeda/references/estado-vigente.md`: actualiza la fecha, la tabla y las fuentes.
+2. Etiquetas: OFICIAL (Meta, WhatsApp Business o esquema de la API) · SECUNDARIA (blogs) · NO VERIFICADO · HEURÍSTICA.
+3. Puntos pendientes al 2026-11-12: cantidad exacta de clientes/pedidos para habilitar "compras por mensajes" (hoy ~10, observado), ruta exacta del "uso compartido de datos" de WhatsApp, límites del impulso de la entrega por anuncio y detalle de las campañas Advantage+ de ventas. Ya confirmados con capturas de un Administrador real: impulso de la entrega por anuncio, objetivo de compras por mensajes y que el objetivo de rendimiento no se edita tras publicar.
+4. Si cambia una regla, ajusta también `SKILL.md` (Fase 5) y `fm-agente-anuncios.md`/`fm-agente-revisor.md`.
+
+## Lecciones de clientes incorporadas (sin datos de clientes)
+Marca propia por negocio · claims Nivel A y políticas de Meta · estructura de video ganadora (gancho 2 s, ≤ 30 s, prueba visual, cobertura siempre visible) · reglas de Omni Flash (@me, ligero, sin texto/música) · referencias exactas por pieza · propuesta antes de producir · convención de nombres para cruzar anuncios con ventas · privacidad de datos y claves.
+
+## Probar una instalación sin tocar tu equipo
+`.\instalar.ps1 -Destino C:\ruta\de\prueba` (Windows) · `bash instalar.sh --destino /ruta/de/prueba` (Mac/Linux).
+
+## Pendientes conocidos
+- Probar el recorrido completo con un alumno real y en equipo limpio (Windows 10/11, Mac, 8 GB).
+- Landing, CRM de WhatsApp y dashboard de ventas: existen como plantillas aparte; falta decidir cómo se entregan (repos plantilla) y documentarlo.
+- Publicar la guía visual (artifact) del paquete y subir el ZIP.
