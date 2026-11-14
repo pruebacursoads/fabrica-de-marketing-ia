@@ -7,7 +7,7 @@ Qué hace:
     en la carpeta correcta de tu computadora, con el nombre correcto (clip-01.mp4, REF-01.png...).
   - Vigila las carpetas: si copias un archivo a mano, el Panel también lo detecta.
 
-Uso:   python Panel/servidor.py          (o doble clic en iniciar-panel.bat)
+Uso:   python Panel/servidor.py          (o doble clic en ABRIR-PANEL.bat)
 Cierra la ventana o pulsa Ctrl+C para detenerlo.
 
 Seguridad: solo escucha en 127.0.0.1 (nadie más en tu red lo ve), solo acepta subidas con la cabecera propia
@@ -58,9 +58,11 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def _host_ok(self):
         return self.headers.get("Host", "").rsplit(":", 1)[0] in ("localhost", "127.0.0.1", "[::1]")
 
-    def _json(self, codigo, obj):
+    def _json(self, codigo, obj, extra=None):
         cuerpo = json.dumps(obj, ensure_ascii=False).encode("utf-8")
         self.send_response(codigo)
+        for k, v in (extra or {}).items():
+            self.send_header(k, v)
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(cuerpo)))
         self.end_headers()
@@ -72,7 +74,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return self.send_error(403)
         ruta = urllib.parse.urlparse(self.path).path
         if ruta == "/api/ping":
-            return self._json(200, {"ok": True, "raiz": os.path.basename(RAIZ)})
+            # CORS abierto SOLO aquí: permite que Panel/index.html abierto con doble clic detecte el servidor y pase solo a la versión con subida
+            return self._json(200, {"ok": True, "raiz": os.path.basename(RAIZ)}, {"Access-Control-Allow-Origin": "*"})
         rango = self.headers.get("Range")
         fs = self.translate_path(self.path)
         if rango and os.path.isfile(fs):

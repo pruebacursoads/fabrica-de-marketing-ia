@@ -24,7 +24,7 @@ Al terminar recibes una **Campaña lista**: una carpeta con todo para publicar y
 Antes de producir, el **director** hace tu **diagnóstico de negocio** (objetivos, números, semáforo de preparación) y tu **ADN de marca** (logo, colores medidos del archivo, tipografías, tono, claims, referencias). Todo lo que sale lleva tu identidad, nunca la de otro.
 
 ## Novedades de la versión 1.1.0
-- **Panel con oficina 3D** y una nueva pestaña **Guía de generación**: aquí ves tus prompts listos para copiar, qué referencias cargar y en qué orden, y **arrastras tus imágenes y clips** para que se guarden solos en tu computadora. Claude los revisa en tiempo real y te dice si pasan o qué repetir. (Abre el panel con doble clic en `Panel/iniciar-panel.bat`.)
+- **Panel con oficina 3D** y una nueva pestaña **Guía de generación**: aquí ves tus prompts listos para copiar, qué referencias cargar y en qué orden, y **arrastras tus imágenes y clips** para que se guarden solos en tu computadora. Claude los revisa en tiempo real y te dice si pasan o qué repetir. (Abre el panel con doble clic en `Panel/ABRIR-PANEL.bat`.)
 - **Video con varias tomas:** un video de 20 s son 5-6 tomas distintas (no un plano fijo) y la continuidad se arma en la edición con las mismas referencias de escena, sin usar el último fotograma del clip anterior.
 - **Más realista:** se parte de **fotos reales** de tu local o producto (la IA las mejora y reencuadra a 9:16 con Nano Banana 2 o GPT Image 2.6) y se evita el "set de película".
 - El **revisor** ahora también exige dinamismo, continuidad por escena, realismo y que nada quede "al aire" fuera de la guía.

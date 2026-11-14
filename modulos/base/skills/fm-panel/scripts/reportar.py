@@ -117,6 +117,16 @@ def validar_guia(d):
         vistos.add(pid)
         if not p.get("titulo"):
             errs.append("Paso %d (%s): falta 'titulo'." % (i, pid))
+        elif len(p["titulo"]) > 70:
+            errs.append("Paso %d (%s): 'titulo' de %d caracteres; máx. 70. Que sea una acción corta, ej. «Crea la imagen de tu tienda»." % (i, pid, len(p["titulo"])))
+        hacer = p.get("hacer") or p.get("pedir") or ""
+        if not hacer and p.get("fase") != "otro":
+            errs.append("Paso %d (%s): falta 'hacer' (1-2 frases simples sobre qué hace el alumno)." % (i, pid))
+        elif len(hacer) > 280:
+            errs.append("Paso %d (%s): 'hacer' de %d caracteres; máx. 280. El alumno no es técnico: acorta y pasa lo largo a 'ayuda'." % (i, pid, len(hacer)))
+        for j, r in enumerate(p.get("refs") or [], 1):
+            if isinstance(r, dict) and len(str(r.get("nombre", ""))) > 70:
+                errs.append("Paso %d (%s): el nombre de la referencia %d pasa de 70 caracteres; usa un nombre corto («Imagen de tu tienda»)." % (i, pid, j))
         sal = str(p.get("salida") or "").replace("\\", "/")
         if sal:
             if sal.startswith("/") or ".." in sal.split("/") or re.match(r"^[A-Za-z]:", sal):
@@ -148,8 +158,8 @@ def guia_a_md(sec):
                 meta.append(str(p[k]))
         if meta:
             L.append("**Dónde / cómo:** " + " · ".join(meta))
-        if p.get("pedir"):
-            L += ["", p["pedir"]]
+        if p.get("hacer") or p.get("pedir"):
+            L += ["", p.get("hacer") or p.get("pedir")]
         if p.get("refs"):
             L += ["", "**Carga en este orden:**"]
             for i, r in enumerate(p["refs"], 1):
@@ -159,8 +169,10 @@ def guia_a_md(sec):
             L += ["", "**%s (copiar y pegar)**" % p.get("prompt_titulo", "Prompt") + ((" · " + p["palabras"]) if p.get("palabras") else ""), "", "```text", p["prompt"].strip(), "```"]
         for alt in p.get("alternativas") or []:
             L += ["", "**%s (copiar y pegar)**" % alt.get("titulo", "Alternativa"), "", "```text", alt["prompt"].strip(), "```"]
-        if p.get("notas"):
-            L += ["", p["notas"]]
+        if p.get("ayuda") or p.get("notas"):
+            L += ["", "_Ayuda:_ " + (p.get("ayuda") or p.get("notas"))]
+        if p.get("decir"):
+            L += ["", "**Escríbele a Claude en el chat:** «%s»" % p["decir"]]
         if p.get("revisar"):
             L += ["", "**Revisa al recibirlo:**"] + ["- " + x for x in p["revisar"]]
         if p.get("salida"):

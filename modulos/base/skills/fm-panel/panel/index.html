@@ -171,66 +171,81 @@ summary{cursor:pointer;color:var(--mut);font-weight:700;font-size:13px;padding:8
 .ag.listo .bar>i{background:var(--ok)}
 .files{font-size:11.5px;color:var(--mut);margin-top:6px}
 
-/* ================= GUÍA DE GENERACIÓN ================= */
-.gtop{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;background:linear-gradient(180deg,var(--card2),var(--card));
-  border:1px solid var(--line);border-radius:16px;padding:14px 18px;margin-bottom:14px}
-.gtop h2{font-size:17px}
-.gtop p{color:var(--mut);font-size:13px;margin-top:3px;max-width:760px}
-.gprog{min-width:220px}
-.gprog .bar{height:9px}.gprog b{font-size:13px}
-.srvbox{font-size:12.5px;border-radius:12px;padding:10px 14px;margin-bottom:14px;border:1px solid var(--line);background:var(--card)}
-.srvbox.ok{border-color:#22c55e66;color:#86efac}
-.srvbox.no{border-color:#f59e0b66;color:#fde68a}
-.srvbox code{background:#0003;padding:1px 6px;border-radius:5px}
-.sec h3.sech{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin:20px 0 4px}
-.sec .intro{color:var(--mut);font-size:13px;margin-bottom:10px;max-width:900px}
-.gc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
-.gc.ahora{border-color:var(--am);box-shadow:0 0 0 1px var(--am),0 10px 30px #facc1514}
-.gc.aprobado{border-color:#22c55e66}
-.gc.repetir{border-color:#f59e0b99}
-.gch{display:flex;gap:12px;align-items:flex-start}
-.num{width:32px;height:32px;border-radius:50%;background:var(--vio2);display:grid;place-items:center;font-weight:800;flex:none}
-.gc.aprobado .num{background:var(--ok);color:#06220f}
-.gch h3{font-size:16px;line-height:1.25}
-.meta{color:var(--mut);font-size:12.5px;margin-top:3px}
-.meta a{color:#c4b5fd}
-.gch .chip{margin-left:auto}
-.ahorab{display:inline-block;background:var(--am);color:#2a2100;font-weight:800;font-size:11px;padding:2px 9px;border-radius:999px;margin-left:8px}
-.pedir{background:#facc1514;border:1px solid #facc1544;color:#fde68a;border-radius:10px;padding:10px 12px;font-size:13px;margin-top:12px}
-.refs{margin-top:12px}
-.refs>b{font-size:12.5px;color:var(--mut)}
-.refs ol{list-style:none;display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
-.refs li{display:flex;align-items:center;gap:9px;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:6px 12px 6px 6px;font-size:12.5px}
-.refs li .n{width:22px;height:22px;border-radius:50%;background:var(--am);color:#2a2100;font-weight:800;font-size:12px;display:grid;place-items:center;flex:none}
-.refs li img{width:42px;height:56px;object-fit:cover;border-radius:6px;border:1px solid var(--line)}
-.refs li .ic{width:42px;height:56px;border-radius:6px;background:var(--card2);display:grid;place-items:center;font-size:22px}
-.pbox{margin-top:12px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
-.pbar{display:flex;align-items:center;gap:10px;background:var(--card2);padding:8px 12px;font-size:12.5px}
-.pbar small{color:var(--mut)}
-.pbar button{margin-left:auto;padding:6px 12px;font-size:12.5px}
-.pbox pre{white-space:pre-wrap;word-wrap:break-word;font:13px/1.55 Consolas,"Cascadia Mono",monospace;padding:12px 14px;background:#100c24;max-height:280px;overflow:auto}
-.notas{margin-top:10px;font-size:13px;color:var(--mut)}
-.chk{margin:10px 0 0 18px;font-size:13px;color:var(--mut)}
-.chk li{margin:2px 0}
-.drop{margin-top:14px;border:2px dashed #4b3f99;border-radius:14px;padding:16px;text-align:center;color:var(--mut);font-size:13px;cursor:pointer;transition:.2s;background:#ffffff05}
+/* ================= GUÍA PASO A PASO (un paso a la vez) ================= */
+.gwrap{max-width:920px;margin:0 auto}
+.gtop{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:6px}
+.gtop h2{font-size:19px}
+.gtop small{color:var(--mut);font-size:13px}
+.gprog{min-width:220px;flex:0 1 320px}
+.gprog b{font-size:13px}
+.gprog .bar{height:9px}
+.hintline{font-size:13px;color:var(--mut);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin:10px 0 4px}
+.hintline b{color:var(--tx)}
+.stepper{display:flex;gap:8px;overflow-x:auto;padding:12px 4px 16px}
+.sdot{flex:none;width:40px;height:40px;border-radius:50%;border:2px solid var(--line);background:var(--card);color:var(--mut);font-weight:800;font-size:14px;display:grid;place-items:center;cursor:pointer;padding:0}
+.sdot:hover{border-color:var(--vio);background:var(--card2);color:var(--tx)}
+.sdot.cur{border-color:var(--am);color:var(--am);box-shadow:0 0 0 4px #facc1533}
+.sdot.aprobado{background:var(--ok);border-color:var(--ok);color:#06220f}
+.sdot.revisando{border-color:#38bdf8;color:#7dd3fc}
+.sdot.repetir{border-color:var(--warn);color:var(--warn)}
+.wz{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px 30px}
+.kick{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--am);font-weight:800}
+.wz h2{font-size:27px;line-height:1.2;margin:8px 0 12px}
+.hacer{font-size:18px;line-height:1.55;color:#e9e6ff}
+.blk{margin-top:26px}
+.blk-h{display:flex;align-items:center;gap:10px;font-weight:800;font-size:16px;margin-bottom:12px}
+.bn{width:28px;height:28px;border-radius:50%;background:var(--vio2);display:grid;place-items:center;font-size:14px;flex:none}
+.bigbtn{display:inline-flex;gap:8px;align-items:center;background:var(--am);color:#2a2100;font-weight:800;font-size:16px;padding:12px 22px;border-radius:12px;text-decoration:none}
+.bigbtn:hover{filter:brightness(1.08)}
+.rfs{display:flex;flex-wrap:wrap;gap:16px}
+.rf{width:124px;font-size:12.5px;color:var(--mut)}
+.rf .im{position:relative;width:124px;height:166px;border-radius:12px;border:1px solid var(--line);background:var(--bg2);display:grid;place-items:center;font-size:40px;overflow:hidden}
+.rf .im img{width:100%;height:100%;object-fit:cover}
+.rf .im b{position:absolute;left:7px;top:7px;width:26px;height:26px;border-radius:50%;background:var(--am);color:#2a2100;font-size:14px;display:grid;place-items:center}
+.rf span{display:block;margin-top:7px;color:var(--tx);line-height:1.3;font-size:13px}
+.rf small{color:var(--mut);display:block;margin-top:2px}
+.vtabs{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.vtab{background:transparent;border:1px solid var(--line);color:var(--mut);padding:8px 14px;border-radius:10px;font-size:13px}
+.vtab.on{background:var(--vio2);border-color:var(--vio2);color:#fff}
+.pv{border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.pvbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:12px 14px;background:var(--card2)}
+.pvbar span{color:var(--mut);font-size:13px;flex:1;min-width:140px}
+.copybig{font-size:16px;padding:13px 24px;border-radius:12px}
+.pv pre{white-space:pre-wrap;word-wrap:break-word;font:13px/1.55 Consolas,"Cascadia Mono",monospace;padding:12px 14px;background:#100c24;max-height:6.2em;overflow:hidden;position:relative}
+.pv.open pre{max-height:360px;overflow:auto}
+.pv .more{display:block;width:100%;background:#100c24;border:0;border-top:1px solid var(--line);color:#c4b5fd;border-radius:0;padding:9px;font-size:13px}
+.drop{border:2px dashed #5b4cc4;border-radius:16px;padding:28px 18px;text-align:center;color:var(--mut);font-size:14px;cursor:pointer;transition:.2s;background:#ffffff06}
 .drop:hover,.drop.over{border-color:var(--am);color:var(--tx);background:#facc1510}
-.drop b{color:var(--tx)}
-.drop small{display:block;margin-top:4px;color:#8a84c0}
-.drop.off{cursor:default;opacity:.85}
-.drop.off:hover{border-color:#4b3f99;background:#ffffff05;color:var(--mut)}
-.up{height:8px;background:var(--bg2);border-radius:999px;margin-top:10px;overflow:hidden}
+.drop .ic{font-size:34px;display:block;margin-bottom:6px}
+.drop b{color:var(--tx);font-size:17px;display:block;margin-bottom:4px}
+.drop small{display:block;margin-top:8px;color:#8a84c0;font-size:12px}
+.drop.off{cursor:default;opacity:.9}
+.drop.off:hover{border-color:#5b4cc4;background:#ffffff06;color:var(--mut)}
+.up{height:8px;background:var(--bg2);border-radius:999px;margin-top:12px;overflow:hidden}
 .up>i{display:block;height:100%;background:linear-gradient(90deg,var(--vio),var(--am));width:0}
-.prev{margin-top:14px;display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start}
-.prev img{max-height:300px;max-width:100%;border-radius:12px;border:1px solid var(--line)}
+.prev{margin-top:16px;display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start}
+.prev img{max-height:320px;max-width:100%;border-radius:12px;border:1px solid var(--line)}
 .prev video{max-height:420px;max-width:100%;border-radius:12px;border:1px solid var(--line);background:#000}
 .prev audio{width:100%}
-.thumb{display:flex;flex-direction:column;gap:4px;font-size:11.5px;color:var(--mut);max-width:130px}
-.thumb img{width:130px;height:170px;object-fit:cover}
-.rev{margin-top:10px;border-radius:10px;padding:9px 12px;font-size:13px}
+.thumb{display:flex;flex-direction:column;gap:4px;font-size:11.5px;color:var(--mut);max-width:110px}
+.thumb img{width:110px;height:146px;object-fit:cover}
+.rev{margin-top:14px;border-radius:12px;padding:12px 14px;font-size:14px;line-height:1.45}
 .rev.revisando{background:#0ea5e920;color:#bae6fd}
 .rev.ok{background:#22c55e20;color:#bbf7d0}
 .rev.repetir{background:#f59e0b20;color:#fde68a}
-.empty{color:var(--mut);font-size:14px;padding:30px;text-align:center;border:1px dashed var(--line);border-radius:16px}
+.navrow{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:28px;padding-top:18px;border-top:1px solid var(--line)}
+.navrow button{font-size:15px;padding:11px 20px}
+.navrow .go{background:var(--ok);color:#06220f}
+.navrow .go:hover{filter:brightness(1.1)}
+.ayuda{margin-top:18px}
+.ayuda summary{cursor:pointer;color:#c4b5fd;font-size:13.5px;padding:6px 0}
+.ayuda div{color:var(--mut);font-size:13.5px;line-height:1.6;padding:6px 0}
+.ayuda ul{margin:6px 0 0 18px}
+.saycopy{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:16px}
+.saycopy q{flex:1;min-width:200px;quotes:"«" "»"}
+.empty{color:var(--mut);font-size:15px;padding:34px;text-align:center;border:1px dashed var(--line);border-radius:16px}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#fff;color:#1b1740;font-weight:700;font-size:14px;padding:12px 20px;border-radius:999px;box-shadow:0 10px 30px #0008;z-index:99;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{opacity:1}
 footer{margin-top:28px;text-align:center;color:#6f69a8;font-size:12px}
 </style>
 </head>
@@ -277,16 +292,17 @@ footer{margin-top:28px;text-align:center;color:#6f69a8;font-size:12px}
 </main>
 
 <main id="pane-guia" class="pane">
-  <div class="gtop">
-    <div>
-      <h2>Tu guía paso a paso</h2>
-      <p>Aquí están los prompts listos para copiar, qué referencias cargar y en qué orden. Cuando tengas cada archivo, arrástralo a su cuadro: se guarda solo en tu computadora y Claude lo revisa al instante.</p>
+  <div class="gwrap">
+    <div class="gtop">
+      <div><h2>Tu guía paso a paso</h2><small id="gSub">Haz un paso a la vez. Yo te digo cuál toca.</small></div>
+      <div class="gprog"><b id="gprogTxt">Sin pasos todavía</b><div class="bar"><i id="gprogBar"></i></div></div>
     </div>
-    <div class="gprog"><b id="gprogTxt">Sin pasos todavía</b><div class="bar"><i id="gprogBar"></i></div></div>
+    <div id="gHint" class="hintline" style="display:none"></div>
+    <div class="stepper" id="gStepper"></div>
+    <div id="guiaBody"><div class="empty">Cuando tu equipo termine las piezas, aquí aparecerá el primer paso.<br>Pulsa <b>▶ Ver demo</b> para ver cómo se ve.</div></div>
   </div>
-  <div id="srvbox" class="srvbox no" style="display:none"></div>
-  <div id="guiaBody"><div class="empty">Cuando el equipo termine las piezas aparecerán aquí los pasos con sus prompts.<br>Pulsa <b>▶ Ver demo</b> para ver cómo se ve.</div></div>
 </main>
+<div class="toast" id="toast"></div>
 <footer>Fábrica de Marketing con IA · por Hugo López, El Marketero del Pueblo</footer>
 
 <script>
@@ -342,10 +358,11 @@ const DEMO_AG={
  anuncios:{s:32,d:23,t:['Construyendo la matriz de 3 ángulos','Copy: texto principal, títulos y descripciones','Ventas → WhatsApp → compras por mensajes','Impulso de la entrega por anuncio','Nombres de campañas y anuncios'],f:['Entregables/anuncios/campana-whatsapp.md']},
  revisor:{s:57,d:9,t:['Revisando claims y promesas','Comprobando que el local se vea real','Verificando que nada esté inventado','Coherencia con tu ADN de marca'],f:['Entregables/revision-final.md']}
 };
-const DEMO_GUIA={secciones:[{agente:'video',titulo:'Video de 20 s · ejemplo',intro:'Así se ve una guía: cada paso trae su prompt, las referencias en orden y un cuadro para subir el archivo. (Esto es una demostración: aquí no se sube nada.)',orden:1,pasos:[
- {id:'demo-foto',fase:'material',titulo:'Pásame 3 fotos reales de tu local',pedir:'Con tu celular, en vertical, con luz normal del lugar (sin filtros). Una del frente, una del interior y una del producto.',salida:'Mi negocio/fotos-producto/',multiple:true,herramienta:'Tu celular'},
- {id:'demo-escena',fase:'imagenes',titulo:'Imagen de escena: tu local en 9:16',herramienta:'Nano Banana 2 o GPT Image 2.6',enlace:'https://aistudio.google.com',formato:'9:16',refs:[{nombre:'Tu foto real del local'}],prompt:'Usa la foto adjunta como escena exacta: mismo local, mismos muros, mostrador y estantes. Mejora la nitidez y la luz natural, encuadre vertical 9:16. No embellezcas ni agregues muebles. Sin personas, sin texto, sin logos.',salida:'Entregables/demo/imagenes/escena.png',revisar:['Se reconoce como TU local','Sin muebles ni cuadros inventados','Sin texto ni logos']},
- {id:'demo-toma-1',fase:'clips',titulo:'Toma 1 · Gancho (5 s)',herramienta:'Google Flow · Omni Flash 1.2',enlace:'https://labs.google/fx/tools/flow',formato:'9:16',duracion:'5 s',palabras:'12 palabras · 5 s',refs:[{nombre:'@me (tu avatar)',tipo:'avatar'},{nombre:'Imagen de escena'}],prompt:'@me entra caminando hacia la cámara en el local de la imagen. Cámara en mano, un paso de seguimiento y un push in suave. El avatar dice: "¿Buscas terno para ese día importante?" Con su propia voz, español latino. Sin texto ni música; solo sonido ambiente.',salida:'Entregables/demo/clips/toma-01.mp4',revisar:['Tu voz, frase completa','Sin texto ni música','Ropa igual que la imagen']}
+const DEMO_GUIA={secciones:[{agente:'video',titulo:'Video de 20 s · ejemplo',orden:1,pasos:[
+ {id:'demo-foto',fase:'material',titulo:'Pásame 3 fotos reales de tu local',hacer:'Tómalas con tu celular, en vertical y con la luz normal del lugar. Sin filtros: yo las uso de referencia.',salida:'Mi negocio/fotos-producto/',multiple:true},
+ {id:'demo-escena',fase:'imagenes',titulo:'Crea la imagen de tu local',hacer:'Súbele tu foto a la herramienta y pega el texto. Te devuelve tu local mejorado, en vertical.',herramienta:'Nano Banana 2 o GPT Image 2.6',enlace:'https://gemini.google.com',refs:[{nombre:'Tu foto real del local'}],prompt:'Usa la imagen adjunta como escena exacta: mismo local, mismos muros, mostrador y estantes. Mejora la nitidez y la luz natural y reencuádrala en vertical 9:16, sin personas. No agregues nada que no esté en la foto. Sin texto ni logos.',salida:'Entregables/demo/imagenes/escena.png',revisar:['Se reconoce como TU local','Sin muebles inventados']},
+ {id:'demo-toma-1',fase:'clips',titulo:'Toma 1 · Entras al local (4 s)',hacer:'En Google Flow carga tu avatar y la imagen del local. Pega el texto y genera.',herramienta:'Google Flow',enlace:'https://labs.google/fx/tools/flow',palabras:'6 palabras · 4 s',refs:[{nombre:'@me (tu avatar)',tipo:'avatar'},{nombre:'Imagen de tu local',slot:'demo-escena'}],prompt:'@me entra caminando hacia la cámara en el local de la imagen. Cámara en mano. El avatar dice: "¿Buscas terno para ese día importante?" Con su propia voz, español latino. Sin texto ni música; solo sonido ambiente.',salida:'Entregables/demo/clips/toma-01.mp4',revisar:['Tu voz y la frase completa','Sin texto ni música']},
+ {id:'demo-fin',fase:'edicion',titulo:'Cuando tengas todo, avísame',hacer:'Escríbele esta frase a Claude en el chat y pasamos a la edición.',decir:'Ya subí todas las tomas, pasa a la edición.'}
 ]}]};
 function demoState(t){
   const D={negocio:'Tienda de ternos (ejemplo)',etapas:[],mensaje:'',log:[]};
@@ -657,83 +674,96 @@ function pintar(){
     $('docs').innerHTML=docs.length?docs.map(f=>`<a class="doc" href="../${encodeURI(f.ruta)}" target="_blank">📄 <span>${esc(f.nombre||f.ruta)}<br><small>${esc(f.a)}</small></span></a>`).join(''):'<span style="color:var(--mut);font-size:13px">Aún no hay archivos.</span>';}
 }
 
-/* ============ GUÍA DE GENERACIÓN ============ */
-let lastGuiaSig='';const PROMPTS={};const subiendo={};
-const ESTG={pendiente:'Pendiente',revisando:'Recibido · Claude lo revisa',aprobado:'Aprobado ✓',repetir:'Repetir ↻'};
+/* ============ GUÍA PASO A PASO: un paso a la vez ============ */
+const PROMPTS={},subiendo={},OPEN={},VAR={};let gman=null,gLastAuto=-1,lastGuiaSig='';
+const FASES={material:'Tus fotos',imagenes:'Imagen',clips:'Clip de video',edicion:'Edición',otro:'Paso'};
+function listaPasos(S){const o=[];((S.guia&&S.guia.secciones)||[]).forEach(s=>(s.pasos||[]).forEach(p=>o.push(p)));return o;}
 function archivosDe(m){return !m?[]:(m.archivos?m.archivos:[m]);}
 function estadoPaso(p,S){
-  const m=(S.medios||{})[p.id];const tiene=archivosDe(m).length>0;
   if(!p.salida)return 'info';
+  const tiene=archivosDe((S.medios||{})[p.id]).length>0;
   if(!tiene)return 'pendiente';
   const r=(S.revisiones||{})[p.id];
   if(r&&r.estado==='ok')return 'aprobado';
   if(r&&r.estado==='repetir')return 'repetir';
-  return p.multiple?'aprobado':'revisando';
+  return 'revisando';
+}
+function autoIdx(L,S){
+  for(let i=0;i<L.length;i++){const e=estadoPaso(L[i],S);if(e==='pendiente'||e==='repetir'||e==='info')return i;}
+  return Math.max(0,L.length-1);
 }
 function urlMedio(f){return '../'+encodeURI(f.archivo)+'?v='+f.mod;}
-function previewHTML(f){
-  if(f.tipo==='imagen')return `<a href="${urlMedio(f)}" target="_blank"><img src="${urlMedio(f)}" alt=""></a>`;
+function previewHTML(f,multi){
+  if(f.tipo==='imagen')return multi?`<div class="thumb"><img src="${urlMedio(f)}" alt=""><span>${esc(f.archivo.split('/').pop())}</span></div>`:`<a href="${urlMedio(f)}" target="_blank"><img src="${urlMedio(f)}" alt=""></a>`;
   if(f.tipo==='video')return `<video src="${urlMedio(f)}" controls preload="metadata" playsinline></video>`;
   if(f.tipo==='audio')return `<audio src="${urlMedio(f)}" controls></audio>`;
   return `<a class="doc" href="${urlMedio(f)}" target="_blank">📄 ${esc(f.archivo.split('/').pop())}</a>`;
 }
-function refHTML(r,i,S){
-  let vis='<div class="ic">'+(r.tipo==='avatar'?'👤':'🖼️')+'</div>';
+function toast(t){const e=$('toast');e.textContent=t;e.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('show'),4200);}
+function refHTML(r,i,S,L){
+  const vis=r.tipo==='avatar'?'👤':'🖼️';let inner=vis;
+  const idxSlot=r.slot?L.findIndex(x=>x.id===r.slot):-1;
   const fm=r.slot?archivosDe((S.medios||{})[r.slot])[0]:null;
-  if(fm&&fm.tipo==='imagen')vis=`<img src="${urlMedio(fm)}" alt="">`;
-  else if(r.archivo&&/\.(png|jpe?g|webp)$/i.test(r.archivo))vis=`<img src="../${encodeURI(r.archivo)}" alt="" onerror="this.outerHTML='<div class=ic>🖼️</div>'">`;
-  return `<li><span class="n">${i+1}</span>${vis}<span>${esc(r.nombre||'')}${r.nota?`<br><small style="color:var(--mut)">${esc(r.nota)}</small>`:''}</span></li>`;
+  if(fm&&fm.tipo==='imagen')inner=`<img src="${urlMedio(fm)}" alt="">`;
+  else if(r.archivo&&/\.(png|jpe?g|webp)$/i.test(r.archivo))inner=`<img src="../${encodeURI(r.archivo)}" alt="" onerror="this.outerHTML='${vis}'">`;
+  return `<div class="rf"><div class="im">${inner}<b>${i+1}</b></div><span>${esc(r.nombre||'')}</span>${idxSlot>=0?`<small>del paso ${idxSlot+1}</small>`:''}</div>`;
+}
+function bloquePrompt(p){
+  const vars=[{t:p.prompt_titulo||'',x:p.prompt||''},...(p.alternativas||[]).map(a=>({t:a.titulo||'Otra opción',x:a.prompt}))].filter(v=>v.x);
+  if(!vars.length)return '';
+  const sel=Math.min(VAR[p.id]||0,vars.length-1);const v=vars[sel];const k=p.id+'#'+sel;PROMPTS[k]=v.x;
+  const abierto=!!OPEN[k];
+  return (vars.length>1?`<div class="vtabs">${vars.map((x,i)=>`<button class="vtab ${i===sel?'on':''}" data-var="${esc(p.id)}|${i}">${esc(x.t||('Opción '+(i+1)))}</button>`).join('')}</div>`:'')+
+   `<div class="pv ${abierto?'open':''}"><div class="pvbar"><button class="copybig" data-copy="${esc(k)}" data-l="📋 Copiar texto">📋 Copiar texto</button><span>${esc(p.palabras||'')}</span></div><pre>${esc(v.x)}</pre><button class="more ghost" data-more="${esc(k)}">${abierto?'▲ Ocultar texto':'▼ Ver el texto completo'}</button></div>`;
+}
+function pasoHTML(p,idx,L,S){
+  const est=estadoPaso(p,S);const files=archivosDe((S.medios||{})[p.id]);const rev=(S.revisiones||{})[p.id];
+  const hacer=p.hacer||p.pedir||'';let n=0;const blk=(t,body)=>`<div class="blk"><div class="blk-h"><span class="bn">${++n}</span>${t}</div>${body}</div>`;
+  let h=`<div class="wz"><div class="kick">Paso ${idx+1} de ${L.length} · ${esc(FASES[p.fase]||'Paso')}</div><h2>${esc(p.titulo)}</h2>${hacer?`<p class="hacer">${esc(hacer)}</p>`:''}`;
+  if(p.enlace)h+=blk('Abre la herramienta',`<a class="bigbtn" href="${esc(p.enlace)}" target="_blank" rel="noopener">Abrir ${esc(p.herramienta||'la herramienta')} ↗</a>`);
+  if(p.refs&&p.refs.length)h+=blk('Súbele estas imágenes, en este orden',`<div class="rfs">${p.refs.map((r,i)=>refHTML(r,i,S,L)).join('')}</div>`);
+  const bp=bloquePrompt(p);if(bp)h+=blk('Copia este texto y pégalo allí',bp);
+  if(p.decir){PROMPTS[p.id+'#say']=p.decir;h+=blk('Escríbele esto a Claude en el chat',`<div class="saycopy"><q>${esc(p.decir)}</q><button class="copybig" data-copy="${esc(p.id+'#say')}" data-l="📋 Copiar frase">📋 Copiar frase</button></div>`);}
+  if(p.salida){
+    const on=srv&&!demo;
+    const titulo=p.multiple?'Arrastra aquí tus fotos':'Cuando termine, arrastra aquí lo que te dio';
+    h+=blk(titulo,`<div class="drop ${on?'':'off'}" data-slot="${esc(p.id)}"><span class="ic">📥</span><b>${p.multiple?'Suelta tus fotos aquí (puedes varias a la vez)':(files.length?'¿Otro intento? Suelta aquí el nuevo archivo':'Suelta aquí tu archivo')}</b>${on?'o haz clic para elegirlo':'Para arrastrar archivos aquí, abre el panel con <b style="display:inline;font-size:inherit">ABRIR-PANEL</b> (doble clic).'}<small>Se guarda solo en: ${esc(p.salida)}</small><div class="up" style="display:none"><i></i></div><input type="file" ${p.multiple?'multiple':''} hidden></div>`);
+    if(files.length)h+=`<div class="prev">${files.map(f=>previewHTML(f,p.multiple)).join('')}</div>`;
+    if(est==='aprobado')h+=`<div class="rev ok">✓ <b>Claude lo aprobó.</b> ${esc((rev&&rev.nota)||'')}</div>`;
+    else if(est==='repetir')h+=`<div class="rev repetir">↻ <b>Hay que repetirlo.</b> ${esc((rev&&rev.nota)||'')}</div>`;
+    else if(est==='revisando')h+=`<div class="rev revisando">✓ <b>Recibido.</b> Claude lo está revisando; mientras tanto puedes seguir con el siguiente paso.</div>`;
+  }
+  const ay=p.ayuda||p.notas||'';const rv=p.revisar||[];
+  if(ay||rv.length)h+=`<details class="ayuda"><summary>Ver ayuda${rv.length?' y qué se revisa':''}</summary>${ay?`<div>${esc(ay)}</div>`:''}${rv.length?`<div>Claude revisa por ti:<ul>${rv.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:''}</details>`;
+  const hayFile=files.length>0||!p.salida;
+  h+=`<div class="navrow"><button class="ghost" data-nav="${idx-1}" ${idx===0?'disabled style="opacity:.4"':''}>← Anterior</button>${idx<L.length-1?`<button class="${hayFile?'go':'ghost'}" data-nav="${idx+1}">Siguiente paso →</button>`:'<span></span>'}</div></div>`;
+  return h;
 }
 function pintarGuia(S){
-  const g=S.guia;
-  const secs=(g&&g.secciones)||[];
-  const sig=JSON.stringify([secs,S.medios,S.revisiones,srv,demo]);
-  /* badge: pasos pendientes */
-  let pend=0,total=0,hechos=0;
-  secs.forEach(s=>(s.pasos||[]).forEach(p=>{if(!p.salida)return;total++;const e=estadoPaso(p,S);if(e==='pendiente'||e==='repetir')pend++;else hechos++;}));
+  const L=listaPasos(S);
+  let hechos=0,total=0,pend=0;
+  L.forEach(p=>{if(!p.salida)return;total++;const e=estadoPaso(p,S);if(e==='pendiente'||e==='repetir')pend++;else hechos++;});
   const bd=$('badgeGuia');bd.style.display=pend?'inline-block':'none';bd.textContent=pend;
-  if(sig===lastGuiaSig)return;lastGuiaSig=sig;
-  const sb=$('srvbox');
-  if(!secs.length){
-    sb.style.display='none';
-    $('guiaBody').innerHTML='<div class="empty">Cuando el equipo termine las piezas, aquí aparecerán los pasos con sus prompts listos para copiar.<br>Pulsa <b>▶ Ver demo</b> para ver cómo se ve.</div>';
-    $('gprogTxt').textContent='Sin pasos todavía';$('gprogBar').style.width='0';return;
+  const auto=autoIdx(L,S);
+  if(auto!==gLastAuto){
+    if(gLastAuto>=0&&L.length){const e=estadoPaso(L[auto],S);toast(e==='repetir'?('↻ Claude pidió repetir el paso '+(auto+1)):('Sigamos: paso '+(auto+1)+' de '+L.length));}
+    gLastAuto=auto;gman=null;
   }
-  sb.style.display='block';
-  if(demo){sb.className='srvbox ok';sb.innerHTML='Modo demo: así se ve la guía. Aquí no se sube nada de verdad.';}
-  else if(srv){sb.className='srvbox ok';sb.innerHTML='✔ Conectado: lo que arrastres se guarda solo en tu computadora y Claude lo revisa al instante.';}
-  else{sb.className='srvbox no';sb.innerHTML='Para <b>subir archivos desde aquí</b>, abre el panel con doble clic en <code>Panel/iniciar-panel.bat</code> (o pídele a Claude: «abre el panel con subida»). Mientras tanto puedes copiar tus archivos a la carpeta que indica cada paso: el panel los detecta cuando Claude lo actualiza.';}
-  $('gprogTxt').textContent=hechos+' de '+total+' archivos recibidos';$('gprogBar').style.width=(total?Math.round(hechos*100/total):0)+'%';
-  let h='',ahoraMarcado=false,n=0;
-  secs.forEach(s=>{
-    h+=`<section class="sec"><h3 class="sech">${esc(s.titulo||'Guía')}</h3>${s.intro?`<p class="intro">${esc(s.intro)}</p>`:''}`;
-    (s.pasos||[]).forEach(p=>{
-      n++;const est=estadoPaso(p,S);const files=archivosDe((S.medios||{})[p.id]);
-      const esAhora=!ahoraMarcado&&p.salida&&(est==='pendiente'||est==='repetir');if(esAhora)ahoraMarcado=true;
-      if(p.prompt)PROMPTS[p.id]=p.prompt;
-      const rev=(S.revisiones||{})[p.id];
-      h+=`<article class="gc ${est} ${esAhora?'ahora':''}" id="gc-${esc(p.id)}"><div class="gch"><span class="num">${n}</span><div><h3>${esc(p.titulo)}${esAhora?'<span class="ahorab">👉 HAZ ESTO AHORA</span>':''}</h3>
-        <div class="meta">${p.herramienta?(p.enlace?`<a href="${esc(p.enlace)}" target="_blank" rel="noopener">${esc(p.herramienta)} ↗</a>`:esc(p.herramienta)):''}${p.formato?' · '+esc(p.formato):''}${p.duracion?' · '+esc(p.duracion):''}</div></div>
-        ${est!=='info'?`<span class="chip ${est}">${esc(ESTG[est]||est)}</span>`:''}</div>`;
-      if(p.pedir)h+=`<div class="pedir">${esc(p.pedir)}</div>`;
-      if(p.refs&&p.refs.length)h+=`<div class="refs"><b>Carga en este orden:</b><ol>${p.refs.map((r,i)=>refHTML(r,i,S)).join('')}</ol></div>`;
-      if(p.prompt)h+=`<div class="pbox"><div class="pbar"><b>${esc(p.prompt_titulo||'Prompt')}</b>${p.palabras?`<small>${esc(p.palabras)}</small>`:''}<button data-copy="${esc(p.id)}">📋 Copiar prompt</button></div><pre>${esc(p.prompt)}</pre></div>`;
-      (p.alternativas||[]).forEach((al,ai)=>{const k=p.id+'#'+ai;PROMPTS[k]=al.prompt;h+=`<div class="pbox"><div class="pbar"><b>${esc(al.titulo||'Alternativa')}</b><button data-copy="${esc(k)}">📋 Copiar prompt</button></div><pre>${esc(al.prompt)}</pre></div>`;});
-      if(p.notas)h+=`<div class="notas">${esc(p.notas)}</div>`;
-      if(p.revisar&&p.revisar.length)h+=`<ul class="chk">${p.revisar.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;
-      if(p.salida){
-        const quedan=p.multiple?'Arrastra aquí tus fotos (puedes soltar varias a la vez)':(files.length?'¿Otro intento? Suelta aquí el nuevo archivo (el anterior se guarda en _anteriores)':'Arrastra aquí tu archivo');
-        h+=`<div class="drop ${srv&&!demo?'':'off'}" data-slot="${esc(p.id)}" data-multi="${p.multiple?1:0}"><b>${quedan}</b> o haz clic para elegirlo<small>Se guarda en: ${esc(p.salida)}</small>
-           <div class="up" style="display:none"><i></i></div><input type="file" ${p.multiple?'multiple':''} hidden></div>`;
-        if(files.length)h+=`<div class="prev">${files.map(f=>p.multiple?`<div class="thumb">${previewHTML(f)}<span>${esc(f.archivo.split('/').pop())}</span></div>`:previewHTML(f)).join('')}</div>`;
-      }
-      if(rev&&!p.multiple)h+=`<div class="rev ${esc(rev.estado)}">${rev.estado==='ok'?'✓ ':rev.estado==='repetir'?'↻ ':'… '}<b>Claude:</b> ${esc(rev.nota||(rev.estado==='revisando'?'Revisando tu archivo…':''))}</div>`;
-      else if(est==='revisando')h+=`<div class="rev revisando">… <b>Claude</b> está por revisar tu archivo. Si tarda, escríbele en el chat: «ya subí ${esc(p.titulo)}».</div>`;
-      h+='</article>';
-    });
-    h+='</section>';
-  });
-  $('guiaBody').innerHTML=h;
+  const idx=gman!=null?Math.min(Math.max(gman,0),L.length-1):auto;
+  const sig=JSON.stringify([L,S.medios,S.revisiones,srv,demo,idx,VAR,OPEN]);
+  if(sig===lastGuiaSig)return;lastGuiaSig=sig;
+  if(!L.length){
+    $('gStepper').innerHTML='';$('gHint').style.display='none';$('gprogTxt').textContent='Sin pasos todavía';$('gprogBar').style.width='0';
+    $('guiaBody').innerHTML='<div class="empty">Cuando tu equipo termine las piezas, aquí aparecerá el primer paso.<br>Pulsa <b>▶ Ver demo</b> para ver cómo se ve.</div>';return;
+  }
+  $('gprogTxt').textContent=total?(hechos+' de '+total+' archivos listos'):('Paso '+(idx+1)+' de '+L.length);
+  $('gprogBar').style.width=(total?Math.round(hechos*100/total):0)+'%';
+  const hint=$('gHint');
+  if(demo){hint.style.display='block';hint.innerHTML='<b>Demo:</b> así se ve la guía. Aquí no se sube nada de verdad.';}
+  else if(!srv){hint.style.display='block';hint.innerHTML='Estás viendo el panel <b>sin conexión</b>: para <b>arrastrar archivos aquí</b> ábrelo con <b>ABRIR-PANEL</b> (doble clic en la carpeta <i>Panel</i>).';}
+  else hint.style.display='none';
+  $('gStepper').innerHTML=L.map((p,i)=>`<button class="sdot ${estadoPaso(p,S)} ${i===idx?'cur':''}" data-nav="${i}" title="${esc(p.titulo)}">${estadoPaso(p,S)==='aprobado'?'✓':i+1}</button>`).join('');
+  $('guiaBody').innerHTML=pasoHTML(L[idx],idx,L,S);
   Object.keys(subiendo).forEach(k=>mostrarProgreso(k,subiendo[k]));
 }
 function mostrarProgreso(slot,pct){
@@ -753,7 +783,7 @@ function subir(slot,files){
         x.upload.onprogress=e=>{if(e.lengthComputable){subiendo[slot]=Math.round(e.loaded*100/e.total);mostrarProgreso(slot,subiendo[slot]);}};
         x.onload=()=>{delete subiendo[slot];let r={};try{r=JSON.parse(x.responseText)}catch(e){}
           if(!r.ok)alert('No se pudo subir "'+f.name+'": '+(r.error||'error desconocido'));res();};
-        x.onerror=()=>{delete subiendo[slot];alert('Se perdió la conexión con el servidor del panel. Ábrelo de nuevo con iniciar-panel.bat');res();};
+        x.onerror=()=>{delete subiendo[slot];alert('Se perdió la conexión con el panel. Ciérralo y ábrelo de nuevo con ABRIR-PANEL.');res();};
         x.send(f);
       });
     }
@@ -761,12 +791,17 @@ function subir(slot,files){
   })();
 }
 function copiar(texto,btn){
-  const ok=()=>{const t=btn.textContent;btn.textContent='✓ Copiado';setTimeout(()=>btn.textContent='📋 Copiar prompt',1600);};
+  const lab=btn.dataset.l||btn.textContent;
+  const ok=()=>{btn.textContent='✓ Copiado';setTimeout(()=>btn.textContent=lab,1600);};
   if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(texto).then(ok,()=>fallback());}else fallback();
   function fallback(){const t=document.createElement('textarea');t.value=texto;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();try{document.execCommand('copy');ok();}catch(e){}t.remove();}
 }
+function estadoActual(){return demo?demoState((Date.now()-demoT0)/1000%DEMO_TOTAL):window.FM;}
 document.addEventListener('click',e=>{
-  const b=e.target.closest('[data-copy]');if(b){copiar(PROMPTS[b.dataset.copy]||'',b);return;}
+  const c=e.target.closest('[data-copy]');if(c){copiar(PROMPTS[c.dataset.copy]||'',c);return;}
+  const m=e.target.closest('[data-more]');if(m){OPEN[m.dataset.more]=!OPEN[m.dataset.more];lastGuiaSig='';pintarGuia(estadoActual());return;}
+  const v=e.target.closest('[data-var]');if(v){const a=v.dataset.var.split('|');VAR[a[0]]=+a[1];lastGuiaSig='';pintarGuia(estadoActual());return;}
+  const n=e.target.closest('[data-nav]');if(n&&!n.disabled){gman=+n.dataset.nav;lastGuiaSig='';pintarGuia(estadoActual());window.scrollTo({top:0,behavior:'smooth'});return;}
   const d=e.target.closest('.drop');if(d&&srv&&!demo&&e.target.tagName!=='INPUT'){d.querySelector('input').click();}
 });
 document.addEventListener('change',e=>{
@@ -775,7 +810,6 @@ document.addEventListener('change',e=>{
 ['dragover','dragenter'].forEach(ev=>document.addEventListener(ev,e=>{const d=e.target.closest&&e.target.closest('.drop');if(d){e.preventDefault();if(srv&&!demo)d.classList.add('over');}}));
 ['dragleave','drop'].forEach(ev=>document.addEventListener(ev,e=>{const d=e.target.closest&&e.target.closest('.drop');if(d){d.classList.remove('over');}}));
 document.addEventListener('drop',e=>{const d=e.target.closest&&e.target.closest('.drop');if(d){e.preventDefault();subir(d.dataset.slot,e.dataTransfer.files);}});
-/* si sueltan un archivo fuera de un cuadro, que el navegador no lo abra */
 window.addEventListener('dragover',e=>e.preventDefault());window.addEventListener('drop',e=>e.preventDefault());
 
 /* ============ pestañas y botones ============ */
@@ -796,6 +830,12 @@ $('btnFull').onclick=()=>{document.fullscreenElement?document.exitFullscreen():d
 buildScene();
 if(/[?&]demo/.test(location.search)){demo=true;demoT0=Date.now();$('btnDemo').textContent='■ Salir de la demo';}
 if(location.hash==='#guia')document.querySelector('.tab[data-tab="guia"]').click();
+/* Si abrieron el archivo con doble clic pero el servidor del panel está encendido, pasar solos a la versión con subida de archivos */
+if(location.protocol==='file:'){
+  const carpeta=decodeURIComponent(location.pathname.split('/').slice(-3)[0]||'');
+  (async()=>{for(let pt=8765;pt<=8784;pt++){try{const r=await fetch('http://localhost:'+pt+'/api/ping',{cache:'no-store'});const j=await r.json();
+    if(j&&j.ok&&j.raiz===carpeta){location.replace('http://localhost:'+pt+'/Panel/index.html'+(location.hash||''));return;}}catch(e){}}})();
+}
 pingServidor();cargar();pintar();
 setInterval(()=>{demo?pintar():cargar()},demo?600:2000);
 setInterval(pingServidor,4000);
