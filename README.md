@@ -46,7 +46,7 @@ Antes de producir, el **director** hace tu **diagnóstico de negocio** (objetivo
 El instalador copia las skills a `~/.claude/skills` y los agentes a `~/.claude/agents`, y **respalda** lo que ya tuvieras.
 
 ## Verlo funcionar antes de empezar
-Abre `modulos/base/skills/fm-panel/panel/index.html` en tu navegador y pulsa **▶ Ver demo**: verás al equipo trabajando a la vez, con su actividad y entregables.
+Abre `modulos/base/skills/fm-panel/panel/index.html` en tu navegador y pulsa **▶ Ver demo**: verás una **oficina animada** con tu equipo (cada personaje con su nombre y rol): se reúnen en la sala de reuniones para el plan, trabajan en su estudio, se pasan material entre ellos, entregan al director, la revisora recorre los escritorios y al final celebran la campaña lista. También muestra la actividad en vivo y los entregables.
 
 ## Cómo se usa
 1. **Quiero empezar** → el director te entrevista (diagnóstico + marca) con preguntas sencillas.

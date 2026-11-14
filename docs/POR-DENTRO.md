@@ -19,6 +19,7 @@ fm-director ──► fm-diagnostico ─► Mi negocio/diagnostico-situacional.m
 - Sin Python, el agente reescribe su archivo con el formato documentado en `fm-panel/SKILL.md`.
 - Modo demo: `?demo=1` o botón; la línea de tiempo está en `DEMO_AG` dentro del HTML.
 - Para cambiar el roster, edita `AGENTES` en `index.html` y `IDS` en `reportar.py`.
+- **Oficina animada:** el movimiento de los personajes se **deriva del estado**, sin cambiar el protocolo. Etapa 3 (Plan) y etapa final → todos a la sala de reuniones (en la final celebran con confeti); etapa 4 → cada uno en su estudio, tecleando mientras `trabajando`; al pasar a `listo` el agente camina al escritorio del director y entrega; cuando `video` o `anuncios` empiezan, `imagenes` / `oferta` les llevan material (`COLLAB`); en la etapa 5 la revisora recorre los escritorios. Las salas, escritorios y asientos están en `SALAS`, `AGENTES[].seat/desk/meet`; los nombres y roles de los personajes, en `AGENTES` y `DIRECTOR`.
 
 ## Agentes
 - Viven en `agentes/*.md` y se instalan en `~/.claude/agents/`. El director los lanza con varias llamadas a `Agent` en **un solo mensaje** (paralelo real). Si la herramienta no permite subagentes, el director ejecuta las instrucciones una tras otra.
