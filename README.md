@@ -70,7 +70,7 @@ Abre `modulos/base/skills/fm-panel/panel/index.html` en tu navegador y pulsa **�
 - Las **imágenes y los clips los generas tú** en Gemini/Nano Banana y Google Flow: los agentes te dan los prompts y las referencias exactas. No usa APIs de pago.
 - **No toca tu cuenta de Meta** sin tu confirmación en cada acción; por defecto entrega el plan y el copy.
 - No promete resultados de ventas.
-- Los agentes en paralelo gastan más cuota de tu plan de Claude: el director lanza 3-4 a la vez.
+- Cada agente consume cuota de tu plan de Claude: por eso el director los lanza **en olas** (1: estrategia y oferta · 2: imágenes, carruseles y video · 3: anuncios · 4: revisión), no los 7 a la vez, y los agentes vienen configurados con el modelo Sonnet.
 - Probado en Windows. Mac/Linux: scripts incluidos, sin probar en equipo limpio. El nivel Video necesita ffmpeg, Node, Python y Whisper (se instalan con tu permiso).
 
 ## Requisitos

@@ -339,8 +339,8 @@ const ZONAS=[
 const BB=[ ['🪴',20,60],['🪴',690,60],['🪴',1150,60],['🪴',16,300],['🪴',1170,300],['🪴',410,300],['🪴',1170,560],['🪴',420,560],['🗄️',330,60],['💡',1100,300] ];
 const CORR=282;           // "pies" del pasillo
 const SPEED=230;          // px de escena por segundo
-const COLLAB={video:'imagenes',anuncios:'oferta'};
-const COLLAB_MSG={video:'Te paso las referencias',anuncios:'Te paso la oferta'};
+const COLLAB={imagenes:'oferta',carruseles:'oferta',video:'imagenes',anuncios:'oferta'};
+const COLLAB_MSG={imagenes:'Te paso la oferta',carruseles:'Te paso la oferta',video:'Te paso las referencias',anuncios:'Te paso la oferta'};
 let demo=false,demoT0=0,lastSig='',scale=1,srv=false,tab='oficina';
 window.FM={director:null,agentes:{}};
 const $=id=>document.getElementById(id);
@@ -351,12 +351,12 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const DEMO_TOTAL=98;
 const DEMO_AG={
  estratega:{s:26,d:14,t:['Leyendo el ADN de marca','Definiendo 3 pilares de contenido','Armando el calendario de 4 semanas','Marcando qué piezas pasan a anuncios'],f:['Estrategia/plan-90-dias.md','Estrategia/calendario.md']},
- oferta:{s:26,d:12,t:['Afinando la promesa de la oferta','Escribiendo 3 propuestas de valor','Preparando el flujo de WhatsApp','Respuestas a las 5 objeciones'],f:['Entregables/oferta-y-copy.md','Entregables/flujo-whatsapp.md']},
- imagenes:{s:27,d:22,t:['Revisando tu paleta y tu foto real del local','Prompt de la escena: tu local, 9:16','Prompt flyer 1: oferta principal','Prompt imagen de producto 4:5','Anotando qué referencias cargar'],f:['Entregables/imagenes/prompts-flyers.md']},
- carruseles:{s:27,d:18,t:['Eligiendo el tema del carrusel','Diseñando el ADN visual de las slides','Escribiendo el prompt de cada slide','Copy de publicación'],f:['Entregables/carruseles/carrusel-1.md']},
- video:{s:29,d:26,t:['Pensando 6 tomas distintas para 20 s','Guion: gancho de 2 s en pregunta','Prompts por toma, con cambio de cámara','Lista de referencias por toma','Subiendo la guía al panel'],f:['Entregables/video/guiones.md','Entregables/video/05-guia-de-generacion.md']},
- anuncios:{s:32,d:23,t:['Construyendo la matriz de 3 ángulos','Copy: texto principal, títulos y descripciones','Ventas → WhatsApp → compras por mensajes','Impulso de la entrega por anuncio','Nombres de campañas y anuncios'],f:['Entregables/anuncios/campana-whatsapp.md']},
- revisor:{s:57,d:9,t:['Revisando claims y promesas','Comprobando que el local se vea real','Verificando que nada esté inventado','Coherencia con tu ADN de marca'],f:['Entregables/revision-final.md']}
+ oferta:{s:26,d:10,t:['Afinando la promesa de la oferta','Escribiendo 3 propuestas de valor','Preparando el flujo de WhatsApp','Respuestas a las 5 objeciones'],f:['Entregables/oferta-y-copy.md','Entregables/flujo-whatsapp.md']},
+ imagenes:{s:37,d:20,t:['Revisando tu paleta y tu foto real del local','Prompt de la escena: tu local, 9:16','Prompt flyer 1: oferta principal','Prompt imagen de producto 4:5','Anotando qué referencias cargar'],f:['Entregables/imagenes/prompts-flyers.md']},
+ carruseles:{s:37,d:17,t:['Eligiendo el tema del carrusel','Diseñando el ADN visual de las slides','Escribiendo el prompt de cada slide','Copy de publicación'],f:['Entregables/carruseles/carrusel-1.md']},
+ video:{s:38,d:24,t:['Pensando 6 tomas distintas para 20 s','Guion: gancho de 2 s en pregunta','Prompts por toma, con cambio de cámara','Lista de referencias por toma','Subiendo la guía al panel'],f:['Entregables/video/guiones.md','Entregables/video/05-guia-de-generacion.md']},
+ anuncios:{s:58,d:18,t:['Construyendo la matriz de 3 ángulos','Copy: texto principal, títulos y descripciones','Ventas → WhatsApp → compras por mensajes','Impulso de la entrega por anuncio','Nombres de campañas y anuncios'],f:['Entregables/anuncios/campana-whatsapp.md']},
+ revisor:{s:77,d:8,t:['Revisando claims y promesas','Comprobando que el local se vea real','Verificando que nada esté inventado','Coherencia con tu ADN de marca'],f:['Entregables/revision-final.md']}
 };
 const DEMO_GUIA={secciones:[{agente:'video',titulo:'Video de 20 s · ejemplo',orden:1,pasos:[
  {id:'demo-foto',fase:'material',titulo:'Pásame 3 fotos reales de tu local',hacer:'Tómalas con tu celular, en vertical y con la luz normal del lugar. Sin filtros: yo las uso de referencia.',salida:'Mi negocio/fotos-producto/',multiple:true},
@@ -366,10 +366,10 @@ const DEMO_GUIA={secciones:[{agente:'video',titulo:'Video de 20 s · ejemplo',or
 ]}]};
 function demoState(t){
   const D={negocio:'Tienda de ternos (ejemplo)',etapas:[],mensaje:'',log:[]};
-  const bounds=[0,7,14,26,57,66];
+  const bounds=[0,7,14,26,77,85];
   for(let i=0;i<6;i++){const ini=bounds[i],fin=i<5?bounds[i+1]:DEMO_TOTAL-8;D.etapas.push(t>=fin?'listo':t>=ini?'en-curso':'pendiente');}
   if(t>=DEMO_TOTAL-8)D.etapas=D.etapas.map(()=>'listo');
-  const msgs=[[0,'Hola 👋 Primero entiendo tu negocio y tus objetivos de venta.'],[7,'Ahora capto tu marca y te pido fotos reales de tu local.'],[14,'Les presento el plan. Cuando lo apruebes, el equipo arranca.'],[26,'Producción en paralelo: seis agentes trabajando a la vez.'],[57,'La revisora controla claims, realismo y políticas de Meta.'],[66,'Armando tu Campaña lista con la guía de prompts.'],[DEMO_TOTAL-8,'¡Campaña lista! Abre la pestaña Guía de generación.']];
+  const msgs=[[0,'Hola 👋 Primero entiendo tu negocio y tus objetivos de venta.'],[7,'Ahora capto tu marca y te pido fotos reales de tu local.'],[14,'Les presento el plan. Cuando lo apruebes, el equipo arranca.'],[26,'Producción en olas: primero estrategia y oferta; luego imágenes, carruseles y video; al final anuncios.'],[77,'La revisora controla claims, realismo y políticas de Meta.'],[85,'Armando tu Campaña lista con la guía de prompts.'],[DEMO_TOTAL-8,'¡Campaña lista! Abre la pestaña Guía de generación.']];
   msgs.forEach(m=>{if(t>=m[0])D.mensaje=m[1]});
   const ag={},ev=[];
   const fmt=x=>String(Math.floor(x/60)).padStart(2,'0')+':'+String(Math.floor(x%60)).padStart(2,'0');

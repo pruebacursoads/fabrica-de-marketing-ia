@@ -13,3 +13,4 @@ Aprendido en la prueba "ternos" (Centro de Lima, avatar @me, 2 clips de 10 s): p
 - **ABRIR-PANEL** (antes iniciar-panel): si abren `Panel/index.html` con doble clic y el servidor está encendido, la página pasa sola a la versión con subida de archivos.
 - Variantes de prompt (`alternativas`) con pestañas, y frase `decir` para copiar y pegarle a Claude.
 - **Repositorio privado con colaboradores:** el instalador y la actualización ahora contemplan acceso por invitación de GitHub (aceptar invitación, Download ZIP, Prompt 1) y un camino B de actualización sin GitHub CLI; el Prompt 0 queda para cuando el repositorio sea público.
+- **Producción en olas y menos consumo:** el director lanza los agentes por dependencia (estrategia y oferta → imágenes, carruseles y video → anuncios → revisor) en vez de los 7 a la vez; agentes con `model: sonnet`; lectura mínima de skills; la ronda 2 del revisor solo revisa lo corregido; el panel muestra los traspasos entre agentes.

@@ -24,6 +24,10 @@ fm-director ──► fm-diagnostico ─► Mi negocio/diagnostico-situacional.m
 - Para cambiar el roster, edita `AGENTES` en `index.html` y `IDS` en `reportar.py`.
 - **Oficina animada:** el movimiento de los personajes se **deriva del estado**, sin cambiar el protocolo. Etapa 3 (Plan) y etapa final → todos a la sala de reuniones (en la final celebran con confeti); etapa 4 → cada uno en su estudio, tecleando mientras `trabajando`; al pasar a `listo` el agente camina al escritorio del director y entrega; cuando `video` o `anuncios` empiezan, `imagenes` / `oferta` les llevan material (`COLLAB`); en la etapa 5 la revisora recorre los escritorios. Las salas, escritorios y asientos están en `SALAS`, `AGENTES[].seat/desk/meet`; los nombres y roles de los personajes, en `AGENTES` y `DIRECTOR`.
 
+## Olas y consumo de cuota
+Cada agente que lanza el director es una conversación aparte que relee el ADN y las skills, y eso es lo que más consume (en pruebas reales, cada agente de producción usó del orden de 100 000 a 180 000 tokens). Por eso la etapa 4 va **en olas por dependencia**: 1) estratega + oferta → 2) imágenes + carruseles + video (cuando existe `oferta/01-oferta-y-copy.md`) → 3) anuncios → 4) revisor. En el panel se ve cada traspaso («Te paso la oferta»).
+Medidas de ahorro: agentes con `model: sonnet`; lectura mínima (solo el `SKILL.md` y las referencias que se usan); cada brief nombra los archivos que el agente debe leer en vez de rehacer; y la ronda 2 del revisor solo mira lo corregido. Para cambiar el modelo de un agente, edita `model:` en su archivo de `agentes/`.
+
 ## Agentes
 - Viven en `agentes/*.md` y se instalan en `~/.claude/agents/`. El director los lanza con varias llamadas a `Agent` en **un solo mensaje** (paralelo real). Si la herramienta no permite subagentes, el director ejecuta las instrucciones una tras otra.
 - Los agentes **no preguntan al alumno**: leen el ADN, el diagnóstico y `aprendizajes.md`, y devuelven Supuestos y Faltantes.

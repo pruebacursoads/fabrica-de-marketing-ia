@@ -50,6 +50,7 @@ Con diagnóstico + ADN decide el camino (los del Hub: solo orgánico, solo ads, 
 
 | Agente | Qué entregará | Cantidad | Lo que debe hacer el alumno a mano |
 |---|---|---|---|
+En la tabla agrega la columna **Ola** (1: estratega y oferta · 2: imágenes, carruseles y video · 3: anuncios · 4: revisor) para que el alumno vea el orden.
 Reglas de dimensionamiento: **sin presupuesto de ads → no actives el agente de anuncios** (déjalo como "siguiente nivel"); si hay presupuesto pero sin mensaje ganador, activa anuncios en modo *plan de pruebas*. Muestra "cuántos clips/imágenes tendrá que generar" y cuáles se reutilizan. Pregunta: "¿Vamos?".
 
 **El alumno decide quién trabaja.** No todo es una sola línea: las etapas 1-3 son en orden, pero en la 4 **solo trabajan los agentes que el plan apruebe**. Ofrece estos perfiles y deja que los ajuste ("sin anuncios", "agrega carruseles"):
@@ -63,9 +64,21 @@ Reglas de dimensionamiento: **sin presupuesto de ads → no actives el agente de
 | **A la carta** | los que diga el alumno |
 Los agentes apagados aparecen en el panel como "En espera" y se pueden activar después. El **revisor** y el **ADN** nunca se omiten.
 
-### Etapa 4 · Lanzar el equipo en paralelo
-- Lanza **en un solo mensaje, varias llamadas a la herramienta Agent a la vez**, una por agente del plan (subagentes `fm-agente-estratega`, `-oferta`, `-imagenes`, `-carruseles`, `-video`, `-anuncios`). El revisor va después.
-- Límite sano: **4 agentes a la vez** si el plan del alumno es básico (lanza el resto cuando terminen los primeros); hasta 6 si tiene plan alto. Avísale que el trabajo en paralelo gasta más cuota.
+### Etapa 4 · Producción en olas: paralelo donde se puede, en cadena donde hay dependencia
+Los agentes **no arrancan todos a la vez**: cada ola arranca cuando tiene lo que necesita de la anterior. Dentro de cada ola trabajan en paralelo y se pasan material de verdad (en el panel se ve como «Te paso la oferta»). Así el pico de consumo baja, hay menos supuestos que rehacer y el resultado sale más coherente.
+
+| Ola | Agentes (en paralelo entre sí) | Arranca cuando… | Lo que reciben de la ola anterior |
+|---|---|---|---|
+| 1 | estratega + oferta | El plan está aprobado | Nada: parten del ADN y el diagnóstico |
+| 2 | imágenes + carruseles + video | Existe `oferta/01-oferta-y-copy.md` (no esperes el flujo de WhatsApp) | Oferta en una frase, valores, objeciones; calendario si ya salió |
+| 3 | anuncios | La ola 2 reportó sus ángulos y piezas (basta el avance de video e imágenes, no su fin) | Oferta + piezas y ángulos para armar la matriz |
+| 4 | revisor | Todos en «listo» | Todos los entregables |
+
+- Lanza cada ola **en un solo mensaje, una llamada Agent por agente de esa ola**. Máx. **4 simultáneos** (6 con plan alto). Una ola con agentes apagados por el perfil simplemente no existe («solo video»: oferta breve + video; sin presupuesto: no hay ola 3).
+- Al abrir cada ola, dilo en una frase al alumno y al panel (`director --mensaje "Ola 2: imágenes, carruseles y video"`). Mientras trabajan, adelanta lo que viene (por ejemplo, pedirle las fotos reales).
+- **Cada brief nombra los archivos de las olas anteriores que debe leer** (ej. «Lee `Entregables/<tema>/oferta/01-oferta-y-copy.md`») y le dice que **no repita** ese trabajo.
+- **Modelo:** los agentes vienen configurados con `model: sonnet` (redacción y prompts no necesitan el modelo más caro). Súbelo solo si un resultado sale flojo.
+- Avísale que cada agente consume cuota de su plan; por eso van en olas y no los 7 juntos.
 - Brief para cada agente (cópialo y rellénalo):
 ```
 Carpeta de trabajo: <ruta absoluta>
@@ -84,7 +97,7 @@ Devuélveme: ruta de archivos, 5 líneas de resumen, supuestos, faltantes y «gu
 - Cuando un agente publique su guía: arranca `PY Panel/vigilar.py` en segundo plano con la herramienta **Monitor** (si no existe, avísale al alumno que te escriba "ya subí…"). Cada archivo que suba te llegará como aviso: míralo, publica el veredicto con `reportar.py revision` y díselo en una frase (ver `fm-panel`).
 
 ### Etapa 5 · Revisión
-Lanza `fm-agente-revisor` con la lista de archivos (incluye la guía publicada: debe pasar su checklist de dinamismo, continuidad por escena y realismo). Si devuelve pendientes críticos, reenvía cada corrección al agente dueño (que pasa a "ajustando") y vuelve a revisar. Máximo 2 rondas; lo que siga abierto va al LEEME como "para decidir contigo".
+Lanza `fm-agente-revisor` con la lista de archivos (incluye la guía publicada: debe pasar su checklist de dinamismo, continuidad por escena y realismo). Si devuelve pendientes críticos, reenvía cada corrección al agente dueño (que pasa a "ajustando") y vuelve a revisar. Máximo 2 rondas; lo que siga abierto va al LEEME como "para decidir contigo". **La ronda 2 revisa solo lo corregido** (le pasas al revisor únicamente los archivos cambiados y su lista de correcciones), no todo otra vez.
 
 ### Etapa 6 · Entrega
 Crea `Entregables/<tema>/00-LEEME-PRIMERO.md` con: (1) qué hay en cada carpeta, (2) **pasos manuales numerados con enlace** (generar imágenes/clips, subir a Meta, configurar WhatsApp) y la indicación «tus prompts están en la pestaña **Guía de generación** del Panel (arrastra ahí tus archivos)», (3) faltantes `POR CONFIRMAR`, (4) calendario de la primera semana, (5) cómo medir y cuándo mirar resultados (día 8, no antes). Resume en 6 líneas, actualiza `aprendizajes.md` y ofrece el siguiente nivel (video pro con la Fábrica de Video, tablero, landing, CRM; ver `references/enlaces-y-ayuda.md`).
