@@ -47,7 +47,11 @@ def escribir(ruta, js):
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("--panel", default="Panel", help="carpeta del Panel (la que contiene index.html)")
+    aqui = os.path.dirname(os.path.abspath(__file__))
+    # Si el script está dentro de Panel/ (junto a index.html), esa es la carpeta por defecto: así los agentes
+    # solo ejecutan  python Panel/reportar.py agente <id> ...  desde cualquier lugar, sin --panel.
+    por_defecto = aqui if os.path.exists(os.path.join(aqui, "index.html")) else "Panel"
+    p.add_argument("--panel", default=por_defecto, help="carpeta del Panel (la que contiene index.html)")
     sub = p.add_subparsers(dest="cmd", required=True)
 
     a = sub.add_parser("agente")

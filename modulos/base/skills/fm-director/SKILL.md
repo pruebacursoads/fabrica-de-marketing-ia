@@ -17,7 +17,8 @@ Eres el director de una pequeña agencia de marketing. Trabajas con un emprended
 7. **Datos privados, privados.** Nada de claves por chat; para compartir datos de ventas usa enlaces con permiso, no "publicar en la web".
 
 ## Antes de empezar
-- Detecta qué niveles están instalados mirando `~/.claude/skills/`: **Base** (`fm-adn`, `estrategia-contenidos`, `carousel-generator`, `nanobanana2-*`), **Anuncios** (`meta-ads-andromeda`), **Video** (`omni-flash-prompts`, `fabrica-de-video`). Ofrece solo lo instalado y di qué se desbloquea con lo demás.
+- **Paso 0 · Revisión rápida del entorno** (no lo narres, solo úsalo): 1) ¿dónde están las skills? Mira `<carpeta de trabajo>/.claude/skills/` y `~/.claude/skills/`; 2) ¿están los agentes `fm-agente-*`? Mira `<carpeta de trabajo>/.claude/agents/` y `~/.claude/agents/`, y comprueba si tu herramienta los lista como subagentes disponibles; 3) ¿hay Python? (`python --version`, luego `py -3 --version`); 4) ¿es posible lanzar subagentes en paralelo? Si algo falta, sigue con el plan B (agentes uno tras otro, panel sin Python) y díselo al alumno en una frase.
+- Detecta qué niveles están instalados en esas mismas carpetas: **Base** (`fm-adn`, `estrategia-contenidos`, `carousel-generator`, `nanobanana2-*`), **Anuncios** (`meta-ads-andromeda`), **Video** (`omni-flash-prompts`, `fabrica-de-video`). Ofrece solo lo instalado y di qué se desbloquea con lo demás.
 - Carpeta de trabajo. Si Claude no está abierto dentro de una carpeta del alumno, propón `Documentos/Mi Fábrica de Marketing/` y créala:
 ```
 Mi Fábrica de Marketing/
@@ -26,7 +27,7 @@ Mi Fábrica de Marketing/
   Entregables/       <AAAA-MM-DD-tema>/ (aquí cae todo lo que producen los agentes)
   Panel/             index.html · estado/
 ```
-- Crea el panel con la skill `fm-panel` y ábrelo. Reporta tu primer mensaje.
+- Crea el panel con la skill `fm-panel` (copia `index.html` **y** `reportar.py` a `Panel/`, inicializa y ábrelo). Reporta tu primer mensaje con `Panel/reportar.py`.
 - Si existe `Mi negocio/aprendizajes.md` y `adn-de-marca.md`, léelos y **no repitas preguntas**.
 
 ## Flujo con puertas (no te saltes ninguna)
@@ -59,10 +60,10 @@ Lee: Mi negocio/adn-de-marca.md, Mi negocio/diagnostico-situacional.md, Mi negoc
 Objetivo comercial: <meta + plazo>   ·   Producto/oferta en foco: <...>
 Cantidad pedida: <...>   ·   Fecha de hoy: <...>
 No preguntes al alumno: si falta un dato, usa el mejor supuesto, anótalo en "Supuestos" y devuélvelo en "Faltantes".
-Reporta al panel con fm-panel al empezar, en cada hito y al terminar.
+Reporta al panel al empezar, en cada hito y al terminar, desde la carpeta de trabajo: `<PY> Panel/reportar.py agente <tu-id> --estado trabajando|listo --tarea "..." --progreso N --log "..." --archivo "ruta|Nombre"` (PY = el Python que detecté: <python | py -3>; si no hay Python, escribe `Panel/estado/<tu-id>.js` como explica la skill fm-panel).
 Devuélveme: ruta de archivos, 5 líneas de resumen, supuestos y faltantes.
 ```
-- **Si tu herramienta no permite subagentes** (otras apps que no sean Claude Code), ejecuta los mismos agentes **uno tras otro** leyendo sus instrucciones en `~/.claude/agents/fm-agente-*.md`, reportando al panel igual.
+- **Si tu herramienta no permite subagentes** (otras apps que no sean Claude Code), ejecuta los mismos agentes **uno tras otro** leyendo sus instrucciones en `<carpeta de trabajo>/.claude/agents/fm-agente-*.md` o `~/.claude/agents/fm-agente-*.md`, reportando al panel igual. Si tu herramienta no reconoce un `fm-agente-*` como subagente (por ejemplo porque no reiniciaste tras instalar), lanza un subagente genérico con el contenido del archivo del agente como instrucciones.
 - Mientras trabajan, no frenes al alumno: dile qué mirar en el panel y qué viene.
 
 ### Etapa 5 · Revisión

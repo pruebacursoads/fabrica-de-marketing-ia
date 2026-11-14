@@ -5,31 +5,43 @@ description: Panel visual en vivo donde el emprendedor ve trabajar a cada agente
 
 # Panel en vivo (fm-panel)
 
-Es una página local (`Panel/index.html`) que se actualiza sola cada 2 segundos. No necesita servidor, internet ni instalar nada: se abre con doble clic. Los agentes le informan escribiendo archivos pequeños en `Panel/estado/`.
+Es una página local (`Panel/index.html`) que se actualiza sola cada 2 segundos. No necesita servidor, internet ni instalar nada: se abre con doble clic (también funciona si se sirve desde `localhost`). Los agentes le informan escribiendo archivos pequeños en `Panel/estado/`.
 
 ## Crear el panel (lo hace el director, una vez por carpeta de trabajo)
-1. Ubica esta skill: `~/.claude/skills/fm-panel/` (en Windows `%USERPROFILE%\.claude\skills\fm-panel\`).
-2. Copia `panel/index.html` a `<carpeta de trabajo>/Panel/index.html` y crea `Panel/estado/`.
-3. Inicializa: `python <skill>/scripts/reportar.py --panel Panel reiniciar` (en Windows, si `python` no existe, `py -3`). Si no hay Python, escribe `Panel/estado/director.js` a mano con el formato de abajo.
-4. Ábrelo para el alumno: Windows `start "" "Panel\index.html"`, Mac `open Panel/index.html`, Linux `xdg-open Panel/index.html`. Dile: "Deja esta ventana visible, ahí verás a tu equipo trabajar. Si algo no se abre, pulsa **▶ Ver demo**."
+1. **Encuentra esta skill.** Busca la carpeta `fm-panel` en este orden y usa la primera que exista:
+   1. `<carpeta de trabajo>/.claude/skills/fm-panel/`
+   2. `~/.claude/skills/fm-panel/` (Windows: `%USERPROFILE%\.claude\skills\fm-panel\`)
+   3. Si ninguna existe, busca `fm-panel` dentro de la carpeta del paquete descomprimido (`modulos/base/skills/fm-panel/`).
+2. **Copia a la carpeta de trabajo**, en `Panel/`: `panel/index.html` **y** `scripts/reportar.py` (queda `Panel/index.html` y `Panel/reportar.py`). Así los agentes siempre usan la misma ruta, estén las skills donde estén. Crea `Panel/estado/`.
+3. **Detecta Python:** prueba `python --version`; si falla, `py -3 --version`; si falla, `python3 --version`. Usa el que responda (en adelante, `PY`). Si no hay ninguno, usa el **plan B sin Python** (más abajo) y no detengas el trabajo.
+4. **Inicializa:** `PY Panel/reportar.py reiniciar`.
+5. **Ábrelo para el alumno:** Windows `start "" "Panel\index.html"`, Mac `open Panel/index.html`, Linux `xdg-open Panel/index.html`. Dile: "Deja esta ventana visible, ahí verás a tu equipo trabajar. Si algo no se abre, pulsa **▶ Ver demo**."
+6. Comprobación rápida: `PY Panel/reportar.py director --negocio "Prueba" --mensaje "Panel listo"` y confirma que se creó `Panel/estado/director.js`.
 
 ## Protocolo de reporte
-Cada agente escribe **solo su propio archivo** (así 6 agentes en paralelo no se pisan). Con Python:
+Cada agente escribe **solo su propio archivo** (así 6 agentes en paralelo no se pisan). Desde la carpeta de trabajo:
 ```
-python reportar.py --panel Panel agente <id> --estado trabajando --tarea "Qué estoy haciendo" --progreso 35 --log "Frase corta"
-python reportar.py --panel Panel agente <id> --estado listo --progreso 100 --archivo "Entregables/2026-11-12-lanzamiento/anuncios/campana.md|Campaña de anuncios"
+PY Panel/reportar.py agente <id> --estado trabajando --tarea "Qué estoy haciendo" --progreso 35 --log "Frase corta"
+PY Panel/reportar.py agente <id> --estado listo --progreso 100 --archivo "Entregables/2026-11-12-lanzamiento/anuncios/campana.md|Campaña de anuncios"
 ```
+(`reportar.py` ya sabe que el panel es su propia carpeta; no hace falta `--panel`.)
+
 IDs válidos: `estratega, oferta, imagenes, carruseles, video, anuncios, revisor`.
 Estados: `espera`, `trabajando`, `listo`, `ajustando` (corrigiendo tras la revisión), `necesita-ayuda` (te falta un dato del alumno).
 
-Sin Python, escribe `Panel/estado/<id>.js` con exactamente este formato (una sola línea de datos, reescribe el archivo completo):
+### Plan B sin Python
+Escribe `Panel/estado/<id>.js` con exactamente este formato (una sola línea de datos; reescribe el archivo completo cada vez):
 ```
 window.FM=window.FM||{};window.FM.agentes=window.FM.agentes||{};window.FM.agentes["estratega"]={"estado":"trabajando","tarea":"Armando calendario","progreso":35,"archivos":[],"log":[{"t":"10:02:11","m":"Definí 3 pilares"}]};
+```
+y `Panel/estado/director.js`:
+```
+window.FM=window.FM||{};window.FM.director={"negocio":"Mi negocio","etapas":["listo","listo","listo","en-curso","pendiente","pendiente"],"mensaje":"Producción en paralelo","log":[{"t":"10:00:00","ag":"Director","m":"Lancé 6 agentes"}]};
 ```
 
 ### El director
 ```
-python reportar.py --panel Panel director --negocio "Nombre del negocio" --etapa 4 --estado-etapa en-curso --mensaje "Producción en paralelo" --log "Lancé 6 agentes"
+PY Panel/reportar.py director --negocio "Nombre del negocio" --etapa 4 --estado-etapa en-curso --mensaje "Producción en paralelo" --log "Lancé 6 agentes"
 ```
 Etapas: 1 Diagnóstico · 2 ADN de marca · 3 Plan · 4 Producción en paralelo · 5 Revisión · 6 Entrega. Al marcar una etapa, las anteriores quedan en "listo".
 
