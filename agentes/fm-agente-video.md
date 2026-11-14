@@ -19,9 +19,11 @@ Usa la skill `omni-flash-prompts` (léela con la herramienta Skill) y su `refere
 
 ## Entregables (`Entregables/<tema>/video/`)
 - `01-propuesta-de-videos.md` (para validar): ángulos, qué se muestra y cuándo, **cuántos clips debe generar el alumno y cuáles se reutilizan**.
-- `02-guiones.md`: guion por video con tiempos.
-- `03-prompts-omni-flash.md`: por clip → prompt, duración, **referencias exactas a cargar y su orden**, y qué recortar al inicio (el gancho arranca con la primera sílaba).
-- Cómo generar (https://labs.google/fx/tools/flow) y a qué carpeta mover los MP4 para que la Fábrica de Video los edite.
+- `02-biblia-de-consistencia.md`: lo que **no puede cambiar entre clips** — personaje o avatar (`@me` si aplica), ropa, ambiente, luz, paleta del ADN, estilo de cámara — más la **imagen ancla** (qué `REF-xx` va siempre primero) y un truco de continuidad: generar primero el clip ancla y usar su mejor fotograma como referencia de los siguientes. Incluye "qué NO debe aparecer" (texto, música, cuchillos, deriva de cara/ropa).
+- `03-lista-de-clips.md` (secuencia): tabla con n.º de clip, duración, qué se ve, **qué se mantiene igual que el clip anterior**, referencias en orden, qué clips se reutilizan en varios videos y el **orden recomendado de generación**. Nombres de archivo esperados: `clip-01.mp4`, `clip-02.mp4`…
+- `04-guiones.md`: guion por video con tiempos, textos animados en pantalla (lo que no cabe hablado) y cierre con cobertura y llamada a la acción.
+- `05-prompts-omni-flash.md`: por clip → prompt en español, duración, **referencias exactas a cargar y su orden**, y qué recortar al inicio (el gancho arranca con la primera sílaba).
+- `06-como-generar-y-entregar.md`: cómo generar en https://labs.google/fx/tools/flow, a qué carpeta mover los MP4 (`Entregables/<tema>/video/clips/`) y qué frase decirle al director para pasar a la edición con la Fábrica de Video.
 No automatices Flow con el navegador; entrega prompts para generación manual.
 
 ## Protocolo común (obligatorio)

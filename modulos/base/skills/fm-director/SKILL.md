@@ -49,6 +49,17 @@ Con diagnóstico + ADN decide el camino (los del Hub: solo orgánico, solo ads, 
 |---|---|---|---|
 Reglas de dimensionamiento: **sin presupuesto de ads → no actives el agente de anuncios** (déjalo como "siguiente nivel"); si hay presupuesto pero sin mensaje ganador, activa anuncios en modo *plan de pruebas*. Muestra "cuántos clips/imágenes tendrá que generar" y cuáles se reutilizan. Pregunta: "¿Vamos?".
 
+**El alumno decide quién trabaja.** No todo es una sola línea: las etapas 1-3 son en orden, pero en la 4 **solo trabajan los agentes que el plan apruebe**. Ofrece estos perfiles y deja que los ajuste ("sin anuncios", "agrega carruseles"):
+
+| Perfil | Agentes activos |
+|---|---|
+| **Campaña completa** | estratega + oferta + imágenes + carruseles + video + anuncios (+ revisor siempre) |
+| **Solo video** | oferta (breve) + video (+ imágenes solo si hacen falta como referencia) + revisor; luego la ruta de video de abajo |
+| **Solo contenido orgánico** | estratega + oferta + imágenes + carruseles + video + revisor (sin anuncios) |
+| **Solo anuncios** | oferta + anuncios + las piezas creativas que pidan los anuncios + revisor |
+| **A la carta** | los que diga el alumno |
+Los agentes apagados aparecen en el panel como "En espera" y se pueden activar después. El **revisor** y el **ADN** nunca se omiten.
+
 ### Etapa 4 · Lanzar el equipo en paralelo
 - Lanza **en un solo mensaje, varias llamadas a la herramienta Agent a la vez**, una por agente del plan (subagentes `fm-agente-estratega`, `-oferta`, `-imagenes`, `-carruseles`, `-video`, `-anuncios`). El revisor va después.
 - Límite sano: **4 agentes a la vez** si el plan del alumno es básico (lanza el resto cuando terminen los primeros); hasta 6 si tiene plan alto. Avísale que el trabajo en paralelo gasta más cuota.
@@ -75,8 +86,16 @@ Crea `Entregables/<tema>/00-LEEME-PRIMERO.md` con: (1) qué hay en cada carpeta,
 ## Cuando el alumno pida algo suelto
 Si solo pide "un carrusel" o "un flyer", no montes todo: asegúrate de que existe el ADN (o hazlo en 5 minutos con `fm-adn`) y pasa directo a la skill de producción, reportando igual al panel si está abierto.
 
-## Si genera clips con Omni Flash (nivel Video)
-Los clips se generan **a mano en Google Flow** (gratis con su cuota). Tú entregas prompts y la lista exacta de referencias por clip (qué imagen cargar y en qué orden). Cuando el alumno suba los clips a su carpeta, pasa a la Fábrica de Video (`fabrica-de-video`). No automatices Flow con el navegador sin explicar antes el riesgo de términos de uso y recomendar una cuenta secundaria.
+## Ruta de video de punta a punta (nivel Video)
+Úsala cuando el alumno quiera una campaña en video (perfil "Solo video" o "Campaña completa").
+
+**Fase A · Preproducción (agentes + tú)**: diagnóstico → ADN con inventario `REF-xx` → el agente de video entrega la **propuesta para validar** (ángulos, qué se muestra y cuándo, **cuántos clips hay que generar y cuáles se reutilizan**), la **biblia de consistencia** (personaje/avatar, ropa, ambiente, luz, paleta, imagen ancla), la **lista de clips** con su secuencia, los guiones y los **prompts con las referencias exactas y su orden**. El alumno valida ("vamos") antes de generar nada.
+
+**Fase B · Generación (el alumno, a mano)**: en Google Flow (https://labs.google/fx/tools/flow), gratis con su cuota. Pide que guarde los MP4 en `Entregables/<tema>/video/clips/` con nombres `clip-01.mp4`, `clip-02.mp4`… (los del orden de la lista). Si un clip sale con texto o música generados, con deriva de cara/ropa, con cuchillos en cuadro o con un gesto raro al inicio, **se repite o se recorta**. No automatices Flow con el navegador sin explicar antes el riesgo de términos de uso y recomendar una cuenta secundaria.
+
+**Fase C · Edición (Fábrica de Video)**: cuando el alumno avise "ya están los clips": `fabrica-de-video` en este orden, sin saltarte puertas — `fv-diagnostico` (solo la primera vez) → `fv-marca` partiendo del ADN → `fv-medios` (analiza los clips, quita silencios y arranques, transcribe) → `fv-editor` (**plan en tabla aprobado por escrito**: subtítulos con palabra clave, tarjetas de datos animadas, zooms, cierre con cobertura y llamada a la acción) → `fv-sonido` (música y efectos propios, mezcla a −14 LUFS) → `fv-calidad` (0 choques, fotogramas **mirados**, render verificado). Entrega MP4 vertical y versión ligera, con lista de qué revisar.
+
+**Fase D · Aprender**: las notas del alumno con el segundo exacto ("en 0:12 el texto tapa…") se guardan en `Mi negocio/aprendizajes.md` y en `Mi estilo/Reglas-de-estilo.md`, y se aplican a los siguientes videos.
 
 ## Qué NO hacer
 - No lances agentes sin plan aprobado. No entregues sin revisión.
