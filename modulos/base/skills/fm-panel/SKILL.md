@@ -1,36 +1,73 @@
 ---
 name: fm-panel
-description: Panel visual en vivo donde el emprendedor ve trabajar a cada agente de su equipo de marketing (estado, tarea, progreso, actividad y entregables). Define cómo se crea el panel en la carpeta de trabajo y el protocolo con el que el director y los agentes reportan su avance. Úsala cuando el director lance el equipo, cuando un agente deba reportar avance, o cuando el emprendedor pida "ver cómo trabajan los agentes", "el panel" o "la demo".
+description: Panel visual en vivo (oficina 3D con el equipo de agentes) y Guía de generación donde el emprendedor ve los prompts listos para copiar, las referencias en orden y sube sus archivos (se guardan solos en su computadora y Claude los revisa en tiempo real). Define cómo se crea y abre el panel, el protocolo de reporte de los agentes, el formato de la guía y cómo vigilar lo que el alumno sube. Úsala cuando el director lance el equipo, cuando un agente deba reportar o publicar su guía, cuando el alumno suba un archivo, o cuando pida "el panel", "dónde están los prompts" o "la demo".
 ---
 
-# Panel en vivo (fm-panel)
+# Panel en vivo (fm-panel) · v1.1
 
-Es una página local (`Panel/index.html`) que se actualiza sola cada 2 segundos. No necesita servidor, internet ni instalar nada: se abre con doble clic (también funciona si se sirve desde `localhost`). Los agentes le informan escribiendo archivos pequeños en `Panel/estado/`.
+`Panel/index.html` tiene dos pestañas: **🏢 Oficina** (el equipo trabajando, en 3D) y **🎬 Guía de generación** (prompts para copiar, referencias en orden, cuadros para subir archivos y el veredicto de Claude). Se actualiza solo cada 2 s. Los agentes escriben archivos pequeños en `Panel/estado/`.
+
+Dos formas de abrirlo:
+- **Con servidor (recomendada):** `python Panel/servidor.py` (o doble clic en `Panel/iniciar-panel.bat`) → abre `http://localhost:8765/Panel/index.html`. Habilita **subir archivos arrastrándolos** (se guardan en la carpeta correcta con el nombre correcto), vista previa de videos y detección de archivos copiados a mano.
+- **Sin servidor:** doble clic en `Panel/index.html`. Se ve todo, pero para subir hay que copiar los archivos a la carpeta que indica cada paso y pedirle a Claude `reportar.py medios`.
 
 ## Crear el panel (lo hace el director, una vez por carpeta de trabajo)
-1. **Encuentra esta skill.** Busca la carpeta `fm-panel` en este orden y usa la primera que exista:
-   1. `<carpeta de trabajo>/.claude/skills/fm-panel/`
-   2. `~/.claude/skills/fm-panel/` (Windows: `%USERPROFILE%\.claude\skills\fm-panel\`)
-   3. Si ninguna existe, busca `fm-panel` dentro de la carpeta del paquete descomprimido (`modulos/base/skills/fm-panel/`).
-2. **Copia a la carpeta de trabajo**, en `Panel/`: `panel/index.html` **y** `scripts/reportar.py` (queda `Panel/index.html` y `Panel/reportar.py`). Así los agentes siempre usan la misma ruta, estén las skills donde estén. Crea `Panel/estado/`.
-3. **Detecta Python:** prueba `python --version`; si falla, `py -3 --version`; si falla, `python3 --version`. Usa el que responda (en adelante, `PY`). Si no hay ninguno, usa el **plan B sin Python** (más abajo) y no detengas el trabajo.
+1. **Encuentra esta skill:** `<carpeta de trabajo>/.claude/skills/fm-panel/` → `~/.claude/skills/fm-panel/` (Windows: `%USERPROFILE%\.claude\skills\fm-panel\`) → `modulos/base/skills/fm-panel/` del paquete descomprimido.
+2. **Copia a `Panel/`:** `panel/index.html` y **todo `scripts/`** (`reportar.py`, `servidor.py`, `vigilar.py`, `iniciar-panel.bat`, `iniciar-panel.sh`). Queda `Panel/index.html`, `Panel/reportar.py`… y crea `Panel/estado/`.
+3. **Detecta Python:** `python --version` → `py -3 --version` → `python3 --version`. Usa el que responda (`PY`). Si no hay ninguno: **plan B sin Python** (abajo) y sin subida de archivos.
 4. **Inicializa:** `PY Panel/reportar.py reiniciar`.
-5. **Ábrelo para el alumno:** Windows `start "" "Panel\index.html"`, Mac `open Panel/index.html`, Linux `xdg-open Panel/index.html`. Dile: "Deja esta ventana visible, ahí verás a tu equipo trabajar. Si algo no se abre, pulsa **▶ Ver demo**."
-6. Comprobación rápida: `PY Panel/reportar.py director --negocio "Prueba" --mensaje "Panel listo"` y confirma que se creó `Panel/estado/director.js`.
+5. **Ábrelo con servidor y en segundo plano:** ejecuta `PY Panel/servidor.py --no-abrir` en segundo plano (Bash `run_in_background`), lee la URL de `Panel/estado/servidor.json` y ábrela para el alumno (navegador integrado de la app, o `start "" "<url>"`). Dile: *"Deja esta ventana visible: ahí ves a tu equipo trabajar y ahí te voy a dejar tus prompts para copiar y donde arrastrar tus archivos. Cuando quieras, doble clic en `Panel/iniciar-panel.bat` para abrirlo tú."*
+6. Comprobación: `PY Panel/reportar.py director --negocio "Prueba" --mensaje "Panel listo"` y confirma `Panel/estado/director.js`.
 
-## Protocolo de reporte
-Cada agente escribe **solo su propio archivo** (así 6 agentes en paralelo no se pisan). Desde la carpeta de trabajo:
+## Protocolo de reporte (agentes y director)
+Cada agente escribe **solo sus propios archivos**. Desde la carpeta de trabajo:
 ```
 PY Panel/reportar.py agente <id> --estado trabajando --tarea "Qué estoy haciendo" --progreso 35 --log "Frase corta"
 PY Panel/reportar.py agente <id> --estado listo --progreso 100 --archivo "Entregables/2026-11-12-lanzamiento/anuncios/campana.md|Campaña de anuncios"
+PY Panel/reportar.py director --negocio "Nombre" --etapa 4 --estado-etapa en-curso --mensaje "Producción en paralelo" --log "Lancé 6 agentes"
 ```
-(`reportar.py` ya sabe que el panel es su propia carpeta; no hace falta `--panel`.)
+IDs: `estratega, oferta, imagenes, carruseles, video, anuncios, revisor`. Estados: `espera`, `trabajando`, `listo`, `ajustando`, `necesita-ayuda`. Etapas: 1 Diagnóstico · 2 ADN · 3 Plan · 4 Producción · 5 Revisión · 6 Entrega.
+Reglas: reporta al empezar, en cada hito (máx. 1 vez cada ~20 s) y al terminar con archivos; frases cortas de emprendedor; rutas de `--archivo` relativas a la carpeta de trabajo; nunca claves ni teléfonos en el panel; si el panel falla, **no detengas el trabajo**.
 
-IDs válidos: `estratega, oferta, imagenes, carruseles, video, anuncios, revisor`.
-Estados: `espera`, `trabajando`, `listo`, `ajustando` (corrigiendo tras la revisión), `necesita-ayuda` (te falta un dato del alumno).
+## La Guía de generación (para que nada quede "al aire")
+Todo lo que el alumno deba **generar, subir o pegar** se publica aquí. Cada agente escribe un `guia.json` y lo publica:
+```
+PY Panel/reportar.py guia video --desde Entregables/<tema>/video/guia.json --md Entregables/<tema>/video/05-guia-de-generacion.md
+```
+Formato (`guia.json`):
+```json
+{"titulo":"Video de 20 s","intro":"Qué vas a hacer y en qué orden, en 2 frases.","orden":1,"pasos":[
+ {"id":"vid-fotos","fase":"material","titulo":"Pásame 3 a 6 fotos reales de tu local",
+  "pedir":"Con el celular, en vertical, con la luz normal del lugar. No las arregles.",
+  "salida":"Mi negocio/fotos-producto/","multiple":true},
+ {"id":"vid-escena","fase":"imagenes","titulo":"Imagen de la escena: tu local en 9:16",
+  "herramienta":"Nano Banana 2 o GPT Image 2.6","enlace":"https://aistudio.google.com","formato":"9:16",
+  "refs":[{"nombre":"Tu foto real del local","slot":"vid-fotos"}],
+  "prompt":"Usa la imagen adjunta como escena exacta…","salida":"Entregables/<tema>/video/imagenes/escena.png",
+  "revisar":["Se reconoce como TU local","Sin muebles inventados"],"notas":"Si sale distinta, repite con la misma foto."},
+ {"id":"vid-toma-01","fase":"clips","titulo":"Toma 1 · Gancho","herramienta":"Google Flow · Omni Flash 1.2",
+  "enlace":"https://labs.google/fx/tools/flow","formato":"9:16","duracion":"6 s","palabras":"14 palabras · 6 s",
+  "refs":[{"nombre":"@me (tu avatar de Flow)","tipo":"avatar"},{"nombre":"Imagen de la escena","slot":"vid-escena"}],
+  "prompt":"@me …","salida":"Entregables/<tema>/video/clips/toma-01.mp4","revisar":["Tu voz y frase completa","Sin texto ni música"]}
+]}
+```
+Campos: `id` (minúsculas, números, guiones; **único en todo el panel**, con prefijo de tu área: `vid-`, `img-`, `car-`, `ads-`), `fase` (`material`, `imagenes`, `clips`, `edicion`, `otro`), `titulo`, `pedir` (texto de petición), `herramienta`, `enlace`, `formato`, `duracion`, `refs` (lista **en el orden de carga**; cada una con `nombre` y opcional `slot` para mostrar la miniatura de otro paso, `archivo` o `tipo:"avatar"`), `prompt` (completo, pegable), `palabras`, `notas`, `revisar` (lista corta), `salida` (ruta relativa que **empieza por `Entregables/` o `Mi negocio/`**; si termina en `/` y `multiple:true`, recibe varios archivos; sin `salida` el paso es solo informativo), `multiple`.
+El comando valida el JSON, escribe `Panel/estado/guia-<id>.json`, regenera `guia.js` y, con `--md`, escribe la misma guía en Markdown. **El prompt vive solo en la guía.**
 
-### Plan B sin Python
-Escribe `Panel/estado/<id>.js` con exactamente este formato (una sola línea de datos; reescribe el archivo completo cada vez):
+## Lo que sube el alumno y cómo lo lees en tiempo real
+- Al arrastrar un archivo a un paso, `servidor.py` lo guarda en `salida` con el nombre del paso (si hay una versión previa, pasa a `_anteriores/`) y actualiza `Panel/estado/medios.js`. Si copia el archivo a mano a esa carpeta, también se detecta (el servidor revisa cada 2 s).
+- **Vigila en segundo plano** apenas publiques una guía: con la herramienta **Monitor** ejecuta `PY Panel/vigilar.py` (imprime `SUBIDA paso=<id> archivo=<ruta> tam=…MB` por cada archivo nuevo ya copiado completo). Cada línea te llega como aviso: **abre el archivo y revísalo** (imágenes: mírala; video: `ffprobe`, fotogramas con ffmpeg, transcripción con Whisper si existe). Si tu herramienta no tiene Monitor, pídele al alumno «avísame cuando subas algo» y ejecuta `PY Panel/vigilar.py --una-vez`.
+- **Devuelve el veredicto al panel**, que lo muestra en la tarjeta del paso:
+```
+PY Panel/reportar.py revision --slot vid-toma-01 --estado revisando --nota "Mirándolo ahora"
+PY Panel/reportar.py revision --slot vid-toma-01 --estado ok --nota "Voz y ropa bien; encuadre distinto al anterior"
+PY Panel/reportar.py revision --slot vid-toma-01 --estado repetir --nota "Dice 'WhatsApp' en vez de 'por aquí'; regenera con la frase literal"
+```
+  Y dilo también en el chat en una frase. Cuando todos los pasos de clips estén en `ok`, pasa a la edición.
+- Para fotos de `material`: mira cada foto y dile al alumno qué sirve y qué falta (frente, interior, producto, vertical, nítida).
+
+## Plan B sin Python
+Escribe `Panel/estado/<id>.js` (una línea; reescríbelo completo cada vez):
 ```
 window.FM=window.FM||{};window.FM.agentes=window.FM.agentes||{};window.FM.agentes["estratega"]={"estado":"trabajando","tarea":"Armando calendario","progreso":35,"archivos":[],"log":[{"t":"10:02:11","m":"Definí 3 pilares"}]};
 ```
@@ -38,16 +75,9 @@ y `Panel/estado/director.js`:
 ```
 window.FM=window.FM||{};window.FM.director={"negocio":"Mi negocio","etapas":["listo","listo","listo","en-curso","pendiente","pendiente"],"mensaje":"Producción en paralelo","log":[{"t":"10:00:00","ag":"Director","m":"Lancé 6 agentes"}]};
 ```
-
-### El director
-```
-PY Panel/reportar.py director --negocio "Nombre del negocio" --etapa 4 --estado-etapa en-curso --mensaje "Producción en paralelo" --log "Lancé 6 agentes"
-```
-Etapas: 1 Diagnóstico · 2 ADN de marca · 3 Plan · 4 Producción en paralelo · 5 Revisión · 6 Entrega. Al marcar una etapa, las anteriores quedan en "listo".
+Sin Python no hay subida desde el panel ni `guia.js` automático: en ese caso entrega los prompts **en el chat y en un `.md`** (nunca solo "en la carpeta") y pide al alumno que copie sus archivos a las rutas indicadas.
 
 ## Reglas
-- Reporta **al empezar**, **en cada hito** (máx. 1 vez cada ~20 s) y **al terminar** con los archivos. Frases cortas, en lenguaje de emprendedor ("Escribiendo los títulos del anuncio"), sin jerga.
-- Las rutas de `--archivo` son relativas a la carpeta de trabajo (la que contiene `Panel/`).
-- Nunca escribas datos sensibles (claves, teléfonos de clientes) en el panel.
-- Si el panel falla, **no detengas el trabajo**: el panel es un extra, el entregable es lo importante.
-- Modo demo: `Panel/index.html?demo=1` o el botón "Ver demo" muestra al equipo trabajando con datos de ejemplo (ideal para clases).
+- Nunca escribas datos sensibles en el panel. El servidor solo escucha en `127.0.0.1`, solo escribe en `Entregables/` y `Mi negocio/`, y acepta solo imágenes, video, audio, pdf y texto (máx. 1 GB).
+- Modo demo: `Panel/index.html?demo=1` o el botón «Ver demo» muestra al equipo trabajando y una guía de ejemplo (ideal para clases).
+- Si el alumno pregunta «¿dónde están los prompts?»: abre la pestaña **Guía de generación** (`#guia`), y además pégale en el chat el prompt del paso que toca.

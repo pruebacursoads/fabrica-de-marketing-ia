@@ -6,7 +6,7 @@
 | Para qué | Dónde | Enlace |
 |---|---|---|
 | Hablar con Claude | Claude | https://claude.ai |
-| Generar **imágenes y flyers** (Nano Banana) | Gemini o Google AI Studio | https://gemini.google.com · https://aistudio.google.com |
+| Generar **imágenes y flyers** (Nano Banana 2 **o GPT Image 2.6**, el que tengas) | Gemini, Google AI Studio o ChatGPT | https://gemini.google.com · https://aistudio.google.com · https://chatgpt.com |
 | Generar **clips de video** (Omni Flash, avatar @me) | Google Flow | https://labs.google/fx/tools/flow |
 | Crear y gestionar **anuncios** | Administrador de anuncios de Meta | https://adsmanager.facebook.com |
 | Cuenta, páginas, permisos | Meta Business Suite / Configuración | https://business.facebook.com |
@@ -19,7 +19,9 @@
 | Hoja de ventas | Google Sheets | https://sheets.google.com |
 
 ## Mini-guías de 3 pasos
-**Generar una imagen (Nano Banana):** 1) abre Gemini en https://gemini.google.com 2) adjunta las referencias en el **orden** que indica el entregable 3) pega el prompt y elige formato 9:16 (video) o 4:5 (feed). Pide siempre en español.
+**Generar una imagen (Nano Banana 2 o GPT Image 2.6):** 1) abre Gemini en https://gemini.google.com (o ChatGPT si usas GPT Image 2.6) 2) adjunta las referencias en el **orden** que indica tu **Guía de generación** (pestaña del Panel) 3) pega el prompt y elige formato 9:16 (video) o 4:5 (feed). Pide siempre en español. Para que se vea real, usa **fotos reales de tu local o producto** como referencia: la IA las mejora y reencuadra, no las inventa.
+
+**Subir lo que generaste:** en la pestaña **Guía de generación** arrastra el archivo al cuadro de su paso (se guarda solo en tu computadora y Claude lo revisa). Si el panel no tiene subida, doble clic en `Panel/iniciar-panel.bat`.
 
 **Generar un clip (Omni Flash en Flow):** 1) abre https://labs.google/fx/tools/flow 2) crea un proyecto y carga las referencias en el orden indicado (tu avatar se invoca con `@me`) 3) pega el prompt del clip, duración indicada, y descarga el MP4 a la carpeta `Tomas/` o `Entregables/.../video/clips/`. Si el clip sale con texto o música generados, vuelve a generarlo: el texto y la música se ponen en la edición.
 

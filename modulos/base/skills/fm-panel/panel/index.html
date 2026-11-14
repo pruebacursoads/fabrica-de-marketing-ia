@@ -28,7 +28,16 @@ button:hover{background:var(--vio)}
 button.ghost{background:transparent;border:1px solid var(--line);color:var(--mut)}
 button.ghost:hover{color:var(--tx);border-color:var(--vio)}
 
-/* ---- director banner ---- */
+/* ---- pestañas ---- */
+.tabs{display:flex;gap:8px;margin:0 0 14px;flex-wrap:wrap}
+.tab{background:var(--card);border:1px solid var(--line);color:var(--mut);padding:10px 18px;border-radius:12px;font-size:14px}
+.tab:hover{color:var(--tx);border-color:var(--vio);background:var(--card2)}
+.tab.on{background:linear-gradient(135deg,var(--vio2),var(--vio));color:#fff;border-color:transparent}
+.badge{display:inline-block;min-width:20px;padding:1px 7px;margin-left:8px;border-radius:999px;background:var(--am);color:#2a2100;font-size:12px;font-weight:800}
+.tab.on .badge{background:#fff;color:var(--vio2)}
+.pane{display:none}.pane.on{display:block}
+
+/* ---- director ---- */
 .dir{background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:16px;padding:14px 18px;margin-bottom:14px}
 .dir-name{font-weight:800;font-size:15px}
 .dir-name small{color:var(--mut);font-weight:600;margin-left:8px}
@@ -43,26 +52,51 @@ button.ghost:hover{color:var(--tx);border-color:var(--vio)}
 .step.listo::after{background:var(--ok)}
 .step.en-curso{color:var(--am)}.step.en-curso::before{border-color:var(--am);color:var(--am);box-shadow:0 0 0 4px #facc1533}
 
-/* ---- oficina ---- */
-#stageWrap{position:relative;width:100%;overflow:hidden;border-radius:18px;border:1px solid var(--line);background:#100c22}
-#scene{position:absolute;left:0;top:0;width:1200px;height:626px;transform-origin:0 0}
-#world{position:absolute;left:0;top:46px;width:1200px;height:580px}
-.floor{position:absolute;left:0;top:250px;width:1200px;height:56px;background:repeating-linear-gradient(90deg,#17133a 0 60px,#1a1640 60px 120px)}
-.room{position:absolute;border-radius:18px;border:2px solid rgba(255,255,255,.07);overflow:hidden}
-.room .rl2{position:absolute;left:14px;top:10px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffffff88}
-.room::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#ffffff08,transparent 40%);pointer-events:none}
-.prop{position:absolute;font-size:26px;filter:drop-shadow(0 4px 4px #0006);line-height:1}
-.desk{position:absolute;height:56px;border-radius:12px;background:linear-gradient(180deg,#8a6a4f,#6b4f3a);box-shadow:0 8px 14px #0007;z-index:10}
-.desk .mon{position:absolute;left:14px;top:-14px;width:46px;height:32px;border-radius:6px;background:#1c1b2e;border:3px solid #3a3860;transition:.3s}
-.desk .mon::after{content:"";position:absolute;left:5px;right:5px;top:6px;height:3px;background:#5b5890;border-radius:2px;box-shadow:0 7px 0 #5b5890,0 14px 0 #5b5890}
-.desk.on .mon{background:#2a1f6b;border-color:var(--vio);box-shadow:0 0 18px #8b5cf6aa}
-.desk.on .mon::after{background:var(--am);box-shadow:0 7px 0 #c4b5fd,0 14px 0 var(--am);animation:code 1.2s steps(3) infinite}
+/* ================= OFICINA 3D (isométrica, CSS puro, sin internet) ================= */
+#stageWrap{position:relative;width:100%;overflow:hidden;border-radius:18px;border:1px solid var(--line);
+  background:radial-gradient(900px 420px at 50% 40%,#2a2068,#120d2b 70%)}
+#scene{position:absolute;left:0;top:0;width:1300px;height:870px;transform-origin:0 0}
+#iso{position:absolute;left:50px;top:210px;width:1200px;height:580px;transform-style:preserve-3d;
+  transform-origin:600px 290px;transform:rotateX(58deg) rotateZ(-45deg)}
+#world{position:absolute;left:0;top:0;width:1200px;height:580px;transform-style:preserve-3d}
+.floor{position:absolute;left:0;top:0;width:1200px;height:580px;border-radius:4px;
+  background:
+   repeating-linear-gradient(90deg,#00000010 0 2px,transparent 2px 120px),
+   repeating-linear-gradient(0deg,#00000018 0 1px,transparent 1px 36px),
+   linear-gradient(135deg,#b78b62,#a37a53 55%,#b38660)}
+.slab-f,.slab-l{position:absolute;transform-origin:0 0;background:#5a3e27}
+.slab-f{left:0;top:580px;width:1200px;height:26px;transform:rotateX(-90deg)}
+.slab-l{left:0;top:0;width:580px;height:26px;transform:rotateZ(90deg) rotateX(-90deg);background:#4a321f}
+.rug{position:absolute;border-radius:34px;transform:translateZ(1px);box-shadow:inset 0 0 0 3px #ffffff22,inset 0 0 40px #0003}
+.zlabel{position:absolute;font-weight:800;font-size:21px;letter-spacing:.14em;text-transform:uppercase;color:#ffffffcc;
+  text-shadow:0 2px 0 #0006;white-space:nowrap;transform:translateZ(2px);pointer-events:none}
+.wall{position:absolute;transform-origin:0 0;overflow:visible}
+.wall-b{left:0;top:0;width:1200px;height:170px;transform:translateZ(170px) rotateX(-90deg);
+  background:linear-gradient(180deg,#e9e4f7,#cfc7ea)}
+.wall-r{left:0;top:0;width:580px;height:170px;transform:translate3d(1200px,0,170px) rotateZ(90deg) rotateX(-90deg);
+  background:linear-gradient(180deg,#ddd6f3,#c2b9e3)}
+.wall-b::after,.wall-r::after{content:"";position:absolute;left:0;right:0;bottom:0;height:14px;background:#7b6aa8}
+.win{position:absolute;border:5px solid #f7f5ff;border-radius:3px;background:linear-gradient(180deg,#8fd0ff,#cfeeff 70%,#e9f7ff);box-shadow:0 0 0 2px #0002 inset}
+.win::before,.win::after{content:"";position:absolute;background:#f7f5ff}
+.win::before{left:50%;top:0;bottom:0;width:4px;margin-left:-2px}
+.win::after{top:50%;left:0;right:0;height:4px;margin-top:-2px}
+.wsign{position:absolute;background:#2a1f6b;color:#fff;font-weight:800;font-size:15px;letter-spacing:.1em;text-transform:uppercase;
+  padding:8px 16px;border-radius:8px;white-space:nowrap;border:2px solid var(--am);box-shadow:0 6px 12px #0004}
+.board{position:absolute;background:#fff;border:6px solid #8a7fb4;border-radius:4px;box-shadow:0 4px 10px #0003}
+.board i{position:absolute;left:12px;right:12px;height:6px;border-radius:3px;background:#b9b0e6}
+.box{position:absolute;transform-style:preserve-3d}
+.box>i{position:absolute;display:block;transform-origin:0 0}
+.box .gl{box-shadow:inset 0 0 18px #fff6}
+.mon-scr{position:absolute;inset:3px;border-radius:2px;background:#0b0a1c;transition:.3s}
+.mon-scr.on{background:linear-gradient(180deg,#5b3df0,#2a1f6b);box-shadow:0 0 14px #8b5cf6cc}
+.mon-scr.on::after{content:"";position:absolute;left:4px;right:4px;top:4px;height:3px;background:var(--am);box-shadow:0 5px 0 #c4b5fd,0 10px 0 var(--am);animation:code 1.2s steps(3) infinite}
 @keyframes code{50%{opacity:.4}}
-.desk .kb{position:absolute;right:16px;top:14px;width:40px;height:10px;border-radius:3px;background:#2a2848}
-.table{position:absolute;border-radius:40px;background:linear-gradient(180deg,#8a6a4f,#6b4f3a);box-shadow:0 10px 18px #0008;z-index:8}
+.bb{position:absolute;width:44px;height:44px;transform-origin:50% 100%;transform:rotateZ(45deg) rotateX(-58deg);
+  font-size:34px;line-height:44px;text-align:center;pointer-events:none}
+.shadow{position:absolute;width:46px;height:22px;margin:-11px 0 0 -23px;border-radius:50%;background:#0006;filter:blur(2px);transform:translateZ(1.5px);transition-property:left,top;transition-timing-function:linear}
 
-/* ---- personas ---- */
-.p{position:absolute;width:60px;height:100px;transition-property:left,top;transition-timing-function:linear;z-index:5}
+/* ---- personas (se mantienen de pie frente a la cámara) ---- */
+.p{position:absolute;width:60px;height:100px;transform-origin:50% 100%;transform:rotateZ(45deg) rotateX(-58deg);transition-property:left,top;transition-timing-function:linear}
 .p svg{display:block;overflow:visible}
 .p .legL,.p .legR,.p .armL,.p .armR{transform-box:fill-box}
 .p .legL,.p .legR{transform-origin:50% 0}
@@ -83,24 +117,25 @@ button.ghost:hover{color:var(--tx);border-color:var(--vio)}
 .p.party .armL{animation:wave .6s ease-in-out infinite}
 .p.party .armR{animation:wave .6s ease-in-out infinite reverse}
 @keyframes wave{0%,100%{transform:rotate(-150deg)}50%{transform:rotate(-120deg)}}
-.tag{position:absolute;left:50%;top:-30px;transform:translateX(-50%);background:#0e0b24ee;border:1px solid var(--line);border-radius:10px;padding:3px 9px;white-space:nowrap;text-align:center;line-height:1.15;z-index:3}
-.tag b{display:block;font-size:11.5px}
-.tag span{font-size:9.5px;color:var(--mut);letter-spacing:.04em}
-.tag i{position:absolute;right:-3px;top:-3px;width:10px;height:10px;border-radius:50%;background:#64608f;border:2px solid #0e0b24}
+/* etiqueta compacta: solo el nombre (el nombre de cada zona va pintado en el piso y en el letrero) */
+.tag{position:absolute;left:50%;top:-24px;transform:translateX(-50%);background:#0e0b24ee;border:1px solid var(--line);border-radius:9px;
+  padding:2px 8px 2px 7px;white-space:nowrap;line-height:1.2;display:flex;align-items:center;gap:5px}
+.tag b{font-size:11px}
+.tag i{width:8px;height:8px;border-radius:50%;background:#64608f;flex:none}
 .p.s-trabajando .tag i{background:var(--vio);animation:pulse 1.4s infinite}
 .p.s-listo .tag i{background:var(--ok)}
 .p.s-ajustando .tag i,.p.s-necesita-ayuda .tag i{background:var(--warn)}
-.bub{position:absolute;left:50%;bottom:112px;transform:translateX(-50%);width:max-content;min-width:70px;max-width:190px;background:#fff;color:#1b1740;font-size:11px;font-weight:600;line-height:1.25;padding:6px 9px;border-radius:12px;text-align:center;opacity:0;transition:opacity .25s;pointer-events:none;z-index:70}
+.bub{position:absolute;left:50%;bottom:122px;transform:translateX(-50%);width:max-content;min-width:70px;max-width:190px;background:#fff;color:#1b1740;font-size:11px;font-weight:600;line-height:1.25;padding:6px 9px;border-radius:12px;text-align:center;opacity:0;transition:opacity .25s;pointer-events:none}
 .bub::after{content:"";position:absolute;left:50%;bottom:-6px;transform:translateX(-50%) rotate(45deg);width:10px;height:10px;background:#fff}
 .bub.show{opacity:1}
 .bub.warn{background:#fde68a}.bub.warn::after{background:#fde68a}
-.file{position:absolute;left:38px;top:58px;font-size:20px;opacity:0;transition:opacity .2s;z-index:3}
+.file{position:absolute;left:38px;top:58px;font-size:20px;opacity:0;transition:opacity .2s}
 .p.carry .file{opacity:1}
-.banner{position:absolute;left:950px;transform:translateX(-50%);top:206px;font-size:14px;font-weight:800;padding:6px 16px;border-radius:999px;background:linear-gradient(90deg,var(--vio2),var(--vio));box-shadow:0 6px 18px #6d28d977;opacity:0;transition:.4s;z-index:30;white-space:nowrap}
+.banner{position:absolute;left:650px;top:14px;transform:translateX(-50%);font-size:15px;font-weight:800;padding:7px 18px;border-radius:999px;background:linear-gradient(90deg,var(--vio2),var(--vio));box-shadow:0 6px 18px #6d28d977;opacity:0;transition:.4s;z-index:30;white-space:nowrap}
 .banner.show{opacity:1}
-.confetti{position:absolute;width:8px;height:12px;opacity:0;z-index:25;top:20px}
+.confetti{position:absolute;width:8px;height:12px;opacity:0;z-index:25;top:0}
 .party-on .confetti{opacity:1;animation:fall 2.8s linear infinite}
-@keyframes fall{to{transform:translateY(240px) rotate(540deg);opacity:0}}
+@keyframes fall{to{transform:translateY(700px) rotate(540deg);opacity:0}}
 #vacio{position:absolute;left:0;right:0;bottom:12px;text-align:center;color:var(--mut);font-size:13px;z-index:60;pointer-events:none}
 
 /* ---- abajo ---- */
@@ -125,14 +160,77 @@ summary{cursor:pointer;color:var(--mut);font-weight:700;font-size:13px;padding:8
 .ag-h{display:flex;align-items:center;gap:10px}
 .av{width:38px;height:38px;border-radius:11px;background:var(--bg2);display:grid;place-items:center;font-size:19px;flex:none}
 .nm{font-weight:800;font-size:14px}.rl{color:var(--mut);font-size:11.5px}
-.chip{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.05em;padding:3px 9px;border-radius:999px;margin-top:10px;text-transform:uppercase;background:#2e2760;color:var(--mut)}
-.chip.trabajando{background:#8b5cf633;color:#c4b5fd}.chip.listo{background:#22c55e26;color:#4ade80}
-.chip.ajustando,.chip.necesita-ayuda{background:#f59e0b26;color:#fbbf24}
+.chip{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.05em;padding:3px 9px;border-radius:999px;text-transform:uppercase;background:#2e2760;color:var(--mut);white-space:nowrap}
+.ag .chip{margin-top:10px}
+.chip.trabajando{background:#8b5cf633;color:#c4b5fd}.chip.listo,.chip.aprobado{background:#22c55e26;color:#4ade80}
+.chip.ajustando,.chip.necesita-ayuda,.chip.repetir{background:#f59e0b26;color:#fbbf24}
+.chip.revisando{background:#0ea5e926;color:#7dd3fc}.chip.pendiente{background:#facc1522;color:#fde047}
 .task{font-size:12.5px;margin-top:8px;min-height:32px}
 .bar{height:6px;background:var(--bg2);border-radius:999px;margin-top:8px;overflow:hidden}
 .bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--vio),var(--am));border-radius:999px;transition:width .6s}
 .ag.listo .bar>i{background:var(--ok)}
 .files{font-size:11.5px;color:var(--mut);margin-top:6px}
+
+/* ================= GUÍA DE GENERACIÓN ================= */
+.gtop{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;background:linear-gradient(180deg,var(--card2),var(--card));
+  border:1px solid var(--line);border-radius:16px;padding:14px 18px;margin-bottom:14px}
+.gtop h2{font-size:17px}
+.gtop p{color:var(--mut);font-size:13px;margin-top:3px;max-width:760px}
+.gprog{min-width:220px}
+.gprog .bar{height:9px}.gprog b{font-size:13px}
+.srvbox{font-size:12.5px;border-radius:12px;padding:10px 14px;margin-bottom:14px;border:1px solid var(--line);background:var(--card)}
+.srvbox.ok{border-color:#22c55e66;color:#86efac}
+.srvbox.no{border-color:#f59e0b66;color:#fde68a}
+.srvbox code{background:#0003;padding:1px 6px;border-radius:5px}
+.sec h3.sech{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin:20px 0 4px}
+.sec .intro{color:var(--mut);font-size:13px;margin-bottom:10px;max-width:900px}
+.gc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
+.gc.ahora{border-color:var(--am);box-shadow:0 0 0 1px var(--am),0 10px 30px #facc1514}
+.gc.aprobado{border-color:#22c55e66}
+.gc.repetir{border-color:#f59e0b99}
+.gch{display:flex;gap:12px;align-items:flex-start}
+.num{width:32px;height:32px;border-radius:50%;background:var(--vio2);display:grid;place-items:center;font-weight:800;flex:none}
+.gc.aprobado .num{background:var(--ok);color:#06220f}
+.gch h3{font-size:16px;line-height:1.25}
+.meta{color:var(--mut);font-size:12.5px;margin-top:3px}
+.meta a{color:#c4b5fd}
+.gch .chip{margin-left:auto}
+.ahorab{display:inline-block;background:var(--am);color:#2a2100;font-weight:800;font-size:11px;padding:2px 9px;border-radius:999px;margin-left:8px}
+.pedir{background:#facc1514;border:1px solid #facc1544;color:#fde68a;border-radius:10px;padding:10px 12px;font-size:13px;margin-top:12px}
+.refs{margin-top:12px}
+.refs>b{font-size:12.5px;color:var(--mut)}
+.refs ol{list-style:none;display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.refs li{display:flex;align-items:center;gap:9px;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:6px 12px 6px 6px;font-size:12.5px}
+.refs li .n{width:22px;height:22px;border-radius:50%;background:var(--am);color:#2a2100;font-weight:800;font-size:12px;display:grid;place-items:center;flex:none}
+.refs li img{width:42px;height:56px;object-fit:cover;border-radius:6px;border:1px solid var(--line)}
+.refs li .ic{width:42px;height:56px;border-radius:6px;background:var(--card2);display:grid;place-items:center;font-size:22px}
+.pbox{margin-top:12px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.pbar{display:flex;align-items:center;gap:10px;background:var(--card2);padding:8px 12px;font-size:12.5px}
+.pbar small{color:var(--mut)}
+.pbar button{margin-left:auto;padding:6px 12px;font-size:12.5px}
+.pbox pre{white-space:pre-wrap;word-wrap:break-word;font:13px/1.55 Consolas,"Cascadia Mono",monospace;padding:12px 14px;background:#100c24;max-height:280px;overflow:auto}
+.notas{margin-top:10px;font-size:13px;color:var(--mut)}
+.chk{margin:10px 0 0 18px;font-size:13px;color:var(--mut)}
+.chk li{margin:2px 0}
+.drop{margin-top:14px;border:2px dashed #4b3f99;border-radius:14px;padding:16px;text-align:center;color:var(--mut);font-size:13px;cursor:pointer;transition:.2s;background:#ffffff05}
+.drop:hover,.drop.over{border-color:var(--am);color:var(--tx);background:#facc1510}
+.drop b{color:var(--tx)}
+.drop small{display:block;margin-top:4px;color:#8a84c0}
+.drop.off{cursor:default;opacity:.85}
+.drop.off:hover{border-color:#4b3f99;background:#ffffff05;color:var(--mut)}
+.up{height:8px;background:var(--bg2);border-radius:999px;margin-top:10px;overflow:hidden}
+.up>i{display:block;height:100%;background:linear-gradient(90deg,var(--vio),var(--am));width:0}
+.prev{margin-top:14px;display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start}
+.prev img{max-height:300px;max-width:100%;border-radius:12px;border:1px solid var(--line)}
+.prev video{max-height:420px;max-width:100%;border-radius:12px;border:1px solid var(--line);background:#000}
+.prev audio{width:100%}
+.thumb{display:flex;flex-direction:column;gap:4px;font-size:11.5px;color:var(--mut);max-width:130px}
+.thumb img{width:130px;height:170px;object-fit:cover}
+.rev{margin-top:10px;border-radius:10px;padding:9px 12px;font-size:13px}
+.rev.revisando{background:#0ea5e920;color:#bae6fd}
+.rev.ok{background:#22c55e20;color:#bbf7d0}
+.rev.repetir{background:#f59e0b20;color:#fde68a}
+.empty{color:var(--mut);font-size:14px;padding:30px;text-align:center;border:1px dashed var(--line);border-radius:16px}
 footer{margin-top:28px;text-align:center;color:#6f69a8;font-size:12px}
 </style>
 </head>
@@ -158,68 +256,76 @@ footer{margin-top:28px;text-align:center;color:#6f69a8;font-size:12px}
   <div class="steps" id="steps"></div>
 </section>
 
-<div id="stageWrap">
-  <div id="scene"></div>
-  <div id="vacio" style="display:none">Todavía no hay actividad. Abre Claude en esta carpeta y escribe <b>Quiero empezar</b>, o pulsa <b>▶ Ver demo</b>.</div>
-</div>
+<nav class="tabs">
+  <button class="tab on" data-tab="oficina">🏢 Oficina</button>
+  <button class="tab" data-tab="guia">🎬 Guía de generación <span class="badge" id="badgeGuia" style="display:none">0</span></button>
+</nav>
 
-<div class="below">
-  <div class="panel"><h2>Actividad en vivo</h2><div id="feed"></div></div>
-  <div class="panel"><h2>Entregables listos</h2><div class="docs" id="docs"><span style="color:var(--mut);font-size:13px">Aún no hay archivos.</span></div></div>
-</div>
+<main id="pane-oficina" class="pane on">
+  <div id="stageWrap">
+    <div id="scene"></div>
+    <div id="vacio" style="display:none">Todavía no hay actividad. Abre Claude en esta carpeta y escribe <b>Quiero empezar</b>, o pulsa <b>▶ Ver demo</b>.</div>
+  </div>
+  <div class="below">
+    <div class="panel"><h2>Actividad en vivo</h2><div id="feed"></div></div>
+    <div class="panel"><h2>Entregables listos</h2><div class="docs" id="docs"><span style="color:var(--mut);font-size:13px">Aún no hay archivos.</span></div></div>
+  </div>
+  <details>
+    <summary>Ver detalle por agente (lista)</summary>
+    <div class="grid" id="grid"></div>
+  </details>
+</main>
 
-<details>
-  <summary>Ver detalle por agente (lista)</summary>
-  <div class="grid" id="grid"></div>
-</details>
+<main id="pane-guia" class="pane">
+  <div class="gtop">
+    <div>
+      <h2>Tu guía paso a paso</h2>
+      <p>Aquí están los prompts listos para copiar, qué referencias cargar y en qué orden. Cuando tengas cada archivo, arrástralo a su cuadro: se guarda solo en tu computadora y Claude lo revisa al instante.</p>
+    </div>
+    <div class="gprog"><b id="gprogTxt">Sin pasos todavía</b><div class="bar"><i id="gprogBar"></i></div></div>
+  </div>
+  <div id="srvbox" class="srvbox no" style="display:none"></div>
+  <div id="guiaBody"><div class="empty">Cuando el equipo termine las piezas aparecerán aquí los pasos con sus prompts.<br>Pulsa <b>▶ Ver demo</b> para ver cómo se ve.</div></div>
+</main>
 <footer>Fábrica de Marketing con IA · por Hugo López, El Marketero del Pueblo</footer>
 
 <script>
 /* ============ datos fijos del equipo ============ */
 const AGENTES=[
- {id:'estratega',n:'Estela',rol:'Estratega',i:'🧭',d:'Plan de 90 días y calendario',skin:'#f1c9a0',hair:'#6b3d1f',hs:'long',shirt:'#7c3aed',pants:'#1d1d2e',acc:'glasses',
-  seat:{x:350,y:64},desk:{x:310,y:124,w:140},meet:{x:880,y:36,z:6}},
- {id:'oferta',n:'Olivia',rol:'Oferta y copy',i:'✍️',d:'Oferta, textos y WhatsApp',skin:'#c68a5f',hair:'#1a1a1a',hs:'long',shirt:'#f59e0b',pants:'#262338',acc:'',
-  seat:{x:540,y:64},desk:{x:500,y:124,w:140},meet:{x:960,y:36,z:6}},
- {id:'imagenes',n:'Iris',rol:'Imágenes y flyers',i:'🖼️',d:'Prompts de imagen y flyers',skin:'#f0c8a0',hair:'#b5523b',hs:'long',shirt:'#ec4899',pants:'#1d1d2e',acc:'',
-  seat:{x:80,y:368},desk:{x:40,y:428,w:140},meet:{x:1040,y:36,z:6}},
- {id:'carruseles',n:'Carla',rol:'Carruseles',i:'🎠',d:'Slides para Instagram y TikTok',skin:'#d9a074',hair:'#2b2118',hs:'short',shirt:'#14b8a6',pants:'#262338',acc:'',
-  seat:{x:240,y:368},desk:{x:200,y:428,w:140},meet:{x:800,y:150,z:12}},
- {id:'video',n:'Víctor',rol:'Video',i:'🎬',d:'Guiones y prompts de Omni Flash',skin:'#e0ac82',hair:'#1a1a1a',hs:'short',shirt:'#0ea5e9',pants:'#111827',acc:'headset',
-  seat:{x:520,y:368},desk:{x:480,y:428,w:140},meet:{x:880,y:150,z:12}},
- {id:'anuncios',n:'Andrés',rol:'Anuncios Meta',i:'📣',d:'Estructura, copy y WhatsApp',skin:'#c68a5f',hair:'#3a2a1a',hs:'short',shirt:'#f97316',pants:'#1d1d2e',acc:'glasses',
-  seat:{x:830,y:368},desk:{x:790,y:428,w:140},meet:{x:960,y:150,z:12}},
- {id:'revisor',n:'Rocío',rol:'Revisora',i:'🛡️',d:'Marca, claims y políticas de Meta',skin:'#f1c9a0',hair:'#8b5a2b',hs:'long',shirt:'#22c55e',pants:'#262338',acc:'glasses',
-  seat:{x:1050,y:368},desk:{x:1010,y:428,w:140},meet:{x:1040,y:150,z:12}}
+ {id:'estratega',n:'Estela',rol:'Estratega',i:'🧭',d:'Plan de 90 días y calendario',skin:'#f1c9a0',hair:'#6b3d1f',hs:'long',shirt:'#7c3aed',pants:'#1d1d2e',acc:'glasses',desk:{x:310,y:124,w:140}},
+ {id:'oferta',n:'Olivia',rol:'Oferta y copy',i:'✍️',d:'Oferta, textos y WhatsApp',skin:'#c68a5f',hair:'#1a1a1a',hs:'long',shirt:'#f59e0b',pants:'#262338',acc:'',desk:{x:500,y:124,w:140}},
+ {id:'imagenes',n:'Iris',rol:'Imágenes y flyers',i:'🖼️',d:'Prompts de imagen y flyers',skin:'#f0c8a0',hair:'#b5523b',hs:'long',shirt:'#ec4899',pants:'#1d1d2e',acc:'',desk:{x:40,y:428,w:140}},
+ {id:'carruseles',n:'Carla',rol:'Carruseles',i:'🎠',d:'Slides para Instagram y TikTok',skin:'#d9a074',hair:'#2b2118',hs:'short',shirt:'#14b8a6',pants:'#262338',acc:'',desk:{x:200,y:428,w:140}},
+ {id:'video',n:'Víctor',rol:'Video',i:'🎬',d:'Tomas, guiones y prompts de video',skin:'#e0ac82',hair:'#1a1a1a',hs:'short',shirt:'#0ea5e9',pants:'#111827',acc:'headset',desk:{x:480,y:428,w:140}},
+ {id:'anuncios',n:'Andrés',rol:'Anuncios Meta',i:'📣',d:'Estructura, copy y WhatsApp',skin:'#c68a5f',hair:'#3a2a1a',hs:'short',shirt:'#f97316',pants:'#1d1d2e',acc:'glasses',desk:{x:790,y:428,w:140}},
+ {id:'revisor',n:'Rocío',rol:'Revisora',i:'🛡️',d:'Marca, claims, realismo y políticas',skin:'#f1c9a0',hair:'#8b5a2b',hs:'long',shirt:'#22c55e',pants:'#262338',acc:'glasses',desk:{x:1010,y:428,w:140}}
 ];
-const DIRECTOR={id:'director',n:'Diego',rol:'Director',skin:'#e0ac82',hair:'#2b2118',hs:'short',shirt:'#3b2f8f',pants:'#1d1d2e',acc:'tie',
-  seat:{x:140,y:64},desk:{x:100,y:124,w:140},meet:{x:800,y:36,z:6}};
-const TU={id:'tu',n:'Tú',rol:'Emprendedor',skin:'#d9a074',hair:'#1a1a1a',hs:'short',shirt:'#facc15',pants:'#262338',acc:'',seat:{x:246,y:112}};
+const DIRECTOR={id:'director',n:'Diego',rol:'Director',skin:'#e0ac82',hair:'#2b2118',hs:'short',shirt:'#3b2f8f',pants:'#1d1d2e',acc:'tie',desk:{x:100,y:124,w:140}};
+const TU={id:'tu',n:'Tú',rol:'Emprendedor',skin:'#d9a074',hair:'#1a1a1a',hs:'short',shirt:'#facc15',pants:'#262338',acc:''};
+/* posiciones: se miden en "pies" (x,y sobre el piso). Detrás de cada escritorio está su dueño. */
+const ALL0=[DIRECTOR,...AGENTES];
+ALL0.forEach(a=>{a.seat={x:a.desk.x+a.desk.w/2,y:a.desk.y-12};});
+TU.seat={x:268,y:200};
+const MEET={director:[830,104],estratega:[910,104],oferta:[990,104],imagenes:[1070,104],carruseles:[830,200],video:[910,200],anuncios:[990,200],revisor:[1070,200]};
+ALL0.forEach(a=>{a.meet={x:MEET[a.id][0],y:MEET[a.id][1]};});
 const ETAPAS=['Diagnóstico','ADN de marca','Plan','Producción en paralelo','Revisión','Entrega'];
 const ESTADOS={espera:'En espera',trabajando:'Trabajando',listo:'Listo',ajustando:'Ajustando','necesita-ayuda':'Necesita tu ayuda'};
-const SALAS=[
- {x:16,y:16,w:290,h:234,c:'#211a52',t:'Oficina del Director'},
- {x:322,y:16,w:380,h:234,c:'#1b2352',t:'Sala de Estrategia y Oferta'},
- {x:718,y:16,w:466,h:234,c:'#2a1c55',t:'Sala de Reuniones'},
- {x:16,y:306,w:380,h:258,c:'#202c54',t:'Estudio de Diseño'},
- {x:412,y:306,w:320,h:258,c:'#2c1c52',t:'Estudio Audiovisual'},
- {x:748,y:306,w:220,h:258,c:'#1d2f4e',t:'Sala de Anuncios'},
- {x:984,y:306,w:200,h:258,c:'#1b3345',t:'Control de Calidad'}
+/* zonas: alfombras suaves (no paredes) con su nombre pintado en el piso */
+const ZONAS=[
+ {x:30,y:40,w:270,h:210,c:'#5b4aa8',t:'Dirección',lx:46,ly:214},
+ {x:322,y:40,w:380,h:210,c:'#3f5fb0',t:'Estrategia y oferta',lx:340,ly:214},
+ {x:730,y:40,w:440,h:210,c:'#8a4fb8',t:'Sala de reuniones',lx:750,ly:214},
+ {x:24,y:330,w:380,h:226,c:'#b0487f',t:'Estudio de diseño',lx:44,ly:520},
+ {x:430,y:330,w:320,h:226,c:'#2f7fb5',t:'Estudio audiovisual',lx:450,ly:520},
+ {x:770,y:330,w:200,h:226,c:'#c06a2f',t:'Anuncios',lx:788,ly:520},
+ {x:990,y:330,w:190,h:226,c:'#2f9a72',t:'Calidad',lx:1010,ly:520}
 ];
-const PROPS=[
- ['🪴',24,186],['📊',250,34],['🏆',60,34],
- ['🗒️',340,34],['🪴',640,190],['💡',700,40],
- ['🗒️',740,34],['🪴',1130,186],
- ['🎨',30,330],['🪴',330,508],['🖼️',340,330],
- ['🎥',430,330],['💡',690,330],['🎙️',690,508],['🪴',430,512],
- ['📈',765,330],['🪴',915,512],
- ['📋',1000,330],['🪴',1130,512]
-];
-const CORR=186;           // altura (top) del pasillo
+const BB=[ ['🪴',20,60],['🪴',690,60],['🪴',1150,60],['🪴',16,300],['🪴',1170,300],['🪴',410,300],['🪴',1170,560],['🪴',420,560],['🗄️',330,60],['💡',1100,300] ];
+const CORR=282;           // "pies" del pasillo
 const SPEED=230;          // px de escena por segundo
-const COLLAB={video:'imagenes',anuncios:'oferta'};  // quién le "pasa" material a quién cuando empieza
+const COLLAB={video:'imagenes',anuncios:'oferta'};
 const COLLAB_MSG={video:'Te paso las referencias',anuncios:'Te paso la oferta'};
-let demo=false,demoT0=0,lastSig='',scale=1;
+let demo=false,demoT0=0,lastSig='',scale=1,srv=false,tab='oficina';
 window.FM={director:null,agentes:{}};
 const $=id=>document.getElementById(id);
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -230,18 +336,23 @@ const DEMO_TOTAL=98;
 const DEMO_AG={
  estratega:{s:26,d:14,t:['Leyendo el ADN de marca','Definiendo 3 pilares de contenido','Armando el calendario de 4 semanas','Marcando qué piezas pasan a anuncios'],f:['Estrategia/plan-90-dias.md','Estrategia/calendario.md']},
  oferta:{s:26,d:12,t:['Afinando la promesa de la oferta','Escribiendo 3 propuestas de valor','Preparando el flujo de WhatsApp','Respuestas a las 5 objeciones'],f:['Entregables/oferta-y-copy.md','Entregables/flujo-whatsapp.md']},
- imagenes:{s:27,d:22,t:['Revisando tu paleta y tipografía','Prompt flyer 1: oferta principal','Prompt flyer 2: antes y después','Prompt imagen de producto 4:5','Anotando qué referencias cargar'],f:['Entregables/imagenes/prompts-flyers.md']},
+ imagenes:{s:27,d:22,t:['Revisando tu paleta y tu foto real del local','Prompt de la escena: tu local, 9:16','Prompt flyer 1: oferta principal','Prompt imagen de producto 4:5','Anotando qué referencias cargar'],f:['Entregables/imagenes/prompts-flyers.md']},
  carruseles:{s:27,d:18,t:['Eligiendo el tema del carrusel','Diseñando el ADN visual de las slides','Escribiendo el prompt de cada slide','Copy de publicación'],f:['Entregables/carruseles/carrusel-1.md']},
- video:{s:29,d:26,t:['Proponiendo ángulos de video','Guion 1: gancho de 2 s en pregunta','Prompts de Omni Flash con @me','Lista de referencias por clip','Guion 2 y 3'],f:['Entregables/video/guiones.md','Entregables/video/prompts-omni-flash.md']},
+ video:{s:29,d:26,t:['Pensando 6 tomas distintas para 20 s','Guion: gancho de 2 s en pregunta','Prompts por toma, con cambio de cámara','Lista de referencias por toma','Subiendo la guía al panel'],f:['Entregables/video/guiones.md','Entregables/video/05-guia-de-generacion.md']},
  anuncios:{s:32,d:23,t:['Construyendo la matriz de 3 ángulos','Copy: texto principal, títulos y descripciones','Ventas → WhatsApp → compras por mensajes','Impulso de la entrega por anuncio','Nombres de campañas y anuncios'],f:['Entregables/anuncios/campana-whatsapp.md']},
- revisor:{s:57,d:9,t:['Revisando claims y promesas','Comprobando políticas de Meta','Verificando que nada esté inventado','Coherencia con tu ADN de marca'],f:['Entregables/revision-final.md']}
+ revisor:{s:57,d:9,t:['Revisando claims y promesas','Comprobando que el local se vea real','Verificando que nada esté inventado','Coherencia con tu ADN de marca'],f:['Entregables/revision-final.md']}
 };
+const DEMO_GUIA={secciones:[{agente:'video',titulo:'Video de 20 s · ejemplo',intro:'Así se ve una guía: cada paso trae su prompt, las referencias en orden y un cuadro para subir el archivo. (Esto es una demostración: aquí no se sube nada.)',orden:1,pasos:[
+ {id:'demo-foto',fase:'material',titulo:'Pásame 3 fotos reales de tu local',pedir:'Con tu celular, en vertical, con luz normal del lugar (sin filtros). Una del frente, una del interior y una del producto.',salida:'Mi negocio/fotos-producto/',multiple:true,herramienta:'Tu celular'},
+ {id:'demo-escena',fase:'imagenes',titulo:'Imagen de escena: tu local en 9:16',herramienta:'Nano Banana 2 o GPT Image 2.6',enlace:'https://aistudio.google.com',formato:'9:16',refs:[{nombre:'Tu foto real del local'}],prompt:'Usa la foto adjunta como escena exacta: mismo local, mismos muros, mostrador y estantes. Mejora la nitidez y la luz natural, encuadre vertical 9:16. No embellezcas ni agregues muebles. Sin personas, sin texto, sin logos.',salida:'Entregables/demo/imagenes/escena.png',revisar:['Se reconoce como TU local','Sin muebles ni cuadros inventados','Sin texto ni logos']},
+ {id:'demo-toma-1',fase:'clips',titulo:'Toma 1 · Gancho (5 s)',herramienta:'Google Flow · Omni Flash 1.2',enlace:'https://labs.google/fx/tools/flow',formato:'9:16',duracion:'5 s',palabras:'12 palabras · 5 s',refs:[{nombre:'@me (tu avatar)',tipo:'avatar'},{nombre:'Imagen de escena'}],prompt:'@me entra caminando hacia la cámara en el local de la imagen. Cámara en mano, un paso de seguimiento y un push in suave. El avatar dice: "¿Buscas terno para ese día importante?" Con su propia voz, español latino. Sin texto ni música; solo sonido ambiente.',salida:'Entregables/demo/clips/toma-01.mp4',revisar:['Tu voz, frase completa','Sin texto ni música','Ropa igual que la imagen']}
+]}]};
 function demoState(t){
-  const D={negocio:'Postres saludables (ejemplo)',etapas:[],mensaje:'',log:[]};
+  const D={negocio:'Tienda de ternos (ejemplo)',etapas:[],mensaje:'',log:[]};
   const bounds=[0,7,14,26,57,66];
   for(let i=0;i<6;i++){const ini=bounds[i],fin=i<5?bounds[i+1]:DEMO_TOTAL-8;D.etapas.push(t>=fin?'listo':t>=ini?'en-curso':'pendiente');}
   if(t>=DEMO_TOTAL-8)D.etapas=D.etapas.map(()=>'listo');
-  const msgs=[[0,'Hola 👋 Primero entiendo tu negocio y tus objetivos de venta.'],[7,'Ahora capto tu marca: colores, tono y referencias.'],[14,'Les presento el plan. Cuando lo apruebes, el equipo arranca.'],[26,'Producción en paralelo: seis agentes trabajando a la vez.'],[57,'La revisora controla claims, políticas de Meta y coherencia.'],[66,'Armando tu Campaña lista con los pasos y enlaces.'],[DEMO_TOTAL-8,'¡Campaña lista! Abre la carpeta Entregables.']];
+  const msgs=[[0,'Hola 👋 Primero entiendo tu negocio y tus objetivos de venta.'],[7,'Ahora capto tu marca y te pido fotos reales de tu local.'],[14,'Les presento el plan. Cuando lo apruebes, el equipo arranca.'],[26,'Producción en paralelo: seis agentes trabajando a la vez.'],[57,'La revisora controla claims, realismo y políticas de Meta.'],[66,'Armando tu Campaña lista con la guía de prompts.'],[DEMO_TOTAL-8,'¡Campaña lista! Abre la pestaña Guía de generación.']];
   msgs.forEach(m=>{if(t>=m[0])D.mensaje=m[1]});
   const ag={},ev=[];
   const fmt=x=>String(Math.floor(x/60)).padStart(2,'0')+':'+String(Math.floor(x%60)).padStart(2,'0');
@@ -258,7 +369,7 @@ function demoState(t){
   });
   ev.sort((a,b)=>a.t-b.t);
   D.log=ev.map(e=>({t:fmt(e.t),ag:e.ag,m:e.m}));
-  return {director:D,agentes:ag};
+  return {director:D,agentes:ag,guia:t>=DEMO_AG.video.s+DEMO_AG.video.d?DEMO_GUIA:null,medios:{},revisiones:{}};
 }
 
 /* ============ personas (SVG) ============ */
@@ -285,36 +396,68 @@ function svgPersona(c){
   </svg>`;
 }
 
-/* ============ construir la oficina ============ */
-const P={};   // id -> {el,x,y,tok,busy,loc,state,...}
+/* ============ construir la oficina en 3D ============ */
+/* caja con 3 caras visibles: arriba, frente (+y) e izquierda (-x). cols={t,f,l}; fr = html opcional sobre el frente */
+function box(x,y,w,d,h,cols,fr,id,z){
+  return `<div class="box" ${id?`id="${id}"`:''} style="left:${x}px;top:${y}px;width:${w}px;height:${d}px${z?`;transform:translateZ(${z}px)`:''}">`+
+   `<i style="left:0;top:0;width:${w}px;height:${d}px;background:${cols.t};transform:translateZ(${h}px)"></i>`+
+   `<i class="gl" style="left:0;top:${d}px;width:${w}px;height:${h}px;background:${cols.f};transform:translateZ(${h}px) rotateX(-90deg)">${fr||''}</i>`+
+   `<i style="left:0;top:0;width:${d}px;height:${h}px;background:${cols.l};transform:translateZ(${h}px) rotateZ(90deg) rotateX(-90deg)"></i></div>`;
+}
+const P={};   // id -> {el,sh,x,y,tok,busy,loc,state,...}   (x,y = pies)
 function buildScene(){
-  $('scene').innerHTML='<div id="world"></div>';
-  const sc=$('world');let h='<div class="floor"></div>';
-  SALAS.forEach(r=>{h+=`<div class="room" style="left:${r.x}px;top:${r.y}px;width:${r.w}px;height:${r.h}px;background:${r.c}"><div class="rl2">${r.t}</div></div>`;});
-  PROPS.forEach(p=>{h+=`<div class="prop" style="left:${p[1]}px;top:${p[2]}px">${p[0]}</div>`;});
-  h+='<div class="table" style="left:790px;top:112px;width:350px;height:64px"></div>';
-  [DIRECTOR,...AGENTES].forEach(a=>{h+=`<div class="desk" id="desk-${a.id}" style="left:${a.desk.x}px;top:${a.desk.y}px;width:${a.desk.w}px"><div class="mon"></div><div class="kb"></div></div>`;});
-  h+='<div class="banner" id="banner"></div>';
-  for(let i=0;i<26;i++){const cols=['#facc15','#8b5cf6','#22c55e','#ec4899','#0ea5e9'];h+=`<div class="confetti" style="left:${730+Math.random()*440}px;background:${cols[i%5]};animation-delay:${(Math.random()*2.6).toFixed(2)}s"></div>`;}
+  $('scene').innerHTML='<div id="iso"><div id="world"></div></div><div class="banner" id="banner"></div>';
+  const sc=$('world');let h='';
+  h+='<div class="floor"></div><div class="slab-f"></div><div class="slab-l"></div>';
+  /* paredes del fondo con ventanas, pizarra y letreros */
+  h+='<div class="wall wall-b">';
+  [[60,46,130,84],[230,46,130,84],[420,46,130,84],[600,46,130,84],[1010,46,130,84]].forEach(w=>h+=`<div class="win" style="left:${w[0]}px;top:${w[1]}px;width:${w[2]}px;height:${w[3]}px"></div>`);
+  h+='<div class="board" style="left:790px;top:30px;width:190px;height:96px"><i style="top:14px"></i><i style="top:32px;right:60px"></i><i style="top:50px"></i><i style="top:68px;right:90px"></i></div>';
+  h+='<div class="wsign" style="left:70px;top:-6px">Dirección</div><div class="wsign" style="left:420px;top:-6px">Estrategia y oferta</div><div class="wsign" style="left:845px;top:-6px;display:none">Reuniones</div>';
+  h+='</div>';
+  h+='<div class="wall wall-r">';
+  [[60,46,120,84],[240,46,120,84],[420,46,110,84]].forEach(w=>h+=`<div class="win" style="left:${w[0]}px;top:${w[1]}px;width:${w[2]}px;height:${w[3]}px"></div>`);
+  h+='</div>';
+  /* alfombras de cada zona + nombre pintado en el piso */
+  ZONAS.forEach(z=>{h+=`<div class="rug" style="left:${z.x}px;top:${z.y}px;width:${z.w}px;height:${z.h}px;background:${z.c}99"></div>`;
+    h+=`<div class="zlabel" style="left:${z.lx}px;top:${z.ly}px">${esc(z.t)}</div>`;});
+  /* mesa de reuniones y librerías */
+  h+=box(790,112,350,64,34,{t:'#d6b48a',f:'#a98159',l:'#8d6a47'});
+  [[330,6],[1010,6]].forEach(s=>{h+=box(s[0],s[1],150,22,110,{t:'#8c6f55',f:'#6d523c',l:'#4f3a29'},
+     '<span style="position:absolute;left:8px;right:8px;top:12px;height:8px;background:#e9c46a;border-radius:2px;box-shadow:0 22px 0 #e76f51,0 44px 0 #4cc9f0,0 66px 0 #b9fbc0"></span>');});
+  /* escritorios, monitor y silla de cada persona */
+  [DIRECTOR,...AGENTES].forEach(a=>{
+    const d=a.desk;
+    h+=box(d.x,d.y,d.w,56,28,{t:'#caa27a',f:'#9a7752',l:'#7c5d3f'});
+    h+=box(d.x+14,d.y+20,46,6,26,{t:'#1c1b2e',f:'#2a2848',l:'#14122a'},`<div class="mon-scr" id="scr-${a.id}"></div>`,null,28);
+    h+=box(a.seat.x-20,a.seat.y-26,40,26,16,{t:'#3c356e',f:'#2e2858',l:'#262148'});
+    h+=box(a.seat.x-20,a.seat.y-30,40,6,48,{t:'#3c356e',f:'#2e2858',l:'#262148'});
+  });
+  h+=box(TU.seat.x-20,TU.seat.y-26,40,26,16,{t:'#8a6a1f',f:'#6e5416',l:'#58430f'});
+  /* plantas y objetos (siempre de frente a la cámara) */
+  BB.forEach(p=>{h+=`<div class="bb" style="left:${p[1]-22}px;top:${p[2]-44}px">${p[0]}</div>`;});
   sc.innerHTML=h;
+  /* confeti (2D, sobre la escena) */
+  let cf='';for(let i=0;i<30;i++){const cols=['#facc15','#8b5cf6','#22c55e','#ec4899','#0ea5e9'];cf+=`<div class="confetti" style="left:${250+Math.random()*800}px;background:${cols[i%5]};animation-delay:${(Math.random()*2.6).toFixed(2)}s"></div>`;}
+  $('scene').insertAdjacentHTML('beforeend',cf);
   [DIRECTOR,...AGENTES,TU].forEach(a=>{
-    const el=document.createElement('div');el.className='p idle s-espera';el.id='p-'+a.id;
-    el.innerHTML=`<div class="tag"><b>${esc(a.n)}</b><span>${esc(a.rol)}</span><i></i></div><div class="bub"></div><div class="file">📄</div>${svgPersona(a)}`;
-    sc.appendChild(el);
-    const o={el,def:a,x:a.seat.x,y:a.seat.y,tok:0,busy:false,loc:'desk',state:'espera',bubT:0,pend:false};
-    P[a.id]=o;el.style.left=o.x+'px';el.style.top=o.y+'px';
-    el.style.zIndex=a.id==='tu'?12:5;
+    const el=document.createElement('div');el.className='p idle s-espera';el.id='p-'+a.id;el.title=a.n+' · '+a.rol;
+    el.innerHTML=`<div class="tag"><b>${esc(a.n)}</b><i></i></div><div class="bub"></div><div class="file">📄</div>${svgPersona(a)}`;
+    const sh=document.createElement('div');sh.className='shadow';
+    sc.appendChild(sh);sc.appendChild(el);
+    const o={el,sh,def:a,x:a.seat.x,y:a.seat.y,tok:0,busy:false,loc:'desk',state:'espera',bubT:0,pend:false};
+    P[a.id]=o;setPos(o,o.x,o.y);
   });
   fit();
 }
 function fit(){
-  const w=$('stageWrap').clientWidth;scale=Math.min(1.35,w/1200);
-  $('scene').style.transform='scale('+scale+')';$('stageWrap').style.height=(626*scale)+'px';
+  const w=$('stageWrap').clientWidth;scale=Math.min(1.1,w/1300);
+  $('scene').style.transform='scale('+scale+')';$('stageWrap').style.height=(870*scale)+'px';
 }
 window.addEventListener('resize',fit);
 
 /* ============ movimiento ============ */
-function setPos(o,x,y){o.x=x;o.y=y;o.el.style.left=x+'px';o.el.style.top=y+'px';}
+function setPos(o,x,y){o.x=x;o.y=y;o.el.style.left=(x-30)+'px';o.el.style.top=(y-100)+'px';o.sh.style.left=x+'px';o.sh.style.top=y+'px';}
 function dedupe(pts){const r=[];pts.forEach(p=>{const l=r[r.length-1];if(!l||Math.abs(l.x-p.x)>2||Math.abs(l.y-p.y)>2)r.push(p)});return r;}
 function route(o,to){
   const pts=[];
@@ -323,21 +466,21 @@ function route(o,to){
   pts.push({x:to.x,y:to.y});
   return dedupe(pts);
 }
-async function go(o,dest){            // dest: {x,y,z,key}
+async function go(o,dest){            // dest: {x,y,key}  (pies)
   const tok=++o.tok;o.busy=true;
-  o.el.classList.remove('type','idle','party');o.el.classList.add('walk');o.el.style.zIndex=60;
+  o.el.classList.remove('type','idle','party');o.el.classList.add('walk');
   for(const q of route(o,dest)){
     if(o.tok!==tok)return;
     const d=Math.hypot(q.x-o.x,q.y-o.y),t=Math.max(.05,d/SPEED);
-    o.el.style.transitionDuration=t+'s';setPos(o,q.x,q.y);await sleep(t*1000+40);
+    o.el.style.transitionDuration=t+'s';o.sh.style.transitionDuration=t+'s';setPos(o,q.x,q.y);await sleep(t*1000+40);
   }
   if(o.tok!==tok)return;
-  o.el.classList.remove('walk');o.el.style.zIndex=dest.z==null?5:dest.z;o.busy=false;o.loc=dest.key||'x';
+  o.el.classList.remove('walk');o.busy=false;o.loc=dest.key||'x';
   applyAnim(o);
 }
-const seatOf=a=>({x:a.seat.x,y:a.seat.y,z:5,key:'desk'});
-const meetOf=a=>({x:a.meet.x,y:a.meet.y,z:a.meet.z,key:'meet'});
-const sideOf=a=>({x:a.seat.x+70,y:a.seat.y+18,z:60,key:'side:'+a.id});
+const seatOf=a=>({x:a.seat.x,y:a.seat.y,key:'desk'});
+const meetOf=a=>({x:a.meet.x,y:a.meet.y,key:'meet'});
+const sideOf=a=>({x:a.desk.x+a.desk.w/2+46,y:a.desk.y+a.desk.w*0+104,key:'side:'+a.id});
 const ALL=[DIRECTOR,...AGENTES];
 const byId=id=>ALL.find(a=>a.id===id);
 
@@ -369,7 +512,7 @@ async function delivery(o,tries){
   const d=P.director;
   o.el.classList.add('carry');
   const k=AGENTES.indexOf(o.def);
-  const spot={x:DIRECTOR.seat.x-64-(k%3)*28,y:DIRECTOR.seat.y+52+(k%2)*12,z:60,key:'deliver'};
+  const spot={x:70-(k%3)*26,y:206+(k%2)*16,key:'deliver'};
   await go(o,spot);
   if(o.loc!=='deliver')return;
   sticky(o,'¡Entrega lista!',1800);sticky(d,'Gracias, '+o.def.n+' 👍',1800);
@@ -404,7 +547,7 @@ async function reviewLoop(){
 function etapaActual(D){
   const e=(D&&D.etapas)||[];
   if(!e.length)return 0;
-  if(e.every(x=>x==='listo'))return 7;          // todo terminado
+  if(e.every(x=>x==='listo'))return 7;
   const i=e.findIndex(x=>x==='en-curso');
   if(i>=0)return i+1;
   let last=-1;e.forEach((x,k)=>{if(x==='listo')last=k});return last+2;
@@ -412,7 +555,7 @@ function etapaActual(D){
 function reconcile(S,etapa){
   const meetNow=(etapa===3)||(etapa===7);
   const party=(etapa===7);
-  $('scene').parentElement.classList.toggle('party-on',party);
+  $('stageWrap').classList.toggle('party-on',party);
   const ban=$('banner');
   ban.textContent=party?'🎉 ¡Campaña lista!':'📋 Presentando el plan';
   ban.classList.toggle('show',party||etapa===3);
@@ -426,22 +569,20 @@ function reconcile(S,etapa){
     }
     applyAnim(o);
   });
-  // la revisora recorre los escritorios mientras revisa
   if(etapa>=5&&etapa<7&&P.revisor.state==='trabajando')reviewLoop();
 }
 function updateStates(S,etapa){
   const D=S.director||{};
-  // director y "Tú"
   const dir=P.director,tu=P.tu;
   dir.msgDir=D.mensaje||'';dir.state=etapa>=4&&etapa<7?'trabajando':'espera';refreshBubble(dir);
-  tu.tuMsg=(etapa===1||etapa===2)?(etapa===1?'Te cuento de mi negocio…':'Estas son mis fotos y mi logo'):'';refreshBubble(tu);
-  $('desk-director').classList.toggle('on',etapa>=1&&etapa<7);
+  tu.tuMsg=(etapa===1||etapa===2)?(etapa===1?'Te cuento de mi negocio…':'Estas son mis fotos reales y mi logo'):'';refreshBubble(tu);
+  const sd=$('scr-director');if(sd)sd.classList.toggle('on',etapa>=1&&etapa<7);
   AGENTES.forEach(a=>{
     const g=(S.agentes||{})[a.id]||{};const est=g.estado||'espera';const o=P[a.id];
     const prev=o.state;
     o.tarea=g.tarea||'';o.state=est;
     o.el.className=o.el.className.replace(/\bs-[a-z-]+\b/g,'').trim()+' s-'+est;
-    $('desk-'+a.id).classList.toggle('on',est==='trabajando'||est==='ajustando');
+    const sc=$('scr-'+a.id);if(sc)sc.classList.toggle('on',est==='trabajando'||est==='ajustando');
     if(est!==prev){
       if(est==='listo'&&etapa>=4&&etapa<=5)delivery(o,0);
       if(est==='trabajando'&&prev!=='trabajando'&&etapa>=4&&etapa<=5&&COLLAB[a.id]){
@@ -456,7 +597,7 @@ function updateStates(S,etapa){
 /* ============ carga de estado real ============ */
 function cargar(){
   if(demo)return;
-  const ids=['director',...AGENTES.map(a=>a.id)];
+  const ids=['director',...AGENTES.map(a=>a.id),'guia','medios','revisiones'];
   let pend=ids.length;
   document.querySelectorAll('script[data-fm]').forEach(s=>s.remove());
   ids.forEach(id=>{
@@ -465,6 +606,10 @@ function cargar(){
     s.onload=s.onerror=()=>{if(--pend===0)pintar()};
     document.head.appendChild(s);
   });
+}
+function pingServidor(){
+  if(!/^https?:$/.test(location.protocol)){srv=false;return;}
+  fetch('/api/ping',{cache:'no-store'}).then(r=>r.ok).then(ok=>{if(ok!==srv){srv=ok;lastGuiaSig='';}}).catch(()=>{if(srv){srv=false;lastGuiaSig='';}});
 }
 
 /* ============ pintar ============ */
@@ -478,7 +623,8 @@ function pintar(){
   const etapa=etapaActual(D);
   updateStates(S,etapa);
   reconcile(S,etapa);
-  const sig=JSON.stringify(S);
+  pintarGuia(S);
+  const sig=JSON.stringify([D,S.agentes]);
   if(sig===lastSig)return;lastSig=sig;
   $('neg').textContent=D.negocio?('· '+D.negocio):'';
   $('msg').textContent=D.mensaje||'Esperando al director…';
@@ -486,7 +632,6 @@ function pintar(){
   const stSig=et.join(',');
   if(stSig!==window.__stSig){window.__stSig=stSig;
     $('steps').innerHTML=ETAPAS.map((n,i)=>`<div class="step ${esc(et[i]||'pendiente')}" data-n="${i+1}">${esc(n)}</div>`).join('');}
-  /* lista por agente */
   if(!$('grid').children.length){
     $('grid').innerHTML=AGENTES.map(a=>`<div class="ag espera" id="ag-${a.id}"><div class="ag-h"><div class="av">${a.i}</div><div><div class="nm">${esc(a.n)} · ${esc(a.rol)}</div><div class="rl">${esc(a.d)}</div></div></div>
       <span class="chip"></span><div class="task"></div><div class="bar"><i></i></div><div class="files"></div></div>`).join('');
@@ -496,9 +641,8 @@ function pintar(){
     el.className='ag '+est;const chip=el.querySelector('.chip');chip.className='chip '+est;chip.textContent=ESTADOS[est]||est;
     el.querySelector('.task').textContent=g.tarea||'Esperando turno';
     el.querySelector('.bar i').style.width=Math.max(0,Math.min(100,g.progreso||0))+'%';
-    el.querySelector('.files').textContent=nf?('📄 '+nf+' archivo'+(nf>1?'s':'')+' entregado'+(nf>1?'s':'')):' ';
+    el.querySelector('.files').textContent=nf?('📄 '+nf+' archivo'+(nf>1?'s':'')+' entregado'+(nf>1?'s':'')):' ';
   });
-  /* feed */
   let ev=[];
   (D.log||[]).forEach(e=>ev.push({t:e.t,ag:e.ag||'Diego',m:e.m}));
   AGENTES.forEach(a=>{((S.agentes||{})[a.id]||{}).log&&S.agentes[a.id].log.forEach(e=>ev.push({t:e.t,ag:a.n,m:e.m}))});
@@ -506,7 +650,6 @@ function pintar(){
   const evSig=ev.length+'|'+(ev.length?ev[ev.length-1].t+ev[ev.length-1].m:'');
   if(evSig!==window.__evSig){window.__evSig=evSig;
     $('feed').innerHTML=ev.slice(-40).reverse().map(e=>`<div class="ev"><time>${esc(e.t)}</time><div><b>${esc(e.ag)}</b> · ${esc(e.m)}</div></div>`).join('')||'<span style="color:var(--mut);font-size:13px">Sin actividad todavía.</span>';}
-  /* entregables */
   const docs=[];
   AGENTES.forEach(a=>{((S.agentes||{})[a.id]||{}).archivos&&S.agentes[a.id].archivos.forEach(f=>docs.push({a:a.n,...f}))});
   const dSig=docs.map(d=>d.ruta).join('|');
@@ -514,8 +657,136 @@ function pintar(){
     $('docs').innerHTML=docs.length?docs.map(f=>`<a class="doc" href="../${encodeURI(f.ruta)}" target="_blank">📄 <span>${esc(f.nombre||f.ruta)}<br><small>${esc(f.a)}</small></span></a>`).join(''):'<span style="color:var(--mut);font-size:13px">Aún no hay archivos.</span>';}
 }
 
+/* ============ GUÍA DE GENERACIÓN ============ */
+let lastGuiaSig='';const PROMPTS={};const subiendo={};
+const ESTG={pendiente:'Pendiente',revisando:'Recibido · Claude lo revisa',aprobado:'Aprobado ✓',repetir:'Repetir ↻'};
+function archivosDe(m){return !m?[]:(m.archivos?m.archivos:[m]);}
+function estadoPaso(p,S){
+  const m=(S.medios||{})[p.id];const tiene=archivosDe(m).length>0;
+  if(!p.salida)return 'info';
+  if(!tiene)return 'pendiente';
+  const r=(S.revisiones||{})[p.id];
+  if(r&&r.estado==='ok')return 'aprobado';
+  if(r&&r.estado==='repetir')return 'repetir';
+  return p.multiple?'aprobado':'revisando';
+}
+function urlMedio(f){return '../'+encodeURI(f.archivo)+'?v='+f.mod;}
+function previewHTML(f){
+  if(f.tipo==='imagen')return `<a href="${urlMedio(f)}" target="_blank"><img src="${urlMedio(f)}" alt=""></a>`;
+  if(f.tipo==='video')return `<video src="${urlMedio(f)}" controls preload="metadata" playsinline></video>`;
+  if(f.tipo==='audio')return `<audio src="${urlMedio(f)}" controls></audio>`;
+  return `<a class="doc" href="${urlMedio(f)}" target="_blank">📄 ${esc(f.archivo.split('/').pop())}</a>`;
+}
+function refHTML(r,i,S){
+  let vis='<div class="ic">'+(r.tipo==='avatar'?'👤':'🖼️')+'</div>';
+  const fm=r.slot?archivosDe((S.medios||{})[r.slot])[0]:null;
+  if(fm&&fm.tipo==='imagen')vis=`<img src="${urlMedio(fm)}" alt="">`;
+  else if(r.archivo&&/\.(png|jpe?g|webp)$/i.test(r.archivo))vis=`<img src="../${encodeURI(r.archivo)}" alt="" onerror="this.outerHTML='<div class=ic>🖼️</div>'">`;
+  return `<li><span class="n">${i+1}</span>${vis}<span>${esc(r.nombre||'')}${r.nota?`<br><small style="color:var(--mut)">${esc(r.nota)}</small>`:''}</span></li>`;
+}
+function pintarGuia(S){
+  const g=S.guia;
+  const secs=(g&&g.secciones)||[];
+  const sig=JSON.stringify([secs,S.medios,S.revisiones,srv,demo]);
+  /* badge: pasos pendientes */
+  let pend=0,total=0,hechos=0;
+  secs.forEach(s=>(s.pasos||[]).forEach(p=>{if(!p.salida)return;total++;const e=estadoPaso(p,S);if(e==='pendiente'||e==='repetir')pend++;else hechos++;}));
+  const bd=$('badgeGuia');bd.style.display=pend?'inline-block':'none';bd.textContent=pend;
+  if(sig===lastGuiaSig)return;lastGuiaSig=sig;
+  const sb=$('srvbox');
+  if(!secs.length){
+    sb.style.display='none';
+    $('guiaBody').innerHTML='<div class="empty">Cuando el equipo termine las piezas, aquí aparecerán los pasos con sus prompts listos para copiar.<br>Pulsa <b>▶ Ver demo</b> para ver cómo se ve.</div>';
+    $('gprogTxt').textContent='Sin pasos todavía';$('gprogBar').style.width='0';return;
+  }
+  sb.style.display='block';
+  if(demo){sb.className='srvbox ok';sb.innerHTML='Modo demo: así se ve la guía. Aquí no se sube nada de verdad.';}
+  else if(srv){sb.className='srvbox ok';sb.innerHTML='✔ Conectado: lo que arrastres se guarda solo en tu computadora y Claude lo revisa al instante.';}
+  else{sb.className='srvbox no';sb.innerHTML='Para <b>subir archivos desde aquí</b>, abre el panel con doble clic en <code>Panel/iniciar-panel.bat</code> (o pídele a Claude: «abre el panel con subida»). Mientras tanto puedes copiar tus archivos a la carpeta que indica cada paso: el panel los detecta cuando Claude lo actualiza.';}
+  $('gprogTxt').textContent=hechos+' de '+total+' archivos recibidos';$('gprogBar').style.width=(total?Math.round(hechos*100/total):0)+'%';
+  let h='',ahoraMarcado=false,n=0;
+  secs.forEach(s=>{
+    h+=`<section class="sec"><h3 class="sech">${esc(s.titulo||'Guía')}</h3>${s.intro?`<p class="intro">${esc(s.intro)}</p>`:''}`;
+    (s.pasos||[]).forEach(p=>{
+      n++;const est=estadoPaso(p,S);const files=archivosDe((S.medios||{})[p.id]);
+      const esAhora=!ahoraMarcado&&p.salida&&(est==='pendiente'||est==='repetir');if(esAhora)ahoraMarcado=true;
+      if(p.prompt)PROMPTS[p.id]=p.prompt;
+      const rev=(S.revisiones||{})[p.id];
+      h+=`<article class="gc ${est} ${esAhora?'ahora':''}" id="gc-${esc(p.id)}"><div class="gch"><span class="num">${n}</span><div><h3>${esc(p.titulo)}${esAhora?'<span class="ahorab">👉 HAZ ESTO AHORA</span>':''}</h3>
+        <div class="meta">${p.herramienta?(p.enlace?`<a href="${esc(p.enlace)}" target="_blank" rel="noopener">${esc(p.herramienta)} ↗</a>`:esc(p.herramienta)):''}${p.formato?' · '+esc(p.formato):''}${p.duracion?' · '+esc(p.duracion):''}</div></div>
+        ${est!=='info'?`<span class="chip ${est}">${esc(ESTG[est]||est)}</span>`:''}</div>`;
+      if(p.pedir)h+=`<div class="pedir">${esc(p.pedir)}</div>`;
+      if(p.refs&&p.refs.length)h+=`<div class="refs"><b>Carga en este orden:</b><ol>${p.refs.map((r,i)=>refHTML(r,i,S)).join('')}</ol></div>`;
+      if(p.prompt)h+=`<div class="pbox"><div class="pbar"><b>Prompt</b>${p.palabras?`<small>${esc(p.palabras)}</small>`:''}<button data-copy="${esc(p.id)}">📋 Copiar prompt</button></div><pre>${esc(p.prompt)}</pre></div>`;
+      if(p.notas)h+=`<div class="notas">${esc(p.notas)}</div>`;
+      if(p.revisar&&p.revisar.length)h+=`<ul class="chk">${p.revisar.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;
+      if(p.salida){
+        const quedan=p.multiple?'Arrastra aquí tus fotos (puedes soltar varias a la vez)':(files.length?'¿Otro intento? Suelta aquí el nuevo archivo (el anterior se guarda en _anteriores)':'Arrastra aquí tu archivo');
+        h+=`<div class="drop ${srv&&!demo?'':'off'}" data-slot="${esc(p.id)}" data-multi="${p.multiple?1:0}"><b>${quedan}</b> o haz clic para elegirlo<small>Se guarda en: ${esc(p.salida)}</small>
+           <div class="up" style="display:none"><i></i></div><input type="file" ${p.multiple?'multiple':''} hidden></div>`;
+        if(files.length)h+=`<div class="prev">${files.map(f=>p.multiple?`<div class="thumb">${previewHTML(f)}<span>${esc(f.archivo.split('/').pop())}</span></div>`:previewHTML(f)).join('')}</div>`;
+      }
+      if(rev&&!p.multiple)h+=`<div class="rev ${esc(rev.estado)}">${rev.estado==='ok'?'✓ ':rev.estado==='repetir'?'↻ ':'… '}<b>Claude:</b> ${esc(rev.nota||(rev.estado==='revisando'?'Revisando tu archivo…':''))}</div>`;
+      else if(est==='revisando')h+=`<div class="rev revisando">… <b>Claude</b> está por revisar tu archivo. Si tarda, escríbele en el chat: «ya subí ${esc(p.titulo)}».</div>`;
+      h+='</article>';
+    });
+    h+='</section>';
+  });
+  $('guiaBody').innerHTML=h;
+  Object.keys(subiendo).forEach(k=>mostrarProgreso(k,subiendo[k]));
+}
+function mostrarProgreso(slot,pct){
+  const d=document.querySelector('.drop[data-slot="'+slot+'"]');if(!d)return;
+  const u=d.querySelector('.up');u.style.display='block';u.firstElementChild.style.width=pct+'%';
+}
+function subir(slot,files){
+  if(demo||!srv){return;}
+  const lista=[...files];
+  (async()=>{
+    for(const f of lista){
+      await new Promise(res=>{
+        const x=new XMLHttpRequest();
+        x.open('POST','/api/subir?slot='+encodeURIComponent(slot)+'&nombre='+encodeURIComponent(f.name));
+        x.setRequestHeader('X-FM','1');
+        subiendo[slot]=0;
+        x.upload.onprogress=e=>{if(e.lengthComputable){subiendo[slot]=Math.round(e.loaded*100/e.total);mostrarProgreso(slot,subiendo[slot]);}};
+        x.onload=()=>{delete subiendo[slot];let r={};try{r=JSON.parse(x.responseText)}catch(e){}
+          if(!r.ok)alert('No se pudo subir "'+f.name+'": '+(r.error||'error desconocido'));res();};
+        x.onerror=()=>{delete subiendo[slot];alert('Se perdió la conexión con el servidor del panel. Ábrelo de nuevo con iniciar-panel.bat');res();};
+        x.send(f);
+      });
+    }
+    lastGuiaSig='';cargar();
+  })();
+}
+function copiar(texto,btn){
+  const ok=()=>{const t=btn.textContent;btn.textContent='✓ Copiado';setTimeout(()=>btn.textContent='📋 Copiar prompt',1600);};
+  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(texto).then(ok,()=>fallback());}else fallback();
+  function fallback(){const t=document.createElement('textarea');t.value=texto;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();try{document.execCommand('copy');ok();}catch(e){}t.remove();}
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-copy]');if(b){copiar(PROMPTS[b.dataset.copy]||'',b);return;}
+  const d=e.target.closest('.drop');if(d&&srv&&!demo&&e.target.tagName!=='INPUT'){d.querySelector('input').click();}
+});
+document.addEventListener('change',e=>{
+  if(e.target.matches('.drop input')){const d=e.target.closest('.drop');subir(d.dataset.slot,e.target.files);e.target.value='';}
+});
+['dragover','dragenter'].forEach(ev=>document.addEventListener(ev,e=>{const d=e.target.closest&&e.target.closest('.drop');if(d){e.preventDefault();if(srv&&!demo)d.classList.add('over');}}));
+['dragleave','drop'].forEach(ev=>document.addEventListener(ev,e=>{const d=e.target.closest&&e.target.closest('.drop');if(d){d.classList.remove('over');}}));
+document.addEventListener('drop',e=>{const d=e.target.closest&&e.target.closest('.drop');if(d){e.preventDefault();subir(d.dataset.slot,e.dataTransfer.files);}});
+/* si sueltan un archivo fuera de un cuadro, que el navegador no lo abra */
+window.addEventListener('dragover',e=>e.preventDefault());window.addEventListener('drop',e=>e.preventDefault());
+
+/* ============ pestañas y botones ============ */
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+  tab=b.dataset.tab;
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===b));
+  document.querySelectorAll('.pane').forEach(p=>p.classList.toggle('on',p.id==='pane-'+tab));
+  if(tab==='oficina')fit();
+  try{history.replaceState(null,'','#'+tab)}catch(e){}
+});
 $('btnDemo').onclick=()=>{
-  demo=!demo;lastSig='';
+  demo=!demo;lastSig='';lastGuiaSig='';
   $('btnDemo').textContent=demo?'■ Salir de la demo':'▶ Ver demo';
   if(demo)demoT0=Date.now();else cargar();
   pintar();
@@ -523,8 +794,10 @@ $('btnDemo').onclick=()=>{
 $('btnFull').onclick=()=>{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()};
 buildScene();
 if(/[?&]demo/.test(location.search)){demo=true;demoT0=Date.now();$('btnDemo').textContent='■ Salir de la demo';}
-cargar();pintar();
+if(location.hash==='#guia')document.querySelector('.tab[data-tab="guia"]').click();
+pingServidor();cargar();pintar();
 setInterval(()=>{demo?pintar():cargar()},demo?600:2000);
+setInterval(pingServidor,4000);
 </script>
 </body>
 </html>

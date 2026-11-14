@@ -8,7 +8,9 @@ description: ADN de marca del emprendedor: identidad gráfica (logo, paleta de c
 Es la única fuente de verdad visual y de voz del negocio. Si el alumno ya tiene `Mi negocio/adn-de-marca.md`, léelo y pregunta solo qué cambió. **Nunca** uses la paleta, tipografía o tono de otra marca (ni de Hugo) como valor por defecto.
 
 ## Paso 1 · Reúne materiales (pídelos de forma simple)
-Pide que copie a `Mi negocio/` (o te los adjunte): **logo** (PNG con fondo transparente si tiene), **5-10 fotos reales** del producto/servicio/equipo, y **3 referencias visuales** (cuentas, anuncios o marcas que le gustan; pueden ser capturas). Si no tiene nada, trabajas con entrevista y propones una dirección, marcándola `PROPUESTA`.
+Pide que copie a `Mi negocio/` (o los **arrastre al panel**, pestaña Guía de generación): **logo** (PNG con fondo transparente si tiene), **5-10 fotos reales** del producto/servicio/equipo, y **3 referencias visuales** (cuentas, anuncios o marcas que le gustan; pueden ser capturas).
+**Fotos reales del lugar (clave para que el video no se vea falso):** 3 a 6 fotos del local o espacio de trabajo tomadas con el celular, **en vertical y con la luz normal del lugar, sin filtros**: frente/entrada, interior general, zona de venta o mostrador, producto en su exhibidor. Mensaje listo: *"Para que el video se vea real, pásame 3 a 6 fotos de tu local con el celular, en vertical y con la luz normal del lugar. No las arregles ni les pongas filtros: yo las uso de referencia y las mejoro."* Mira cada foto y dile qué sirve y qué falta.
+Si no tiene nada, trabajas con entrevista y propones una dirección, marcándola `PROPUESTA` (para escenas: describe un negocio común de ese tipo y lugar, estilo cotidiano, **nunca un set de catálogo o atelier de lujo**).
 
 ## Paso 2 · Entrevista (de a 2 preguntas)
 1. Cómo describiría su marca en 3 palabras y qué NO quiere parecer.
@@ -25,7 +27,7 @@ Con el logo: extrae los colores reales. Si hay Python con Pillow, ejecuta `scrip
 Elige 2 (títulos y texto) de https://fonts.google.com, gratuitas y con tildes y ñ. Respeta las del logo si existen. Evita más de 2 familias.
 
 ## Paso 5 · Inventario de referencias (clave para generar con IA)
-Numera cada foto del alumno con un ID corto y qué muestra: `REF-01 · cuchareable de pistacho, vista frontal`. Los agentes usarán estos IDs para decir **exactamente qué referencia cargar y en qué orden** en cada imagen o clip. Describe proporciones solo con la referencia visual, nunca en centímetros.
+Numera cada foto del alumno con un ID corto y qué muestra: `REF-01 · cuchareable de pistacho, vista frontal`, `REF-05 · interior del local, mostrador a la izquierda`. Las fotos del lugar se usarán como **escena exacta** (la IA las mejora y reencuadra a 9:16, no las reinventa). Los agentes usarán estos IDs para decir **exactamente qué referencia cargar y en qué orden** en cada imagen o clip. Describe proporciones solo con la referencia visual, nunca en centímetros.
 
 ## Paso 6 · Reglas de producción (rellénalas con el alumno)
 - Formatos: video 9:16 siempre; imagen 4:5 (feed) y 9:16 (historias); carrusel 4:5.

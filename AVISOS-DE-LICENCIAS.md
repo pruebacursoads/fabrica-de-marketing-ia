@@ -1,4 +1,4 @@
-# Avisos de licencias — Fábrica de Marketing con IA 1.0.0 (incluye Fábrica de Video 1.2.0)
+# Avisos de licencias — Fábrica de Marketing con IA 1.1.0 (incluye Fábrica de Video 1.2.0)
 
 Este paquete contiene **solo código y textos propios** (skills y scripts de la Fábrica de Video). No incluye ni redistribuye programas de terceros: los instala el propio usuario desde sus fuentes oficiales.
 

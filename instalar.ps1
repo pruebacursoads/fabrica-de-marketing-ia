@@ -81,6 +81,9 @@ if ($Modulos -contains "base") {
     }
 }
 
+# Registro de la versión instalada (lo usa la skill fm-actualizar para avisar de novedades)
+$info = @{ version = "$version"; modulos = @($Modulos); fecha = (Get-Date -Format "yyyy-MM-dd") } | ConvertTo-Json -Compress
+Set-Content -Path (Join-Path $Destino "fabrica-de-marketing-ia.version.json") -Value $info -Encoding UTF8
 Write-Host ""
 Write-Host "Listo: $nSkills skills y $nAg agentes instalados ($nResp respaldados)." -ForegroundColor Green
 Write-Host ""

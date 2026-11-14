@@ -2,6 +2,21 @@
 
 No necesitas saber de programación ni de comandos. Descomprime el ZIP, abre **Claude Code** (o Codex o Antigravity) **dentro de la carpeta descomprimida** `fabrica-de-marketing-ia`, pega este texto y deja que la herramienta haga todo.
 
+## Prompt 0: instalar directo desde GitHub (el más fácil: no descargas nada a mano)
+
+Abre **Claude Code** en cualquier carpeta vacía, pega esto y responde lo que te pregunte:
+
+```
+Instala la Fábrica de Marketing con IA desde su repositorio oficial: https://github.com/pruebacursoads/fabrica-de-marketing-ia
+Yo no sé de programación ni de terminal: explícame todo en palabras simples y ejecuta tú los comandos.
+1. Pídeme permiso para descargar el archivo https://github.com/pruebacursoads/fabrica-de-marketing-ia/archive/refs/heads/main.zip (menciona nombre, origen y tamaño) y descárgalo en una carpeta nueva y vacía de la carpeta temporal.
+2. Descomprímelo, lee README.md y revisa que instalar.ps1 (Windows) o instalar.sh (Mac/Linux) solo copie skills y agentes a la carpeta .claude.
+3. Sigue desde el paso 2 del "Prompt 1" de PROMPT-DE-INSTALACION.md de ese paquete: pregúntame qué niveles quiero (BASE, ANUNCIOS, VIDEO), instala con el instalador, audita mi equipo si elegí VIDEO y verifica.
+4. Termina diciéndome qué instalaste y si debo cerrar y abrir el programa.
+```
+
+Para **actualizar** más adelante no tienes que repetir nada: el director avisa cuando hay una versión nueva y la instala con tu permiso (o escribe «actualiza la fábrica»).
+
 ## Prompt 1: instalar
 
 ```

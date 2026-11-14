@@ -14,6 +14,7 @@ description: >
 > ## 🔗 Integración con la Fábrica de Marketing con IA
 > Si existen `Mi negocio/adn-de-marca.md` y `Mi negocio/diagnostico-situacional.md` en la carpeta de trabajo, **léelos primero** y úsalos como contexto: **no repitas preguntas** que ya responden (marca, colores, tono, claims, objetivos). Nunca uses la identidad de otra marca. Si te lanzó un agente `fm-agente-*` o el director `fm-director`, **no hagas preguntas al alumno**: usa el brief y el ADN, anota supuestos y entrega en la carpeta indicada. Cuando corresponda, reporta avance con la skill `fm-panel`.
 > **Reglas aprendidas con clientes:** avatar con `@me` (si habla con su voz: "el avatar dice: …"), prompts ligeros por lineamientos, dinámico (nunca primer plano estático), **sin texto ni música generados** (sonido ambiente), 9:16, en español, clips ≤ 10 s, referencias exactas por clip y su orden, ≤ 30 s por video, sin cuchillos en cuadro y la cobertura/ubicación del negocio en todos los videos. Los clips se generan **a mano en Google Flow** y luego pasan a la Fábrica de Video.
+> **Lee primero [`references/multi-toma-y-realismo.md`](references/multi-toma-y-realismo.md) (v1.1): manda sobre las demás reglas de video.** Un video es una secuencia de 5-6 tomas distintas (clips de 4-8 s; uno de 10 s solo con ≥3 cambios de cámara dentro), la continuidad es **por escena** (mismas referencias de lugar, producto y ropa) y **no** con el último fotograma del clip anterior, y la escena sale de **fotos reales** del alumno (Nano Banana 2 o GPT Image 2.6 las mejoran y reencuadran a 9:16), nunca de un local inventado "de película".
 
 # Omni Flash 1.2 — Producción de clips (v4.0)
 
@@ -76,8 +77,10 @@ Reglas:
 - Si no dices algo, el modelo lo decide (música, ruido, plano). Dirige solo lo que importa.
 - Las exclusiones van dentro del prompt ("sin música, sin subtítulos"); no hay
   campo de negativos. Agrúpalas en **una sola línea final**; no las repitas.
-- Plano continuo: pide "una sola toma continua, sin cortes". Dinámico con cortes:
-  pide "cambios naturales de cámara y ángulo". No mezcles ambas cosas.
+- Plano continuo: pide "una sola toma continua, sin cortes" (solo para producto o escenas sin
+  avatar hablando). Dinámico con cortes: pide "cambios naturales de cámara y ángulo" o
+  tramos `[0-3 s] … [3-6 s] …`. **Con avatar hablando nunca uses plano único**: cambia el
+  encuadre dentro del clip o genera varias tomas (ver multi-toma-y-realismo.md).
 - Con tiempos: lenguaje natural ("a los 3 segundos entra…") o `[0-5s] … [5-10s] …`.
   Úsalo solo si el orden de momentos importa.
 - Frases cortas sincronizan mejor. Pocas frases por clip.
@@ -93,7 +96,9 @@ Ya no se usa la plantilla STATE + SINGLE ACTION por defecto.
 - Un solo bloque de **constantes** del avatar: rostro, peinado, lentes y vestimenta
   con código de color si hace falta ("terno gris 8F99A5"). Una vez, no repetido.
 - **Dinámico siempre:** cambios de ángulo y encuadre, cámara en mano o selfie
-  (el celular nunca se ve). Un primer plano estático se nota falso.
+  (el celular nunca se ve; si el avatar necesita las dos manos, "cámara en movimiento,
+  como grabada por otra persona"). Un primer plano estático o un plano único se nota falso:
+  varias tomas, no un clip fijo.
 - Entrada con gancho en el primer segundo (aterriza, camina hacia cámara, gesto).
 - Cierre con gesto directo a cámara. Gesto señalando a sí mismo si dice "estaré yo".
 - Escenas sin el avatar: detalla escena, personajes y ambiente.
@@ -170,8 +175,9 @@ el fondo, reemplazar a una persona por el avatar, convertir una toma fija en din
 - Los videos llevan marca de agua SynthID imperceptible.
 - Frames a video (primer y último fotograma): solo en Flow web.
 
-**Clips más largos que un clip:** divide en clips autosuficientes de 10 s, repite
-el contexto (quién, ropa, lugar, luz, voz) y une en la Fábrica. Con Omni Extend, el
+**Clips más largos que un clip:** divide en tomas autosuficientes de 4-8 s (10 s solo con
+cambios de cámara dentro), repite las mismas referencias de escena, producto y ropa (no el
+último fotograma del clip anterior) y une en la Fábrica. Con Omni Extend, el
 modelo usa los últimos 10 s como contexto: vuelve a mencionar al personaje.
 
 ## Cámara y vocabulario

@@ -14,6 +14,9 @@ fm-director ──► fm-diagnostico ─► Mi negocio/diagnostico-situacional.m
 ```
 
 ## Panel en vivo
+- **v1.1:** `Panel/index.html` tiene dos pestañas. **Oficina**: escena **3D isométrica en CSS puro** (sin librerías ni internet): suelo continuo, paredes con ventanas, alfombras por zona con el nombre pintado en el piso y letreros en la pared, escritorios y sillas como cajas 3D; los personajes son "carteles" que se contra-rotan para quedar de pie frente a la cámara (`transform: rotateZ(45deg) rotateX(-58deg)` sobre el origen en los pies). **Guía de generación**: pasos con prompt + botón copiar, referencias en orden (con miniatura), cuadro para soltar archivos, vista previa del imagen/video recibido y veredicto de Claude.
+- `scripts/servidor.py` (stdlib): sirve la carpeta de trabajo en `127.0.0.1`, recibe subidas (`POST /api/subir?slot=<paso>`, cabecera `X-FM: 1`, solo dentro de `Entregables/` y `Mi negocio/`, extensiones permitidas, 1 GB), soporta `Range` para adelantar videos, archiva la versión anterior en `_anteriores/` y reescribe `estado/medios.js` cada 2 s (detecta también lo copiado a mano). `scripts/vigilar.py` imprime una línea por archivo nuevo para que Claude lo lea en tiempo real con la herramienta Monitor.
+- **Guía:** cada agente escribe `guia.json` → `reportar.py guia <id> --desde … --md …` (valida, guarda `estado/guia-<id>.json`, regenera `guia.js` y el `.md`). Claude devuelve veredictos con `reportar.py revision --slot … --estado ok|repetir|revisando`.
 - `Panel/index.html` es estático. Cada 2 s inyecta `<script src="estado/<id>.js">` para `director` y los 7 agentes; cada archivo asigna `window.FM...`. Así funciona abierto con doble clic (`file://`) y sin servidor.
 - **Un archivo por agente** → cero conflictos en paralelo. `scripts/reportar.py` escribe de forma atómica (`.tmp` + `os.replace`) y conserva el historial (30 eventos).
 - Sin Python, el agente reescribe su archivo con el formato documentado en `fm-panel/SKILL.md`.

@@ -1,7 +1,7 @@
 # Guion para presentarlo en clase (15-20 min)
 
 ## Antes de clase (5 min)
-- Abre `modulos/base/skills/fm-panel/panel/index.html?demo=1` en el navegador, en pantalla completa, para proyectar.
+- Abre `modulos/base/skills/fm-panel/panel/index.html?demo=1` en el navegador, en pantalla completa, para proyectar. Muestra la oficina 3D y, cuando el equipo termine (≈ 1:25 de demo), la pestaña **Guía de generación** con el prompt copiable y el cuadro para soltar archivos.
 - Ten Claude abierto dentro de una carpeta de prueba "Mi Fábrica de Marketing" con el paquete instalado (`instalar.ps1`).
 - Si vas a usar un negocio de ejemplo en vivo, elige uno cuyo logo y 5 fotos ya tengas.
 

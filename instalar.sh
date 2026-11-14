@@ -74,6 +74,9 @@ case ",$MODULOS," in *,base,*)
   done ;;
 esac
 
+# Registro de la versión instalada (lo usa la skill fm-actualizar para avisar de novedades)
+printf '{"version":"%s","modulos":"%s","fecha":"%s"}
+' "$VERSION" "$MODULOS" "$(date +%Y-%m-%d)" > "$DESTINO/fabrica-de-marketing-ia.version.json"
 echo
 echo "Listo: $N_SKILLS skills y $N_AG agentes instalados ($N_RESP respaldados)."
 echo

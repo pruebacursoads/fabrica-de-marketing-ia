@@ -66,6 +66,16 @@ python "<SKILLS>/fv-editor/scripts/construir_pantalla_cara.py" --proyecto Reels/
 3. **Mide antes de anillar.** La pantalla se desplaza: extrae fotogramas cada 2 s (`fps=0.5,tile`) y anota en qué intervalos el contenido está quieto; ubica anillos y zooms solo en esos intervalos.
 4. Misma revisión de `fv-calidad`. Lee `LECCIONES.md` antes de empezar.
 
+## Video de avatar armado con varias tomas (v1.2)
+Cuando el material son **5-6 tomas generadas** (avatar y tomas de detalle) del mismo lugar:
+1. **Orden por el guion, no por el nombre del archivo**; une con cortes secos, cada 1,5-3 s de plano visible. La voz del avatar sigue por encima de las tomas de detalle (corte tipo J/L): el avatar habla mientras se ve el producto.
+2. **Recorta 0,3-0,5 s** al inicio de cada toma (la voz arranca con la primera sílaba) y la cola muda al final.
+3. **Punch-in 105-115 %** en algunos cortes y alterna escalas para disimular costuras; nunca pases de 1.2.
+4. **Continuidad en la edición:** mismo gradiente de color en todas las tomas (iguala brillo y tono), **sonido ambiente continuo** debajo de todo y música baja que une los cortes.
+5. **Tapa o recorta lo que la IA inventó** (etiquetas con letras en prendas, carteles, objetos filosos); si no se puede, repite la toma.
+6. Datos que no se dicen (precio, tallas, colores, ubicación) van como tarjetas animadas; la **ubicación del negocio y la llamada a la acción** siempre aparecen en el cierre.
+7. Si una toma repite el encuadre de la anterior, pídele al alumno otra toma o corta antes: el ojo detecta el plano repetido.
+
 ## Cambios del alumno
 Cada nota ("en 0:12 el texto tapa") se traduce en un cambio de `plan.json` o de `estilo.json`; reconstruye solo eso. Si pide algo que el motor no hace (otro tipo de gráfico, otra composición), dilo claro y ofrece la alternativa más cercana.
 
