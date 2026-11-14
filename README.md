@@ -39,7 +39,10 @@ Antes de producir, el **director** hace tu **diagnóstico de negocio** (objetivo
 
 ## Instalación
 
-### Opción 0 · Un solo enlace (la más fácil)
+### Acceso (mientras el repositorio es privado)
+Acepta la invitación de GitHub que te llega por correo, entra al repositorio con esa cuenta y usa **Code → Download ZIP** (Opción A de abajo). El **Prompt 0** solo funciona cuando el repositorio es público.
+
+### Opción 0 · Un solo enlace (cuando el repositorio es público)
 Abre **Claude Code** en una carpeta vacía y pega el **Prompt 0** de `PROMPT-DE-INSTALACION.md` (o simplemente: *«Instala la Fábrica de Marketing con IA desde https://github.com/pruebacursoads/fabrica-de-marketing-ia»*). Claude te pide permiso, descarga el paquete oficial desde GitHub, lo instala y lo verifica. No necesitas que nadie te pase un ZIP.
 
 ### Opción A · Sin terminal (recomendada)

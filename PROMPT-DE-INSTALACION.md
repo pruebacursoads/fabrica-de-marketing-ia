@@ -2,7 +2,15 @@
 
 No necesitas saber de programación ni de comandos. Descomprime el ZIP, abre **Claude Code** (o Codex o Antigravity) **dentro de la carpeta descomprimida** `fabrica-de-marketing-ia`, pega este texto y deja que la herramienta haga todo.
 
-## Prompt 0: instalar directo desde GitHub (el más fácil: no descargas nada a mano)
+## Primero: acceso al repositorio (mientras sea privado)
+El repositorio es un recurso de la comunidad y está **privado**: solo entra quien Hugo invitó.
+1. Dale a Hugo el correo con el que tienes (o crearás) tu cuenta gratuita de GitHub.
+2. GitHub te envía un correo de invitación: ábrelo y pulsa **Accept invitation**.
+3. Entra a https://github.com/pruebacursoads/fabrica-de-marketing-ia con esa cuenta, pulsa el botón verde **Code → Download ZIP** y descomprime el archivo en el Escritorio.
+4. Abre Claude Code **dentro de esa carpeta** y pega el **Prompt 1** de más abajo.
+El Prompt 0 (instalar sin descargar a mano) solo funciona cuando el repositorio es público.
+
+## Prompt 0: instalar directo desde GitHub (solo cuando el repositorio sea público)
 
 Abre **Claude Code** en cualquier carpeta vacía, pega esto y responde lo que te pregunte:
 
