@@ -717,7 +717,8 @@ function pintarGuia(S){
         ${est!=='info'?`<span class="chip ${est}">${esc(ESTG[est]||est)}</span>`:''}</div>`;
       if(p.pedir)h+=`<div class="pedir">${esc(p.pedir)}</div>`;
       if(p.refs&&p.refs.length)h+=`<div class="refs"><b>Carga en este orden:</b><ol>${p.refs.map((r,i)=>refHTML(r,i,S)).join('')}</ol></div>`;
-      if(p.prompt)h+=`<div class="pbox"><div class="pbar"><b>Prompt</b>${p.palabras?`<small>${esc(p.palabras)}</small>`:''}<button data-copy="${esc(p.id)}">📋 Copiar prompt</button></div><pre>${esc(p.prompt)}</pre></div>`;
+      if(p.prompt)h+=`<div class="pbox"><div class="pbar"><b>${esc(p.prompt_titulo||'Prompt')}</b>${p.palabras?`<small>${esc(p.palabras)}</small>`:''}<button data-copy="${esc(p.id)}">📋 Copiar prompt</button></div><pre>${esc(p.prompt)}</pre></div>`;
+      (p.alternativas||[]).forEach((al,ai)=>{const k=p.id+'#'+ai;PROMPTS[k]=al.prompt;h+=`<div class="pbox"><div class="pbar"><b>${esc(al.titulo||'Alternativa')}</b><button data-copy="${esc(k)}">📋 Copiar prompt</button></div><pre>${esc(al.prompt)}</pre></div>`;});
       if(p.notas)h+=`<div class="notas">${esc(p.notas)}</div>`;
       if(p.revisar&&p.revisar.length)h+=`<ul class="chk">${p.revisar.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;
       if(p.salida){

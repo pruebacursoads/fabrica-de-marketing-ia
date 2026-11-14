@@ -137,6 +137,11 @@ def main():
     if problemas:
         print("NO publiqué nada. Corrige esto primero:\n - " + "\n - ".join(problemas[:15]), file=sys.stderr if auto else sys.stdout)
         return 0 if auto else 1
+    if args.simular:
+        lista = chr(10).join('  ' + c for c in cambios[:40])
+        print('Validacion correcta. Se publicarian %d archivo(s):' % len(cambios))
+        print(lista)
+        return 0
     msg = (args.mensaje or mensaje_auto(cambios)).strip() + "\n\n" + COAUTOR
     try:
         git("add", "-A")

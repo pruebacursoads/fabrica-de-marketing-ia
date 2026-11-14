@@ -127,6 +127,9 @@ def validar_guia(d):
             errs.append("Paso %d (%s): 'prompt' debe ser texto." % (i, pid))
         if p.get("refs") is not None and not isinstance(p["refs"], list):
             errs.append("Paso %d (%s): 'refs' debe ser una lista." % (i, pid))
+        alts = p.get("alternativas")
+        if alts is not None and (not isinstance(alts, list) or any(not isinstance(x, dict) or not x.get("prompt") for x in alts)):
+            errs.append("Paso %d (%s): 'alternativas' debe ser una lista de {titulo, prompt}." % (i, pid))
     return errs
 
 
@@ -153,7 +156,9 @@ def guia_a_md(sec):
                 extra = (" (" + r["archivo"] + ")") if r.get("archivo") else ""
                 L.append("%d. %s%s" % (i, r.get("nombre", ""), extra))
         if p.get("prompt"):
-            L += ["", "**Prompt (copiar y pegar)**" + ((" · " + p["palabras"]) if p.get("palabras") else ""), "", "```text", p["prompt"].strip(), "```"]
+            L += ["", "**%s (copiar y pegar)**" % p.get("prompt_titulo", "Prompt") + ((" · " + p["palabras"]) if p.get("palabras") else ""), "", "```text", p["prompt"].strip(), "```"]
+        for alt in p.get("alternativas") or []:
+            L += ["", "**%s (copiar y pegar)**" % alt.get("titulo", "Alternativa"), "", "```text", alt["prompt"].strip(), "```"]
         if p.get("notas"):
             L += ["", p["notas"]]
         if p.get("revisar"):
